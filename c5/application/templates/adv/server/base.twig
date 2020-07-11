@@ -1,0 +1,21 @@
+{% set host = 'твояфирма.рф' %}
+
+<!DOCTYPE html>
+<html lang="ru">
+{% include "@adv/server/head.twig" %}
+<body>
+<div class="srf-top-space"></div>
+
+<div class="srf-wrap">
+    <div class="srf-wrap-in">
+        <div class="srf-wrap-nf">
+            {% include "@adv/server/header.twig" %}
+            {% block main %}{% endblock %}
+
+        </div>
+    </div>
+    {% include "@adv/server/footer.twig" %}
+</div>
+
+</body>
+</html>

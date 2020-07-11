@@ -1,0 +1,662 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <div class="main_content">
+        {% if new_firm %}
+            <h1>Добавить компанию в справочник "Твоя Фирма"</h1>
+        {% endif %}
+        {% if firm.url %}
+            <ul class="tabs primary">
+                <li>
+                    <a href="{{ firm.url }}">Просмотр</a>
+                </li>
+                <li class="active"><a href="/firm/edit/{{ firm.id }}" class="active">Правка<span
+                                class="element-invisible">(активная вкладка)</span></a></li>
+            </ul>
+        {% endif %}
+        <div class="region region-content">
+            <div class="content
+                {% if new_firm %}
+                  create_company
+                {% endif %}
+                ">
+                {% if errors.0 %}
+                    <div class="messages error">
+                        <h2 class="element-invisible">Сообщение об ошибке</h2>
+                        <ul>
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <form class="node-form node-company-form"
+                      enctype="multipart/form-data"
+                        {% if new_firm %}
+
+                        {% else %}
+                            action="/firm/edit/{{ firm.id }}"
+                        {% endif %}
+                      method="post"
+                      id="company-node-form"
+                      accept-charset="UTF-8">
+
+
+                    <div class="field-group-div">
+                        <h3>Размещение в справочнике</h3>
+                        <div class="description" style="background-color: #b2f3ff; ">
+                            <b>Ваша компания появится на сайте после проверки информации модератором</b>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-name">
+                                Название
+                                <span class="form-required"
+                                      title="Это поле обязательно для заполнения.">*</span>
+                            </label>
+                            <input id="firm-name" name="firm[name]" class="form-text" type="text"
+                                   maxlength="255" required
+                                   size="60"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-subtitle">Подзаголовок</label>
+                            <input id="firm-subtitle" name="firm[subtitle]" class="form-text" type="text"
+                                   maxlength="255" size="60"/>
+                            <div class="description">
+                                Подзаголовок описывает основную деятельность компании<br/>
+                                Пример: Автосалон
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-officialname">Юридическое название</label>
+                            <input id="firm-officialname" name="firm[officialname]" class="form-text"
+                                   type="text"
+                                   maxlength="255" size="60"/>
+                            <div class="description">
+                                Юридическое название компании<br/>
+                                Пример: ООО "Авто-Парадайс"
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-description">Описание компании
+                                <span class="form-required"
+                                      title="Это поле обязательно для заполнения.">*</span>
+                            </label>
+                            <textarea id="firm-description" name="firm[description]"
+                                      class="form-textarea"
+                                      required
+                                      rows="20" cols="60"></textarea>
+                            <div class="description">
+                                Напишите как можно более объективную основную информацию о компании, о
+                                услугах, о специальных предложениях и прочее.
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="categories-block">
+                                <label>Категория
+                                    <span class="form-required"
+                                          title="Это поле обязательно для заполнения.">*</span>
+                                </label>
+                                <select class="form-select firm-category-selector">
+                                    <option value="0">Выберите категорию...</option>
+                                    <option value="144609">Аварийные и экстренные службы, справки</option>
+                                    <option value="144610">Авто и спецтранспорт - услуги и запчасти
+                                    </option>
+                                    <option value="137744">Администрация города</option>
+                                    <option value="137838">Инфоркоммуникационные технологии, интернет
+                                    </option>
+                                    <option value="144597">Кафе, рестораны, пункты общественного питания
+                                    </option>
+                                    <option value="137874">Коммунальные и бытовые услуги</option>
+                                    <option value="137905">Компьютерная, бытовая техника, оргтехника
+                                    </option>
+                                    <option value="144602">Красота</option>
+                                    <option value="137925">Культурные организации, искусство</option>
+                                    <option value="138350">Материалы для строительства и отделки</option>
+                                    <option value="137948">Мебель и интерьер</option>
+                                    <option value="137975">Медицина и здоровье</option>
+                                    <option value="138057">Металлургическая промышленность, добыча и
+                                        переработка
+                                    </option>
+                                    <option value="144596">Надзорные и органы правопорядка</option>
+                                    <option value="187113">Образование, курсы, саморазвитие</option>
+                                    <option value="144608">Организация пассажирских и грузовых перевозок
+                                    </option>
+                                    <option value="144605">Поиск работы, HR</option>
+                                    <option value="138228">Продажа продуктов питания и напитков</option>
+                                    <option value="138189">Производство и продажа одежды и обуви</option>
+                                    <option value="144604">Промышленное оборудование, техника и
+                                        инструмент
+                                    </option>
+                                    <option value="137794">Развлечения и досуг</option>
+                                    <option value="144598">Религия и ритуальные услуги</option>
+                                    <option value="138263">СМИ, рекламные и полиграфические услуги
+                                    </option>
+                                    <option value="138399">Строительно-ремонтные организации, риэлторы
+                                    </option>
+                                    <option value="138462">Ткани, текстиль, интерьер</option>
+                                    <option value="138476">Товары и услуги для животных</option>
+                                    <option value="144603">Топливная, химическая промышленность и
+                                        нефтепродукты
+                                    </option>
+                                    <option value="144607">ТРЦ, шопинг, спецмагазины</option>
+                                    <option value="138307">Туристические, спортивные товары и услуги
+                                    </option>
+                                    <option value="138216">Услуги в области охраны, безопасности</option>
+                                    <option value="138593">Услуги в области финансов, бизнеса, права
+                                    </option>
+                                    <option value="138554">Хозяйственные товары</option>
+                                    <option value="138577">Электротовары</option>
+                                </select>
+                                <input class="add-category form-submit" type="button"
+                                       value="Добавить">
+                            </div>
+                            <div class="choosen-categories-block">
+                                <div>Выбранные категории</div>
+                                <div id="categories" class="form-list">
+                                    <div class="nothing">Ничего не выбрано</div>
+                                </div>
+                            </div>
+                            <div class="description">
+                                Выберите категории к которым относится компания
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div>
+                                <label for="firm-keywords">Ключевые слова
+                                    <span class="form-required"
+                                          title="Это поле обязательно для заполнения.">*</span>
+                                </label>
+                                <input id="firm-keywords" class="form-text"
+                                       type="text"
+                                       maxlength="255" size="60">
+                                <input class="add-keyword form-submit" type="button" value="Добавить">
+                                <div id="drop-down-keywords-block"></div>
+                            </div>
+                            <div class="keywords-block">
+                                <div>Ключевые слова</div>
+                                <div id="keywords" class="form-list">
+                                    <div class="nothing">Ничего не выбрано</div>
+                                </div>
+
+                            </div>
+                            <div class="description">
+                                Ключевые слова это краткое уточнение сферы деятельности предприятия.
+                                Они нужны для быстрого поиска компании.
+                                Начните вводить слово, и Вам будут предложены готовые подсказки, либо введите свое и нажмите Enter, чтобы ввести следующее слово.<br/>
+                                Рекомендуется использовать от 5 до 10 ключевых слов.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="field-group-div">
+
+                        <h3>Адресная информация</h3>
+
+                        <div class="form-item">
+                            <label for="firm-region">
+                                Город
+                                <span class="form-required" title="Это поле обязательно для заполнения.">
+                                        *
+                                    </span>
+                            </label>
+                            <select class="form-select" id="firm-region">
+                                <option value="0">Выберите область</option>
+                                <option value="140334">Алтайский край</option>
+                                <option value="140670">Амурская область</option>
+                                <option value="140145">Архангельская область</option>
+                                <option value="140235">Астраханская область</option>
+                                <option value="140562">Белгородская область</option>
+                                <option value="140721">Брянская область</option>
+                                <option value="143303">Владимирская область</option>
+                                <option value="142569">Волгоградская область</option>
+                                <option value="141413">Вологодская область</option>
+                                <option value="140637">Воронежская область</option>
+                                <option value="142135">Днепропетровская область</option>
+                                <option value="140872">Забайкальский край</option>
+                                <option value="141058">Ивановская область</option>
+                                <option value="140706">Иркутская область</option>
+                                <option value="141115">Калининградская область</option>
+                                <option value="141484">Калужская область</option>
+                                <option value="140364">Кемеровская область</option>
+                                <option value="141748">Кировская область</option>
+                                <option value="141815">Костромская область</option>
+                                <option value="141840">Краснодарский край</option>
+                                <option value="140063">Красноярский край</option>
+                                <option value="142262">Курганская область</option>
+                                <option value="142275">Курская область</option>
+                                <option value="141235">Ленинградская область</option>
+                                <option value="143483">Липецкая область</option>
+                                <option value="143110">Московская область</option>
+                                <option value="141272">Мурманская область</option>
+                                <option value="142005">Нижегородская область</option>
+                                <option value="144306">Новгородская область</option>
+                                <option value="140439">Новосибирская область</option>
+                                <option value="141947">Омская область</option>
+                                <option value="144017">Оренбургская область</option>
+                                <option value="143635">Орловская область</option>
+                                <option value="143901">Пензенская область</option>
+                                <option value="141565">Пермский край</option>
+                                <option value="142907">Приморский край</option>
+                                <option value="144357">Псковская область</option>
+                                <option value="141846">Республика Адыгея</option>
+                                <option value="140887">Республика Алтай</option>
+                                <option value="142310">Республика Башкортостан</option>
+                                <option value="144052">Республика Бурятия</option>
+                                <option value="141392">Республика Карелия</option>
+                                <option value="141469">Республика Коми</option>
+                                <option value="141524">Республика Марий Эл</option>
+                                <option value="144398">Республика Мордовия</option>
+                                <option value="144190">Республика Саха (Якутия)</option>
+                                <option value="141515">Республика Татарстан</option>
+                                <option value="140061">Республика Хакасия</option>
+                                <option value="142525">Ростовская область</option>
+                                <option value="143328">Рязанская область</option>
+                                <option value="142197">Самарская область</option>
+                                <option value="142643">Саратовская область</option>
+                                <option value="144407">Сахалинская область</option>
+                                <option value="138814">Свердловская область</option>
+                                <option value="143444">Смоленская область</option>
+                                <option value="143544">Ставропольский край</option>
+                                <option value="144336">Тамбовская область</option>
+                                <option value="141298">Тверская область</option>
+                                <option value="140267">Томская область</option>
+                                <option value="142971">Тульская область</option>
+                                <option value="142390">Тюменская область</option>
+                                <option value="141081">Удмуртская Республика</option>
+                                <option value="143844">Ульяновская область</option>
+                                <option value="141719">Хабаровский край</option>
+                                <option value="144002">ХМАО</option>
+                                <option value="140800">Челябинская область</option>
+                                <option value="140750">Чувашская Республика</option>
+                                <option value="143338">Ярославская область</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-postal">Индекс</label>
+                            <input id="firm-postal" name="firm[postal]" class="form-text" type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-street">
+                                Улица
+                                <span class="form-required"
+                                      title="Это поле обязательно для заполнения.">*</span>
+                            </label>
+                            <input id="firm-street" name="firm[street]" class="form-text" type="text"
+                                   maxlength="255" required
+                                   size="60"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-home">
+                                Дом
+                                <span class="form-required"
+                                      title="Это поле обязательно для заполнения.">*</span>
+                            </label>
+                            <input id="firm-home" name="firm[home]" class="form-text" type="text"
+                                   maxlength="255" required
+                                   size="60"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-office">Офис</label>
+                            <input id="firm-office" name="firm[office]" class="form-text" type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-children">Филиалы</label>
+                            <textarea id="firm-children"
+                                      class="form-textarea user-company-children"
+                                      name="firm[child][]"
+                                      rows="20" cols="60"></textarea>
+                            <input type="button" class="form-submit clone-prev" value="Добавить ещё"/>
+                        </div>
+
+                    </div>
+
+                    <div class="field-group-div">
+                        <h3>Контактная информация</h3>
+
+                        <div class="form-item">
+                            <label for="firm-phone">
+                                Телефон
+                                <span class="form-required"
+                                      title="Это поле обязательно для заполнения.">*</span>
+                            </label>
+                            <input id="firm-phone" name="firm[phones][]"
+                                   class="form-text contact-field phone-field"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                            <input type="button" class="form-submit clone-prev" value="Добавить ещё"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-sites">
+                                Сайт
+                            </label>
+                            <input id="firm-sites" name="firm[sites][]"
+                                   class="form-text contact-field site-field"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                            <input type="button" class="form-submit clone-prev" value="Добавить ещё"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-email">
+                                E-mail
+                            </label>
+                            <input id="firm-email" name="firm[emails][]"
+                                   class="form-text contact-field email-field"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                            <input type="button" class="form-submit clone-prev" value="Добавить ещё"/>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="firm-fax">
+                                Факс
+                            </label>
+                            <input id="firm-fax" name="firm[faxes][]"
+                                   class="form-text contact-field fax-field"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                            <input type="button" class="form-submit clone-prev" value="Добавить ещё"/>
+                        </div>
+
+                    </div>
+
+                    <div class="field-group-div">
+                        <h3>Дополнительная информация</h3>
+                        <div class="form-item">
+                            <label>График работы</label>
+                            {% set days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
+                            {% set days_rus = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'] %}
+                            {% for day in days %}
+                                <div class="work-row {{ day }}">
+                                    <input class="work-type" type="hidden"
+                                           name="worktime[{{ day }}][type]"
+                                           value="normal">
+                                    <span class="dayname">{{ days_rus[loop.index0] }}</span>
+                                    <div class="work-content">
+                                        <div class="worktime-block-shithole">
+                                            <select class="time-pick start" name="worktime[{{ day }}][start]">
+                                                {% for i in 0..23 %}
+                                                    {% if i == 9 %}
+                                                        <option selected
+                                                                value="{{ i }}:00">{{ i }}:00
+                                                        </option>
+                                                    {% else %}
+                                                        <option value="{{ i }}:00">{{ i }}:00</option>
+                                                    {% endif %}
+                                                    <option value="{{ i }}:30">{{ i }}:30</option>
+                                                {% endfor %}
+                                            </select>
+                                            <span>-</span>
+                                            <select class="time-pick end" name="worktime[{{ day }}][end]">
+                                                {% for i in 0..23 %}
+                                                    {% if i == 18 %}
+                                                        <option selected
+                                                                value="{{ i }}:00">{{ i }}:00
+                                                        </option>
+                                                    {% else %}
+                                                        <option value="{{ i }}:00">{{ i }}:00</option>
+                                                    {% endif %}
+                                                    <option value="{{ i }}:30">{{ i }}:30</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="worktime-block-shithole">
+                                            <input type="checkbox"
+                                                   class="make-nonstop"
+                                                   id="{{ day }}_nonstop"/>
+                                            <label class="work-label"
+                                                   for="{{ day }}_nonstop">Круглосуточно</label>
+                                            <input type="checkbox"
+                                                   class="make-rest"
+                                                   id="{{ day }}_rest"/>
+                                            <label class="work-label" for="{{ day }}_rest">Выходной</label>
+                                        </div>
+                                        <div class="worktime-block-shithole">
+                                            <div class="obed-controls add-obed">Добавить обед</div>
+                                            <div class="obed" style="display: none;">
+                                                <select class="time-pick obed-start"
+                                                        name="worktime[{{ day }}][obed][start]">
+                                                    {% for i in 0..23 %}
+                                                        {% if i == 9 %}
+                                                            <option selected
+                                                                    value="{{ i }}:00">{{ i }}:00
+                                                            </option>
+                                                        {% else %}
+                                                            <option value="{{ i }}:00">{{ i }}:00</option>
+                                                        {% endif %}
+                                                        <option value="{{ i }}:30">{{ i }}:30</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <span>-</span>
+                                                <select class="time-pick obed-end"
+                                                        name="worktime[{{ day }}][obed][end]">
+                                                    {% for i in 0..23 %}
+                                                        {% if i == 18 %}
+                                                            <option selected
+                                                                    value="{{ i }}:00">{{ i }}:00
+                                                            </option>
+                                                        {% else %}
+                                                            <option value="{{ i }}:00">{{ i }}:00</option>
+                                                        {% endif %}
+                                                        <option value="{{ i }}:30">{{ i }}:30</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <span class="obed-controls turn-off-obed">Убрать обед</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <script>
+                            $('#worktime-table').trigger('render-done');
+                            //                                $('.time-pick').timepicker({ 'timeFormat': 'H:i' });
+                        </script>
+                        <div class="form-item">
+                            <label for="jur-regdate">
+                                Дата регистрации компании
+                            </label>
+                            <input id="jur-regdate" name="jur[regdate]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-inn">
+                                ИНН
+                            </label>
+                            <input id="jur-inn" name="jur[inn]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-kpp">
+                                КПП
+                            </label>
+                            <input id="jur-kpp" name="jur[kpp]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-ogrn">
+                                ОГРН
+                            </label>
+                            <input id="jur-ogrn" name="jur[ogrn]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-okpo">
+                                ОКПО
+                            </label>
+                            <input id="jur-okpo" name="jur[okpo]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-okato">
+                                Код ОКАТО
+                            </label>
+                            <input id="jur-okato" name="jur[okato]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-fsfr">
+                                Код ФСФР
+                            </label>
+                            <input id="jur-fsfr" name="jur[fsfr]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-orgform">
+                                Организационно-правовая форма
+                            </label>
+                            <input id="jur-orgform" name="jur[orgform]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                        </div>
+                        <div class="form-item">
+                            <label for="jur-okogu">
+                                ОКОГУ
+                            </label>
+                            <input id="jur-okogu" name="jur[okogu]" class="form-text"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                            <div class="description">
+                                Общероссийский классификатор органов государственной власти и управления
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label for="firm-okved">
+                                ОКВЭД
+                            </label>
+                            <input id="firm-okved" name="jur[activities][]" class="form-text okved-field"
+                                   type="text"
+                                   maxlength="255"
+                                   size="60"/>
+                            <input type="button" class="form-submit clone-prev" value="Добавить ещё"/>
+                            <div class="description">
+                                например, "10.10.12 Добыча каменного угля подземным способом"
+                            </div>
+                        </div>
+                    </div>
+                    {% if not firm_edit %}
+                        {% if not authorized %}
+                            <div class="field-group-div">
+                                <h3>Данные для управления компанией</h3>
+                                <div class="fieldset-description">Все организации, которые Вы добавите в дальнейшем, появятся в личном кабинете, где данными о них можно быстро
+                                    управлять.
+                                </div>
+                                <div class="form-item">
+                                    <label for="user-email">
+                                        E-mail
+                                        <span class="form-required"
+                                              title="Это поле обязательно для заполнения.">*</span>
+                                    </label>
+                                    <input id="user-email" name="user-email" class="form-text"
+                                           type="text"
+                                           maxlength="255"
+                                           size="60"
+                                           required/>
+                                    <div class="description">
+                                        Ваш действительный E-mail адрес. Не публикуется на сайте.
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if new_firm %}
+                        <input type="hidden" name="personal-info" value="0"/>
+                        <input type="checkbox" required name="personal-info" value="1" id="persinfo"/>
+                        <label for="persinfo" style="display: inline-block;">Я согласен с <a href="/polit.pdf" target="_blank"
+                                                                                             title="Политика защиты и обработки персональных данных">политикой защиты и обработки
+                                персональных данных</a> и даю свое <a href="/confirm.pdf" title="Согласие на обработку персональных данных" target="_blank">согласие</a> на их
+                            обработку.<span class="required"> *</span></label>
+                    {% endif %}
+                    <input type="hidden" id="prefilled" value="0">
+                    <div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Добавить компанию" class="form-submit"></div>
+                </form>
+            </div>
+        </div>
+        {% if firm_edit or form_failed %}
+            <script>
+                {% autoescape false %}
+                $(document).ready(function () {
+                    if ($('#prefilled').val() == 1)
+                        window.location.reload();
+                    if ($('#prefilled').val() == 0) {
+                        {% if firm_json %}
+                        form_populate('firm', {{ firm_json }});
+                        {% endif %}
+                        {% if jur_json %}
+                        form_populate('jur', {{ jur_json }});
+                        {% endif %}
+                        {% if region_json %}
+                        set_region({{ region_json }});
+                        {% endif %}
+                        {% if categories_json %}
+                        $.each({{ categories_json }}, function (key, value) {
+                            add_category(value.Id, value.Name);
+                        });
+                        {% endif %}
+                        {% if keywords_json %}
+                        $.each({{ keywords_json }}, function (key, value) {
+                            add_keyword(value);
+                        });
+                        {% endif %}
+                        {% if contacts_json %}
+                        bind_contacts({{ contacts_json }});
+                        {% endif %}
+                        {% if children_json %}
+                        set_children({{ children_json }});
+                        {% endif %}
+                        {% if okved_json %}
+                        set_okved({{ okved_json }});
+                        {% endif %}
+                        {% if worktime_json %}
+                        set_worktime({{ worktime_json }});
+                        {% endif %}
+                        $('#prefilled').val(1)
+                    }
+
+                });
+                {% endautoescape %}
+            </script>
+        {% endif %}
+    </div>
+
+{% endblock %}

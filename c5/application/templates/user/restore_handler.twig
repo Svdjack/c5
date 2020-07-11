@@ -1,0 +1,47 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <style>
+        input[type=password]{
+            padding: 6px 13px;
+            background: #d9d5d5;
+            border: 1px solid #9675ba;
+            display: block;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        input[type=submit]{
+            padding: 6px 13px;
+            background: #2793F8;
+            display: block;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #FFF;
+        }
+        .error{
+            color: #cf2925;
+        }
+    </style>
+    <main>
+        <div class="wrapper">
+            <div class="main_content">
+                <h1>Восстановление пароля</h1>
+                {% if info %}
+                    <p class="error">{{ info }}</p>
+                {% endif %}
+                <p>Введите новый пароль</p>
+                {% if form %}
+                    <form action="" method="post">
+                        <label>
+                            Пароль
+                            <input type="password" name="password"/>
+                        </label>
+                        <input type="submit" class="button" value="Сохранить"/>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

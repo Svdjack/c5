@@ -1,0 +1,19 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <div class="srf-content">
+        <div class="srf-content-in">
+            <div class="tabs"></div>
+            <div class="region region-content">
+                <div id="block-system-main" class="block block-system">
+
+                    <h1>{{ head.title }}</h1>
+
+                    <b>Оплата по каким-либо независящим от нас причинам не прошла.
+                        <a href="{{ url }}">Попробуйте выбрать другой способ оплаты.</a></b>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

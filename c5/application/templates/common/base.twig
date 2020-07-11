@@ -1,0 +1,55 @@
+{% import "@common/adv.twig" as adv %}
+{% import "@common/html.twig" as html %}
+{% set host = 'xn--80adsqinks2h.xn--p1ai' %}
+{# check in controllers set googleads = 1 #}
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="ru" class="js">
+<head>
+    {% include "@common/head.twig" %}
+</head>
+
+<body class="html one-sidebar sidebar-first">
+    
+    {% if isDebug %}
+        {# googleads = {{ googleads }} #}
+    {% endif %}
+    
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter28929580 = new Ya.Metrika({ id:28929580, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/28929580" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+<div class="wrapper">
+    {% include "@common/header.twig" %}
+    <div id="block-system-main" class="block block-system">
+        <div class="content">
+            <main>
+                <div class="wrapper" role="main">
+                    {% block content %} {% endblock %}
+                </div>
+            </main>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="hfooter"></div>
+</div>
+{% include "@common/footer.twig" %}
+
+<noscript id="deferred-styles">
+    <link rel="stylesheet" type="text/css" href="/asset/app/rest.css"/>
+</noscript>
+<script>
+    var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+        webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+    else window.addEventListener('load', loadDeferredStyles);
+</script>
+
+</body>
+</html>
+{% endspaceless %}

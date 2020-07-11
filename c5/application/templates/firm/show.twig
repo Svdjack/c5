@@ -1,0 +1,695 @@
+{% extends "@common/base.twig" %}
+{% block content %}
+    
+    {% if 'hide-ads' in tarif %}
+        {% set adv = '' %}
+    {% endif %}
+
+    {% if admin %}
+        <a href="/admin/#firm/edit/{{ firm.id }}" style="color:green; padding: 20px; display: inline-block; font-weight: bold">Редактировать</a>
+        <a class="deleteFirm" href="/admin/#firm/delete/{{ firm.id }}" style="display: inline-block; color:red; padding: 20px; font-weight: bold">Удалить</a>
+    {% endif %}
+    {% if firm.status < 1 %}
+        <div style="color:red;font-size:20px; font-weight: bold;">Компания появиться на сайте после проверки модератором</div>
+    {% endif %}
+    {% include "@common/breadcrumb.twig" %}
+    <div class="main_content firm-card" itemscope itemtype="http://schema.org/Organization">
+        {% if firm.logo %}
+            <div class="logo-company">{{ html.img('/asset/thumb/company_logo/company_logo/' ~ firm.logo) }}</div>
+        {% endif %}
+
+        {% if (message) %}
+            <div class="description" style="padding: 15px; background: #b7d2c0; font-weight: bold; color: black;">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <div class="headline__wrap">
+            <div class="headline__wrap-title">
+
+                <h1 itemprop="name">
+                    {{ firm.title }}
+                    
+                    {% if tarif | length > 0 %}
+                        <script>document.write('<span class="label-approved"><div class="label-approved-tooltip">Информация о компании проверена ее представителем</div></span>');</script>
+                    {% endif %}
+
+                </h1>
+
+                <div class="offical_name">{{ firm.official_name }}</div>
+                {{ adv.yandex16 }}
+                {% if firm.h2 %}
+                    <h2>{{ firm.h2 }}</h2>
+                {% endif %}
+            </div>
+
+
+
+            {% if tarif | length > 0 %}
+                <script>document.write('<div class="label-approved-mobile-wrapper"><div class="label-approved-mobile">Информация о компании проверена ее представителем</div></div>');</script>
+            {% endif %}
+
+        </div>
+
+        <div class="company__header">
+            <a rel="nofollow" class="print" onclick="fire_target('print')" href="/формат/для-печати/{{ firm.id }}"
+               title="Распечатать информацию о компании"></a>
+            <a rel="nofollow" class="print pdf" onclick="fire_target('print_pdf')" href="/формат/pdf/{{ firm.id }}"
+               title="Скачать информацию о компании в PDF"></a>
+        </div>
+
+        {% if owner %}
+            <a class="edit-company" href="/firm/edit/{{ firm.id }}">Редактировать компанию</a>
+        {% endif %}
+
+        <div class="clearfix"></div>
+
+        <nav class="page_nav">
+            <div class="rating" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">
+                <div title="{{ firm.reviews.title }}"
+                     class="stars vote-{{ firm.reviews.average|round }}">
+                </div>
+
+                <meta content="5" itemprop="bestRating">
+                <meta content="0" itemprop="worstRating">
+                <meta content="{{ firm.reviews.count|default('0') }}" itemprop="ratingCount">
+                <meta content="{{ firm.reviews.average|round }}" itemprop="ratingValue">
+            </div>
+            <!--noindex-->
+            <a name="showmoretab"></a>
+            <ul>
+                <li class="tab selected">
+                    <a href="#" title="Данные о компании">О компании</a>
+                </li>
+
+                <li class="tab">
+                    <a onclick="fire_target('contacts')" title="Контакты организации «{{ firm.title }}»" href="#contacts">Контакты</a>
+                </li>
+
+                <li class="tab">
+                    <a onclick="fire_target('reviews')" title="Отзывы о компании «{{ firm.title }}»" href="#reviews">
+                        Отзывы
+                        {% if firm.reviews.count > 0 %}
+                            ({{ firm.reviews.count }})
+                        {% endif %}
+                    </a>
+                </li>
+
+                {% if firm.site %}
+                    <li class="tab"><a title="Сайт компании «{{ firm.title }}»" href="#site">Сайт</a></li>
+                {% endif %}
+
+
+                <li class="tab other"><a onclick="fire_target('showmore')" href="#showmoretab" title="Показать еще">Еще</a>
+                    <ul>
+                        <li>
+                            <a title="Виды деятельности компании «{{ firm.title }}»" href="#activity">Виды деятельности</a>
+                        </li>
+                        <li>
+                            <a title="КОДы и ОКВЭД компании «{{ firm.title }}»" href="#cods">КОДы и ОКВЭД</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--/noindex-->
+        </nav>
+
+    <div class="about">
+        <div class="text">
+            <p itemprop="description">
+                Компания осуществляет свою деятельность {{ firm.cityPrefix }} <b>{{ firm.city5 }}</b> ({{ firm.region }}).
+            <div class="yandex-1 yandex-ads-firm-stub">{{ adv.yandex1 }}</div>
+
+            <div class="adblock-card-placeholder"></div>
+            
+            {% if not firm.description %}
+                Предприятие находится <b>по адресу {{ firm.address }}</b>. {{ firm.specialization }}
+                {% if firm.contact.phone.0 %}
+                    Для связи с представителями компании Вы можете позвонить
+                    <b>по телефону <a href="tel:{{ firm.contact.clearPhone|replace({' ': ""}) }}">
+                        {{ firm.contact.clearPhone }}</a></b> и уточнить интересующую вас
+                    информацию, график работы или часы приема.
+                {% endif %}
+
+                {% if firm.contact.website.0 %}
+                    Если же вас интересует сайт компании, то вы можете посетить его, перейдя по ссылке
+                    <a rel="nofollow" target="_blank" href="{{ firm.contact.website.0.name }}"
+                       title="Сайт компании «{{ firm.title }}»">
+                        {{ firm.contact.website.0.name|replace({'http://': ''}) }}</a>.
+                {% endif %}
+            {% else %}
+                {% if 'hide-ads' in tarif %}
+                    {{ firm.description | striptags | nl2br }}
+                {% else %}
+                    {{ firm.description | striptags | nl2br }}
+                {% endif %}
+            {% endif %}
+
+            {% if firm.similar and 'hide-ads' not in tarif %}
+                <p></p>
+                Также в сфере {{ firm.mainCategory.name|lower }} осуществляют свою деятельность другие компании: {{ adv.yandex2 }}
+                {{ html.similarlinks(firm.similar) }}
+                <p></p> Если Вас они заинтересовали Вы можете посмотреть более подробную информацию о них, кликнув по ссылкам.
+            {% endif %}
+            Если же Вас интересуют другие компании из другой сферы - воспользуйтесь поиском вверху страницы.<p></p>
+
+
+            {% if not has_real_user %}
+                Изменить описание может только официальный представитель компании.
+                <a title="Это ваша компания?" href="/%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8C/%D1%8D%D1%82%D0%BE-%D0%BC%D0%BE%D1%8F-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F/{{ firm.id }}">
+                    Вы представитель?</a>
+            {% endif %}
+
+        </div>
+        <div class="lacation">
+            <div class="map">
+                {% if firm.coords %}
+                    <div id="map-loaded"></div>
+                    <script type="text/javascript">
+
+
+
+                        setTimeout(wtfORRRAAAA, 3012);
+                        function wtfORRRAAAA() {
+                            ymaps && ymaps.ready(company_map_init);
+                            function company_map_init() {
+                                window.myMap = new ymaps.Map("map-loaded", {
+                                    center: [{{ firm.coords }}],
+                                    zoom: 16,
+                                    controls: ["zoomControl", "fullscreenControl"]
+                                }),
+                                    myPlacemark = new ymaps.Placemark([{{ firm.coords }}], {
+                                        // Чтобы балун и хинт открывались на метке, необходимо задать ей определенные свойства.
+                                        balloonContentHeader: "{{ firm.title }}",
+                                        balloonContentBody: "{{ firm.address }}",
+                                        balloonContentFooter: "{{ firm.contact.phone.0 }}",
+                                    });
+
+                                myMap.geoObjects.add(myPlacemark);
+                            }
+                        }
+                    </script>
+                {% endif %}
+                <div class="mistakes">
+                    {% if not has_real_user %}
+                    <!--noindex--><a class="colorbox-node" data-inner-height="580" data-inner-width="600"
+                                     href="/ошибка-на-странице/{{ firm.id }}" rel="nofollow"
+                                     title="Сообщить нам об ошибке в информации" onclick="fire_target('mistakes')">Нашли ошибку?</a><!--/noindex-->
+                     {% endif %}
+                     <!--noindex--><a style="padding-right: 10px;" href="/пожаловаться/{{ firm.id }}" rel="nofollow" target="_blank"
+                                     title="Сообщить нам о нарушении правил">Пожаловаться!</a><!--/noindex-->
+                </div>
+                <!--noindex-->
+                <div class="zoom" title="Развернуть карту на всю страницу" onclick="fire_target('zoom')">Увеличить карту</div><!--/noindex-->
+            </div>
+            <div class="shared">
+                <div class="shared__title">
+                    Поделиться компанией
+                </div>
+                <div class="yashare-auto-init" data-yashareL10n="ru"
+                     data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
+                     data-yashareTheme="counter"></div>
+            </div>
+            {% if googleads == 1 %}
+                <div class="google-336-280">
+                    {{ adv.google336x280(googleads) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+        
+    <div class="center_block">
+        <div class="center_subblock">
+            {{ adv.yandex3 }}
+        </div>
+        <div class="center_subblock">
+            {{ adv.yandex4 }}
+        </div>
+    </div>
+
+    <div class="contacts_block" itemprop="address" itemscope
+         itemtype="http://schema.org/PostalAddress">
+        <div class="wrap">
+            <div id="contacts" class="contacts-wrap" {% if firm.worktime %}style="max-width: 380px;"{% endif %}>
+                <a name="contacts"></a>
+
+                <h2>Контакты</h2>
+
+                {% if firm.contact.phone.0 %}
+                    <div>
+                        {% for phone in firm.contact.phone %}
+                            <div class="name phone">Телефон:</div>
+                            <div class="descript"><span itemprop="telephone">
+                                    <a href="tel:{{ phone|replace({' ': ""}) }}">{{ phone }}</a></span></div><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if firm.contact.fax.0 %}
+                    <div>
+                        {% for fax in firm.contact.fax %}
+                            <div class="name fax">Факс:</div>
+                            <div class="descript"><span itemprop="faxNumber">{{ fax }}</span></div><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                {% if firm.contact.email.0 %}
+                    <div>
+                        {% for email in firm.contact.email %}
+                            <div class="name email">Email:</div>
+                            <div class="descript">
+                                <span itemprop="email">
+                                    <a href="mailto:{{ email }}">{{ email }}</a>
+                                </span>
+                            </div>
+                            <br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if firm.address %}
+                    <div>
+
+                        <meta content="Россия" itemprop="addressCountry">
+                        <meta content="{{ firm.region }}" itemprop="addressRegion">
+                        <meta content="{{ firm.city }}" itemprop="addressLocality">
+                        <meta content="{{ firm.address }}" itemprop="streetAddress">
+
+                        <div class="name address">Факт. адрес:</div>
+                        <div class="descript">
+                            <span>г. {{ firm.city }}, {{ firm.address }} </span>
+                            {% if firm.district %} (Район {{ firm.district }}) {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if firm.mainCategory %}
+                    <div>
+                        <div class="name category">Главная категория:</div>
+                        <div class="descript">
+                            {{ html.link('/'~city.url~'/'~firm.mainCategory.url, firm.mainCategory.title, firm.mainCategory.title) }}</div>
+                    </div>
+                {% endif %}
+
+
+                {% if firm.contact.website.0 and not firm.site_info %}
+                    <div>
+                        {% for site in firm.contact.website %}
+                            <div class="site name">Сайт:</div>
+                            <div class="descript" itemprop="url">
+                                <a rel="nofollow" target="_blank"
+                                   href="http://{{ site.name|replace({'http://': '', 'https://': ''}) }}"
+                                   title="Сайт компании «{{ firm.title }}»">
+                                    {{ site.name|replace({'http://': '', 'https://': ''}) }}</a></div><br>
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+            </div>
+            {% if firm.worktime %}
+                <div class="work-time-block">
+                    <div class="work-time-title">График (режим) работы
+                        компании «{{ firm.title }}»
+                    </div>
+                    <div class="work-time ">
+                        <div class="box-row">
+                            <div class="box head">День недели</div>
+                            <div class="box head Monday">Пн</div>
+                            <div class="box head Tuesday">Вт</div>
+                            <div class="box head Wednesday">Ср</div>
+                            <div class="box head Thursday">Чт</div>
+                            <div class="box head Friday">Пт</div>
+                            <div class="box weekend head Saturday">Сб</div>
+                            <div class="box weekend head Sunday">Вс</div>
+                        </div>
+                        <div class="box-row">
+                            <div class="box head">Часы работы</div>
+                            {% for day, value in firm.worktime %}
+                                <div class="box {{ day|title }} {% if day in ['saturday', 'sunday'] %}weekend{% endif %}">
+                                    {% if value.type == 'rest' %}
+                                        Выходной
+                                    {% elseif value.type == 'nonstop' %}
+                                        Круглосуточно
+                                    {% else %}
+                                        {{ value.start }} - {{ value.end }}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="box-row">
+                            <div class="box head">Перерыв</div>
+                            {% for day, value in firm.worktime %}
+                                <div class="box {{ day|title }} {% if day in ['saturday', 'sunday'] %}weekend{% endif %}">
+                                    {% if value.type == 'normal_with_rest' %}
+                                        {{ value.obed.start }} - {{ value.obed.end }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="clearfix"></div>
+            {{ adv.yandex14 }}
+        </div>
+    </div>
+    {% if firm.site_info and firm.contact.website.0 %}
+        <div id="site" class="site_block tabber_head">
+            <h2>Сайт</h2>
+
+            <div class="img_wrap">
+                <img alt="Скриншот сайта" title="Сайт организации «{{ firm.title }}»"
+                     src="/asset/screens/{{ firm.site_info.screen }}.jpg"/>
+            </div>
+
+
+            <div class="info">
+                <div class="subtitle">Информация с сайта <a rel="nofollow" target="_blank" href="{{ firm.contact.website.0.name }}" title="Сайт компании «{{ firm.title }}»">
+                        {{ firm.contact.website.0.name|replace({'http://': ''}) }}</a>
+                     <span>(получена в автоматическом режиме):</span></div>
+
+                {% if firm.site_info.title %}
+                    <div class="subtitle">Заголовок:</div>
+                    <p>{{ firm.site_info.title }}</p>
+                {% endif %}
+
+                {% if firm.site_info.description and firm.site_info.description != firm.site_info.title and firm.site_info.description != 'NULL' %}
+                    <div class="subtitle">Описание:</div>
+                    <p>{{ firm.site_info.description }}</p>
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <script>
+            function checkImage(imageSrc, good, bad) {
+                var img = new Image();
+                img.onload = good;
+                img.onerror = bad;
+                img.src = imageSrc;
+            }
+
+            checkImage("/asset/screens/{{ firm.site_info.screen }}.jpg", function(){  }, function(){
+                var siteinfo = document.querySelector('.site_block');
+
+                siteinfo.parentNode.removeChild(siteinfo);
+            } );
+
+        </script>
+    {% endif %}
+
+    <div id="activity" class="tabber">
+
+        <div class="tabber_head">
+            <!--noindex-->
+            <a title="Виды деятельности" name="activity" class="tab selected">Виды деятельности</a>
+            <a href="#" class="tab" title="Филиалы">Филиалы ({{ firm.children|length }})</a>
+            <a href="#" class="tab" title="Фотография">Фотогалерея ({{ firm.photos|length }})</a>
+            <!--/noindex-->
+        </div>
+
+        <div class="yandex_ad">
+            {{ adv.yandex5 }}
+        </div>
+
+
+        <div class="tabber_body">
+            <div class="tab_content">
+                <p>
+                    Предприятие работает в сфере «{{ firm.mainCategory.name }}»,
+                    {% if firm.reviews.comments|length > 0 %}
+                    и имеет среднюю оценку {{ firm.reviews.average }}. Также {{ firm.reviews.comments|length }} {{ html.plural_form(firm.reviews.comments|length, 'человек', '', '', 'а' ) }}
+                    оставили свой отзыв о предприятии
+                {% else %}
+                    на данный момент не имеет оценок. Также вы можете первым оставить свой отзыв о предприятии
+                    {% endif %},
+                    {% if firm.photos|length > 0 %}
+                    у компании уже размещено {{ firm.photos|length }} фотографии
+                {% else %}
+                    а при возможности разместить фотографии
+                    {% endif %}.
+                </p>
+            </div>
+            <div class="tab_content">
+                {% if firm.children %}
+                    {% for child in firm.children %}
+                        {% if 'hide-ads' in tarif %}
+                            <p>{{ child.Value }}</p>
+                        {% else %}
+                            <p>{{ child.Value }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <!--noindex--><p>К сожалению у данной компании такие данные не заполнены</p><!--/noindex-->
+                {% endif %}
+            </div>
+            <div class="tab_content">
+                {% if firm.photos %}
+                    <div class="company-photos">
+                        <ul>
+                            {% for photo in firm.photos %}
+                                <li><a rel="nofollow" class="gallery"
+                                       href="/asset/{{ photo }}">
+                                        <img src="/asset/thumb/firm_gallery/{{ photo }}">
+                                    </a>
+                                </li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    На данный момент не добавлено ни одной фотографии компании.
+                {% endif %}
+                <div class="photos-load-form">
+                    <div class="button bred" title="до 20 МБ (jpg, png, gif)">Добавить фотографии</div>
+                    <form action="/ajax/firm/upload/{{ firm.id }}" class="dropzone" id="firmUploadFile" style="display: none;"></form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="recvizits" id="cods">
+        <a name="cods"></a>
+
+        <div class="tabber">
+            <div class="tabber_head">
+                <!--noindex-->
+                <a class="tab selected"
+                   title="Общероссийский классификатор видов экономической деятельности компании {{ firm.title }}">ОКВЭД</a>
+                <a href="#" title="Посмотреть коды" class="tab">КОДЫ</a>
+                <a href="#" title="Посмотреть QR-код" class="tab">QR-код</a>
+                <!--/noindex-->
+            </div>
+            <div class="tabber_body">
+                <div class="tab_content">
+                    {% if firm.legal.Activities %}
+                        <ul class="arrow_link">
+                            {% for act in firm.legal.Activities %}
+                                <li title="Общероссийский классификатор видов экономической деятельности">{{ act }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <!--noindex--><div class="empty">К сожалению у данной компании такие данные не заполнены</div><!--/noindex-->
+                    {% endif %}
+                </div>
+                <div class="tab_content">
+                    {% if firm.legal.codes %}
+                        <div class="contacts_block">
+                            {% for code, value in firm.legal.codes %}
+                                <div>
+                                    <div class="name">{{ code }}</div>
+                                    <div title="{{ code }} компании {{ firm.title }}" class="descript bold">{{ value }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!--noindex--><div class="empty">К сожалению у данной компании такие данные не заполнены</div><!--/noindex-->
+                    {% endif %}
+                </div>
+                <div class="tab_content">
+                    <img title="QR-код компании {{ firm.title }}" alt="QR-код компании {{ firm.title }}" class="qr-code" src="/qrcode/{{ firm.id }}"/>
+
+                    <h3 class="h3-qr-code">QR-код с информацией о компании</h3>
+                    Данное изображение со штрихкодом содержит в себе закодированную информацию о
+                    компании «{{ firm.title }}».
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+                
+    {% if 'label' not in tarif %}
+        <div class="headline__wrap-adblock ">
+            <div class="adv-firm-upupup">
+                <div class="metochka"></div>
+                <div class="strelochka"></div>
+                <div class="batonchik"><a href="/up/{{ firm.id }}/checkout" title="Поднять компанию">Поднять компанию</a></div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div id="reviews" class="reviews_block" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
+        <a name="reviews"></a>
+
+        <h2 itemprop="itemReviewed">Отзывы</h2>
+
+        <p>Пожалуйста, оставьте небольшой отзыв об этой организации: несколько слов о качестве работы
+            и вашем общем впечатлении — помогите другим посетителям сделать правильный выбор.</p>
+
+        <div class="add_review">
+            <div class="button">ДОБАВИТЬ ОТЗЫВ</div>
+            <span>Регистрация не требуется</span>
+        </div>
+        <!--noindex-->
+        {# форма #}
+        <script>
+            document.write(' \
+            <form class="comment-form" action="/ajax/firm/review/{{ firm.id }}" method="post" \
+                  id="comment-form" accept-charset="UTF-8" style="display: none;"> \
+                <div class="description" style="background-color: #b2f3ff; padding: 10px; margin-bottom:10px; border-radius:5px;">\
+                            <b>Ваш отзыв появится на сайте после проверки модератором</b>\
+                </div>\
+                <div> \
+                    <div id="send-review" class="form-item form-type-textfield form-item-name"> \
+                        <label for="edit-name--2">Ваше имя </label> \
+                        <input required placeholder="Имя может содержать только русские буквы" \
+                               type="text" id="edit-name--2" name="name" value="" \
+                               size="30" maxlength="60" class="form-text"> \
+                    </div> \
+     \
+                    <div class="form-item form-type-textfield form-item-name"> \
+                        <label for="edit-field-c-email-und-0-email">E-mail </label> \
+                        <input type="text" id="edit-field-c-email-und-0-email" name="email" \
+                               value="" size="60" maxlength="128" class="form-text"> \
+                    </div> \
+                    \
+                    <div class="form-item"> \
+                        <label>Оценка \
+                            <span class="form-required" title="Это поле обязательно для заполнения."> \
+                                * \
+                            </span> \
+                        </label> \
+                        <span id="starfield"> \
+                        </span> \
+                        <input type="hidden" name="score" id="score" value="0"> \
+                    </div> \
+     \
+                    <div class="form-item form-type-radios form-item-field-emotion-und" style="display: none"> \
+                        <label>Отзыв  \
+                            <span class="form-required" title="Это поле обязательно для заполнения."> \
+                                * \
+                            </span> \
+                        </label> \
+                        <div id="edit-field-emotion-und" class="form-radios"> \
+                            <div class="form-item form-type-radio form-item-field-emotion-und"> \
+                                <input type="radio" id="edit-field-emotion-und-2" \
+                                       name="emotion" value="2" class="form-radio" required> \
+                                <label class="option" for="edit-field-emotion-und-2">Отрицательный </label> \
+     \
+                            </div> \
+                            <div class="form-item form-type-radio form-item-field-emotion-und"> \
+                                <input type="radio" id="edit-field-emotion-und-0" \
+                                       name="emotion" value="0" class="form-radio" required> \
+                                <label class="option" for="edit-field-emotion-und-0">Нейтральный </label> \
+     \
+                            </div> \
+                            <div class="form-item form-type-radio form-item-field-emotion-und"> \
+                                <input type="radio" id="edit-field-emotion-und-1" \
+                                       name="emotion" value="1" class="form-radio" required> \
+                                <label class="option" for="edit-field-emotion-und-1">Положительный </label> \
+     \
+                            </div> \
+                        </div> \
+                    </div> \
+    \
+                    <div class="field-type-text-long field-name-comment-body \
+                     field-widget-text-textarea form-wrapper" id="edit-comment-body"> \
+                        <div id="comment-body-add-more-wrapper"> \
+                            <div class="form-item form-type-textarea form-item-comment-body-und-0-value"> \
+                                <div class="form-textarea-wrapper"> \
+                                    <textarea class="text-full form-textarea required" \
+                                              id="edit-comment-body-und-0-value" \
+                                              name="text" cols="60" rows="5" required></textarea> \
+                                </div> \
+                            </div> \
+                        </div> \
+                    </div> \
+     \
+       <div class="persinfo-review"><input type="hidden" name="personal-info" value="0"/><input type="checkbox" name="personal-info" value="1" required id="persinfo"/><label for="persinfo" style="display: inline-block;">Я согласен с <a href="/polit.pdf" target="_blank" title="Политика защиты и обработки персональных данных">политикой защиты и обработки персональных данных</a> и даю свое <a href="/confirm.pdf" title="Согласие на обработку персональных данных" target="_blank">согласие</a> на их обработку.<span class="required"> *</span></label></div>  \
+            <div class="form-actions form-wrapper" id="edit-actions--2"> \
+                        <input type="submit" id="edit-submit--2" name="op" \
+                               value="Отправить отзыв" class="form-submit"> \
+                    </div> \
+                </div> \
+            </form> \
+                            ');
+        </script>
+        <!--/noindex-->
+
+        {% if firm.reviews.comments %}
+            {% for comm in firm.reviews.comments %}
+                {% if comm.Edited == 0 %}
+                    <!--noindex-->
+                {% endif %}
+                <div id="comment-{{ comm.Id }}" class="review emotion-{{ comm.Emotion }}" itemprop="review">
+                    <div class="title" itemprop=""><span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">{{ comm.User }}</span></span>
+                        <div class="stars vote-{{ comm.Score }}" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                            <meta itemprop="ratingValue" content="{{ comm.Score }}">
+                            <meta itemprop="ratingCount" content="1">
+                        </div>
+                        <span class="coment">
+                            {% if comm.Emotion == 0 %}
+                                Отзыв нейтральный
+                            {% elseif comm.Emotion == 1 %}
+                                Отзыв положительный
+                            {% elseif comm.Emotion == 2 %}
+                                Отзыв негативный
+                            {% endif %}
+                        </span>
+                        {% if comm.Twitter %}
+                            <div class="twitter" title="{{ comm.User }} оставил ссылку на отзыв в Twitter"></div>
+                        {% endif %}
+                    </div>
+                    <div class="content"><p itemprop="reviewBody">{{ comm.Text }}</p></div>
+                    <div class="review_bottom">
+                        {% if admin %}
+                            <div class="comment-management">
+                                <a href="/admin/#review/edit/{{ comm.Id }}">Изменить</a>
+                                <a onclick="return confirm('Удалить отзыв?')" href="/admin/#review/delete/{{ comm.Id }}">Удалить</a>
+                            </div>
+                        {% endif %}
+                        <div class="date">{{ comm.Date|date('d.m.Y, H:i') }}</div>
+                    </div>
+                </div>
+                {% if comm.Edited == 0 %}
+                    <!--/noindex-->
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if googleads == 1 %}
+        <div class="google-970-90">
+            {{ adv.google970x90(googleads, isMobile) }}
+        </div>
+        {% endif %}
+    </div>
+    </div>
+
+    <span {{ 'stat' in tarif ? ' class="is-up"' : '' }}></span>
+
+    <script>
+        var up = document.querySelector('.is-up');
+        if (up !== null) {
+            var request = new XMLHttpRequest();
+            request.open('GET', '/stat/inc/{{ city.id }}/firm/{{ firm.id }}', true);
+            request.send();
+        }
+    </script>
+
+    <script type="text/javascript" src="//yandex.st/share/share.js" defer
+            charset="utf-8"></script>
+
+{% endblock %}

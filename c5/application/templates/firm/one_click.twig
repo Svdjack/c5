@@ -1,0 +1,170 @@
+<link type="text/css" rel="stylesheet" href="/asset/css/reset.css" media="all"/>
+<link type="text/css" rel="stylesheet" href="/asset/css/style.css" media="all"/>
+<script type="text/javascript" src="/asset/app/angular.min.js"></script>
+<script type="text/javascript" src="/asset/app/angular.js"></script>
+
+<style>
+    #error_form input,
+    #error_form textarea{
+        width: 70%;
+    }
+    #error_form label{
+        display: inline-block;
+        width: 29%;
+        margin-bottom: 11px;
+    }
+
+    .form-actions{
+        text-align: center;
+        padding-top: 24px;
+    }
+</style>
+
+<div style="padding: 30px;" ng-app="app">
+    <h3>Ошибка на странице - {{ firm.name }}</h3>
+    <div class="error-form">
+        <form action="/ошибка-на-странице/{{ firm.id }}" id="error_form" method="post" ng-controller="OneClick as vm">
+            <div class="form-item webform-component">
+                <label for="name">Ваше имя</label>
+                <input class="form-text" type="text" id="name" value="{{ uname }}"
+                       name="name" size="40" required>
+            </div>
+            <div class="form-item webform-component ">
+                <label for="email">Ваш email</label>
+                <input class="email form-text form-email" type="email" id="email" value="{{ uemail }}"
+                       name="email" size="40">
+            </div>
+            <div class="form-item webform-component ">
+                <label for="name">Название компании</label>
+                <input class="form-text" type="text" id="name"
+                       name="firm[name]" size="255" value="{{ firm.name }}">
+                <input name="old_firm[name]" type="hidden" value="{{ firm.name }}">
+            </div>
+            <div class="form-item webform-component ">
+                <label for="name">Юр. название</label>
+                <input class="form-text" type="text" id="street"
+                       name="firm[official_name]" size="255" value="{{ firm.official_name }}">
+                <input name="old_firm[official_name]" type="hidden" value="{{ firm.official_name }}">
+            </div>
+
+            <div>
+                <input name="old_firm[city_id]" type="hidden" value="{{ firm.getCityId() }}">
+                <change-city city="{{ firm.getCityId() }}"></change-city>
+            </div>
+
+            <div class="form-item webform-component ">
+                <label for="description">Описание компании</label>
+                <textarea class="form-text" type="text" id="description"
+                          name="firm[description]" size="255" value="{{ firm.description }}"></textarea>
+                <input name="old_firm[description]" type="hidden" value="{{ firm.description }}">
+            </div>
+
+            <div class="form-item webform-component ">
+                <label for="street">Улица</label>
+                <input class="form-text" type="text" id="street"
+                       name="firm[street]" size="40" value="{{ firm.street }}">
+                <input name="old_firm[street]" type="hidden" value="{{ firm.street }}">
+            </div>
+            <div class="form-item webform-component ">
+                <label for="home">Дом</label>
+                <input class="form-text" type="text" id="home"
+                       name="firm[home]" size="40" value="{{ firm.home }}">
+                <input name="old_firm[home]" type="hidden" value="{{ firm.home }}">
+            </div>
+            <div class="form-item webform-component ">
+                <label for="office">Офис</label>
+                <input class="form-text" type="text" id="office"
+                       name="firm[office]" size="40" value="{{ firm.office }}">
+                <input name="old_firm[office]" type="hidden" value="{{ firm.office }}">
+            </div>
+
+            {% if contacts.phone|length > 0 %}
+                {% for phone in contacts.phone %}
+                    <div class="form-item webform-component ">
+                        <label for="phone-{{ loop.index }}">Телефон {{ loop.index }}</label>
+                        <input class="form-text" type="text" id="phone-{{ loop.index }}"
+                               name="firm[phone][{{ loop.index0 }}]" size="40" value="{{ phone }}">
+                        <input name="old_firm[phone][{{ loop.index0 }}]" type="hidden" value="{{ phone }}">
+                    </div>
+                {% endfor %}
+                {% set phoneId = contacts.phone|length + 1 %}
+                <div class="form-item webform-component ">
+                    <label for="phone-{{ phoneId }}">Телефон {{ phoneId }}</label>
+                    <input class="form-text" type="text" id="phone-{{ phoneId }}"
+                           name="firm[phone][{{ phoneId }}]" size="40" value="">
+                    <input name="old_firm[phone][{{ phoneId }}]" type="hidden" value="">
+                </div>
+            {% else %}
+                <div class="form-item webform-component ">
+                    <label for="phone-1">Телефон 1</label>
+                    <input class="form-text" type="text" id="phone-1"
+                           name="firm[phone][0]" size="40" value="">
+                    <input name="old_firm[phone][0]" type="hidden" value="">
+                </div>
+            {% endif %}
+
+            {% if contacts.website|length > 0 %}
+                {% for website in contacts.website %}
+                    <div class="form-item webform-component ">
+                        <label for="web-{{ loop.index }}">Сайт {{ loop.index }}</label>
+                        <input class="form-text" type="text" id="web-{{ loop.index }}"
+                               name="firm[website][{{ loop.index0 }}]" size="40" value="{{ website }}">
+                        <input name="old_firm[website][{{ loop.index0 }}]" type="hidden" value="{{ website }}">
+                    </div>
+                {% endfor %}
+                {% set websiteId = contacts.website|length + 1 %}
+                <div class="form-item webform-component ">
+                    <label for="web-1">Сайт {{ websiteId }}</label>
+                    <input class="form-text" type="text" id="web-{{ websiteId }}"
+                           name="firm[website][{{ websiteId }}]" size="40" value="">
+                    <input name="old_firm[website][{{ websiteId }}]" type="hidden" value="">
+                </div>
+            {% else %}
+                <div class="form-item webform-component ">
+                    <label for="web-1">Сайт 1</label>
+                    <input class="form-text" type="text" id="web-1"
+                           name="firm[website][0]" size="40" value="">
+                    <input name="old_firm[website][0]" type="hidden" value="">
+                </div>
+            {% endif %}
+
+            {% for children in firm.children %}
+                <div class="form-item webform-component ">
+                    <label for="children-{{ loop.index }}">Филиал {{ loop.index }}</label>
+                    <input class="form-text" type="text" id="children-{{ loop.index }}"
+                           name="firm[children][{{ loop.index0 }}]" size="40" value="{{ children }}">
+                    <input name="old_firm[children][{{ loop.index0 }}]" type="hidden" value="{{ children }}">
+                </div>
+            {% endfor %}
+            {% set childrenId = firm.children|length + 1 %}   
+            <div class="form-item webform-component ">
+                <label for="children-{{ childrenId }}">Филиал {{ childrenId }}</label>
+                <input class="form-text" type="text" id="children-{{ childrenId }}"
+                       name="firm[children][{{ childrenId }}]" size="40" value="">
+                <input name="old_firm[children][{{ childrenId }}]" type="hidden" value="">
+            </div>
+
+            <div class="form-item webform-component">
+                <label for=message">Сообщение</label>
+                <textarea class="form-textarea" id="message" name="message" placeholder="..."></textarea>
+            </div>
+
+            {% if error %}
+                <div class="error">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <input type="hidden" name="firm_id" value="{{ firm.id }}">
+            <div class="persinfo-review"><input type="hidden" name="personal-info" value="0"/><input type="checkbox" name="personal-info" value="1" required id="persinfo"/>
+                <label for="persinfo" style="display: inline;">Я согласен с <a href="/polit.pdf" target="_blank" title="Политика защиты и обработки персональных данных">политикой защиты и обработки персональных данных</a> и даю свое <a href="/confirm.pdf" title="Согласие на обработку персональных данных" target="_blank">согласие</a> на их обработку.<span class="required"> *</span></label></div>
+
+            <div class="form-actions form-wrapper" id="edit-actions--3">
+                <input type="submit"
+                       id=""
+                       name="op"
+                       value="Сообщить об ошибке"
+                       class="form-submit ajax-processed" />
+            </div>
+        </form>
+    </div>
+</div>

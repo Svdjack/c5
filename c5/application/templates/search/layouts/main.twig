@@ -1,0 +1,18 @@
+{% import "@common/html.twig" as html %}
+{% import "@common/adv.twig" as adv %}
+<!doctype html>
+<html lang="ru" prefix="og: http://ogp.me/ns#">
+{% include "@search/layouts/header.twig" %}
+<body>
+<div class="l-page-container">
+    <div class="l-wrap">
+        {% block content %} {% endblock %}
+    </div>
+</div>
+<script type="text/javascript">
+    {% set cty = {'url':city.url, 'name':city.name, 'lat':city.lat, 'lon':city.lon} %}
+    var City = {{ cty|json_encode()|raw }};
+</script>
+{% include "@search/layouts/footer.twig" %}
+</body>
+</html>

@@ -1,0 +1,76 @@
+<script src="http://code.highcharts.com/highcharts.js" defer></script>
+{% autoescape false %}
+<script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function(){
+        $('#container').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Статистика просмотров компании и её категорий по месяцам'
+            },
+            subtitle: {
+                text: '«{{ firm.Name }}»'
+            },
+            xAxis: {
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Просмотры'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            xAxis: {
+                categories: ['{{ content.graph.months | join("', '") }}']
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y:,.0f}</b><br/>'
+            },
+            scrollbar: {
+                enabled: true
+            },
+            series: [{
+                name: 'Просмотры страницы компании',
+                data: [{% for item in content.graph.yearFirm %}{{ item.Cnt }},{% endfor %}]
+            },
+                {% for name, groups in content.graph.groups %}
+                {
+                    visible: false,
+                    name: '{{ name }}',
+                    data: [
+                        {% for group in groups %}
+                        {{ group.Cnt }},
+                        {% endfor %}
+                    ]
+                },
+                {% endfor %}
+                {% for name, tags in content.graph.tags %}
+                {
+                    visible: false,
+                    name: '{{ name }}',
+                    data: [
+                        {% for tag in tags %}
+                        {{ tag.Cnt }},
+                        {% endfor %}
+                    ]
+                },
+                {% endfor %}
+            ]
+        });
+    });
+</script>
+{% endautoescape %}
+<h2 class="stat-titler">График статистики по месяцам</h2>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div class="statictic-page-graphic-desc">Категории и ключевые слова не показываются по умолчанию, чтобы показать их на графике нажмите на название в списке выше.</div>

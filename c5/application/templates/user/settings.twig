@@ -1,0 +1,34 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/asset/css/cabinet.css" media="all">
+
+    <main>
+        <div class="wrapper cabinet" role="main">
+            <h1 class="page_title">{{ user.Name }}</h1>
+            {% for message in messages %}
+                <p class="message-success">{{ message }}</p>
+            {% endfor %}
+            <div class="cabinet_description">
+                <ul class="cabinet_menu">
+                    <li><a href="/профиль/компании">Список компаний</a></li>
+                    {% if up %}
+                        <li><a href="/профиль/почта">Настройки оповещений</a></li>
+                    {% endif %}
+                    <li><a href="/добавить-компанию">Добавить компанию</a></li>
+                    <li><a href="/профиль/выход">Выход</a></li>
+                </ul>
+                <h3>Профиль</h3>
+                <h2>Изменить пароль</h2>
+                <p>Для изменения пароля, введите его в поле ниже и нажмите "Сохранить"</p>
+                <form method="post" action="" class="password-form">
+                    <input type="password" name="password" class="text"/>
+                    <br/>
+                    <p></p>
+                    <input type="submit" value="Сохранить" class="button">
+                </form>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

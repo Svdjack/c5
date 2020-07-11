@@ -1,0 +1,45 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    {% if redirect %}
+        <script>
+            window.location.href = "{{ redirect }}";
+        </script>
+
+    {% endif %}
+    <div class="main_title">
+        <h1>Твоя Фирма – справочник компаний с полными реквизитами</h1>
+        <h2>Твоя фирма среди компаний России</h2>
+    </div>
+    <div class="obl_list">
+        <div class="column">
+            {% for region in regionList %}
+                <div class="obl_section">
+                    <div class="title"><a title="{{ region.name }}" href="/{{ region.url }}">{{ region.name }}</a></div>
+                    <p>всего {{ region.firm_count }}
+                        {% if region.firm_count%10 == 1 %}
+                            компания
+                        {% elseif region.firm_count%10 in 1..4 %}
+                            компании
+                        {% else %}
+                            компаний
+                        {% endif %}
+                        из {{ region.children|length }}
+                        городов</p>
+                </div>
+                {% if loop.index == ((regionList|length)/2)|round %}
+                </div><div class="column">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="two_columns_text">
+        <p>Интернет портал «Твоя фирма» - новый и эффективный способ продвижения товаров и услуг вашей компании. Вы можете совершенно бесплатно добавить данные своей компании в
+            нашу базу. Для этого необходимо <a title="Добавить компанию" rel="nofollow" href="/добавить-компанию">заполнить форму</a>, и у вас появится страница, которой вы
+            сможете
+            управлять через личный кабинет. </p>
+        <p>В любой момент Вы сможете внести изменения в представленную ранее информацию, и клиенты будут всегда видеть актуальные данные о вашей компании. Это особенно удобно в
+            случае оповещения о действующих акциях и специальных предложениях.</p>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <main>
+        <div class="wrapper">
+            <div class="main_content">
+                <h1>Восстановление пароля</h1>
+                {% if info %}
+                    <p class="error">{{ info }}</p>
+                {% endif %}
+                <p>Для восстановления пароля введите свой Email</p>
+                <form action="" method="post">
+                    <div class="form-item">
+                        <label>
+                            Email
+                        </label>
+                        <input type="email" name="email" class="form-text required">
+                    </div>
+
+                    <div class="form-actions form-wrapper" id="edit-actions">
+                        <input type="submit" class="btn form-submit" value="Восстановить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,26 @@
+<main>
+    <div class="wrapper cabinet" role="main">
+        <div class="cabinet_description" style="width:100%;overflow:hidden;">
+            <div class="statictic-page-top-info"
+                 style="background-color:#F7FCFF;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;border-radius:10px;">
+                <div class="statictic-page-top-info-in" style="padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;margin-top:15px;">
+                    На данной странице представлена статистика просмотров страницы компании, а также страниц рубрик и ключевых слов, к которым она
+                    относится.
+                    <br>
+                    <br>
+                    Компания «<a href="http://{{ main_domain }}{{ firm.getAlias() }}">{{ firm.Name }}</a>» поднята и выделена во всех рубриках и ключевых словах, к которым она относится. Поднятие действует
+                    до {{ firmUp.timeEnd | date('d.m.Y') }}.
+                    <br>
+                    <a href="http://{{ main_domain }}/профиль/{{ user.Id }}/почта">Настроить оповещение</a>
+                    <div class="statictic-page-top-info-svodka"></div>
+                </div>
+            </div>
+            {% import "@adv/emails/stat_table.twig" as stat %}
+            {{ stat.statTable(content.firmWeek) }}
+            {{ stat.statTable(content.categoriesWeek) }}
+            {{ stat.statTable(content.tagsWeek) }}
+            {{ stat.statTable(content.sumWeek) }}
+            {{ stat.statTable(content.sumYear) }}
+        </div>
+    </div>
+</main>

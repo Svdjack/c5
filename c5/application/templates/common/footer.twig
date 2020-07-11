@@ -1,0 +1,67 @@
+<footer>
+    <div class="wrapper" role="contentinfo">
+        <div class="info">
+            <div class="metrika">
+                    <!--LiveInternet counter--><script type="text/javascript">document.write("<a href='//www.liveinternet.ru/click;TvoyaFirma' target=_blank><img src='//counter.yadro.ru/hit;TvoyaFirma?t44.2;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";h"+escape(document.title.substring(0,80)) +  ";" + Math.random() + "' border=0 width=31 height=31 alt='' title='LiveInternet'><\/a>")</script><!--/LiveInternet-->
+            </div>
+            <div class="soc_web" id="footer_social_buttons">
+
+
+            </div>
+            <!--noindex-->
+                <div class="age">16+</div>
+            <!--/noindex-->
+            <div class="help_link" id="footer_help_link">
+
+            </div>
+        </div>
+        {% if footer.frontPage %}
+            <div class="copyright"><p title="Адреса, реквизиты, схемы проезда организаций на сайте ТвояФирма.РФ">© 2018 ТвояФирма.РФ</p></div>
+        {% else %}
+            <div class="copyright"><p style="display: inline-block;">© 2018
+                <div id="footer_copyright_link" style="display: inline-block;
+                margin-left: 5px;"></div>
+            </div>
+        {% endif %}
+    </div>
+</footer>
+<!--noindex-->
+
+<!--/noindex-->
+
+
+
+<script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU" defer></script>
+<script type="text/javascript" src="/asset/js/ads.js" defer></script>
+
+
+
+<script type="text/javascript" src="/asset/app/app.js" defer></script>
+<script type="text/javascript" src="/asset/app/search-site.js" defer></script>
+
+{% if city %}
+    <script>
+        var City = {lat:{{ city.lat }}, lon:{{ city.lon }}, url:'{{ city.url }}'}
+    </script>
+{% else %}
+    <script>
+        var City = {lat:0, lon:0, url:'/'}
+    </script>
+{% endif %}
+
+
+{#<script type="text/javascript" src="/asset/js/jquery.simplemodal.min.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/jquery.timepicker.min.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/control.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/generate_links.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/weird_script.js"></script>#}
+
+
+
+{#<script type="text/javascript" src="/asset/js/colorbox.jquery.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/html5.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/IE8.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/less-1.7.4.js"></script>#}
+{#<script type="text/javascript" src="/asset/js/dropzone.js"></script>#}
+
+{{ dbg() }}

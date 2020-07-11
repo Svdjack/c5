@@ -1,0 +1,245 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <main>
+        <div class="wrapper" role="main">
+
+            <style>
+
+                h2 {
+                    font-size: 20px;
+                }
+
+                img {
+                    max-width: 100%;
+                }
+
+                .upfirmrekbut {
+                    cursor: pointer;
+                    outline: none;
+                    padding: 14px 33px;
+                    margin-top: 13px;
+                    border-radius: 6px;
+                    float: left;
+                    width: auto;
+                    color: #FFF;
+                    font-size: 20px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    text-shadow: 1px 1px 1px #555;
+                    margin-bottom: 19px;
+                    background: #ffd65e;
+                    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                    background: -moz-linear-gradient(top, #ffd65e 0%, #febf04 100%);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffd65e), color-stop(100%, #febf04));
+                    background: -webkit-linear-gradient(top, #ffd65e 0%, #febf04 100%);
+                    background: -o-linear-gradient(top, #ffd65e 0%, #febf04 100%);
+                    background: -ms-linear-gradient(top, #ffd65e 0%, #febf04 100%);
+                    background: linear-gradient(to bottom, #ffd65e 0%, #febf04 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd65e', endColorstr='#febf04', GradientType=0);
+                }
+
+                .upfirmrekbut:hover {
+                    background: #ffe523;
+                    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                    background: -moz-linear-gradient(top, #ffe523 0%, #febf04 100%);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffe523), color-stop(100%, #febf04));
+                    background: -webkit-linear-gradient(top, #ffe523 0%, #febf04 100%);
+                    background: -o-linear-gradient(top, #ffe523 0%, #febf04 100%);
+                    background: -ms-linear-gradient(top, #ffe523 0%, #febf04 100%);
+                    background: linear-gradient(to bottom, #ffe523 0%, #febf04 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe523', endColorstr='#febf04', GradientType=0);
+                }
+
+                .mobile-crap {
+                    display: none;
+                }
+
+                @media screen and (max-width: 350px) {
+                    .adv-up-info-top li.pr_icon {
+                        display: block;
+                        float: none !important;
+                        margin-left: 0 !important;
+                    }
+                    #div3 table td {
+                        width: 100% !important;
+                        font-size: 12px;
+                    }
+                    #div3 table h4 {
+                        font-size: 12px !important;
+                    }
+                    .mobile-crap {
+                        display:block;
+                    }
+                    .pc {
+                        display: none;
+                    }
+                }
+
+
+
+            </style>
+
+            <div id="content">
+                <div>
+
+                    <h1 class="page_title">Реклама</h1>
+
+                    <div>
+                        <script>
+                            function op(obj) {
+                                x = document.getElementById(obj);
+                                if (x.style.display == "none") x.style.display = "block";
+                                else x.style.display = "none"
+                            }
+                        </script>
+                        <p>
+                            <strong><span style="font-family: arial,helvetica,sans-serif;font-size: 14px;">Предлагаем рекламные возможности справочника для максимизации эффекта размещения вашей компании в любом городе России.</span></strong>
+                        </p>
+                        <div class="upfirmrektitle">
+                            <h2>Поднять компанию</h2>
+                        </div>
+
+                        <div class="adv-up-info-top up-page-description">
+                            <ul>
+                                <ul>
+                                    <li class="pr_icon pr_icon_1 beta premium all-in">Поднятая компания показывается вверху своих рубрик и ключевых слов, выше всех конкурентов</li>
+                                    <li class="pr_icon pr_icon_2 beta premium all-in">Поднятая компания выделяется фоном, что делает её намного заметнее конкурентов<br></li>
+                                    <li class="pr_icon pr_icon_3 beta premium all-in">Среднее количество просмотров информации о компании увеличивается в 3-5 раз</li>
+                                    <li class="pr_icon pr_icon_4 beta premium all-in">Ведется подробная статистика просмотров компании, рубрик и ключевых слов к которым она относится</li>
+                                    <li class="pr_icon pr_icon_5 premium all-in">Гибкая настройка отчетов по просмотрам вашей компании, рубрик и ключевых слов</li>
+                                    <li class="pr_icon pr_icon_6 premium all-in">У поднятой компании навсегда появляется метка с текстом “Информация проверена её представителем ✓”</li>
+                                    <li class="pr_icon pr_icon_7 all-in">В карточке (странице) с информацией о компании полностью отключена назойливая реклама</li>
+                                    <li class="pr_icon pr_icon_8 all-in">Cкрытие информации о других компаниях на странице с информацией о компании. Позволит посетителю не уйти к конкурентам</li>
+                                    <li class="pr_icon pr_icon_9 all-in">Возможность удаления отзывов о вашей компании. Позволяет удалять любые отзывы, включая негативные в адрес вашей организации</li>
+                                </ul>
+                            </ul>
+                        </div>
+                        <div class="adv-up-info-bottom">
+                            <div class="adv-up-info-bottom-left">
+                                <h3 style="font-size: 20px;">Первое выделенное место</h3>
+                                <p>
+                                    <img class="pc adborimg" src="/asset/up/images/advup_info_cat.png">
+                                    <img class="mobile-crap adborimg" src="/asset/up/images/1.png">
+                                </p>
+                            </div>
+                            <div class="adv-up-info-bottom-right">
+                                <h3 style="font-size: 20px;">Пример статистики</h3>
+                                <p>
+                                    <img class="adborimg" src="/asset/up/images/advup_info_stat.png">
+                                </p>
+                                <div style="font-size: 18px;">
+                                    <i>Дополнительно на странице предприятия появится ремарка: «Информация о компании проверена ее представителем»</i>
+                                </div>
+                                <p>
+                                    <img class="adborimg" src="/asset/up/images/advup_info_firm_page.png">
+                                </p>
+                            </div>
+                            <h2>Сколько это стоит?</h2>
+                            <p>
+                                Поднятие и выделение стоит от 200 до 1950 рублей в месяц в зависимости от региона и рубрики компании.
+                            </p>
+                            <p>
+                                Оплата с помощью пластиковой карты, SMS, Яндекс.Денег, QIWI, WebMoney и другие способы.
+                            </p>
+                        </div>
+                        <h2>Как поднять компанию?</h2>
+                        <p>
+                            Чтобы поднять компанию, нужно зайти на страницу компании, которую Вы хотите поднять и нажать на кнопку "Поднять компанию".<br><br><br>
+                            <img class="pc adborimg" src="/asset/up/images/advup_info_button.png"><br>
+                            <img class="mobile-crap adborimg" src="/asset/up/images/2.png"><br>
+                            <br>
+                            <br></p>
+                        <p>
+                            Если Вы еще не нашли компанию, которую хотите поднять, то воспользуйтесь формой поиска выше
+                        </p>
+                        {#                        <div class="upfirmrekbut">
+                                                    Поднять компанию
+                                                </div>#}
+                        <div style="clear:both;">
+                        </div>
+                        <script>
+                            function op(obj) {
+                                x = document.getElementById(obj);
+                                if (x.style.display == "none") x.style.display = "block";
+                                else x.style.display = "none"
+                            }
+                        </script>                        <ul>
+                            <h2 id="rek">
+                                <li><a class="dynamic" href="/" onclick="op('div1'); return false;">Посещаемость</a></li>
+                            </h2>
+                        </ul>
+                        <div id="div1" style="display:none">
+                            <p>
+                                <span>96% всех посетителей переходят на сайт из различных поисковых систем: Яндекс, Google, Mail и др. Остальные 4% - это закладки, социальные сети и другие сайты.</span>
+                            </p>
+                            <p>
+                                <span><strong>Динамика посещаемости сайта города – миллионника 400-1000 чел/сутки </strong></span>
+                            </p>
+                            <p>
+                                <img border="0" src="/asset/up/images/pos.png">
+                            </p>
+                        </div>
+                        <ul>
+                            <h2 id="rek">
+                                <li><a class="dynamic" href="/" onclick="op('div2'); return false;">Аудитория</a></li>
+                            </h2>
+                        </ul>
+                        <div id="div2" style="display:none">
+                            <p>
+                                <span>Преобладает женская половина (примерно 2/3 всей аудитории), треть – это мужчина в возрасте 18-44 года.</span>
+                            </p>
+                            <p>
+                                <span>Таким образом, аудитория сайта – потенциальные клиенты магазинов, оптовых компаний, любым образом связанные с товарами и услугами в вашем городе, преимущественно женщины.</span>
+                            </p>
+                            <p>
+                                <span>Над сайтом ведется постоянная работа по увеличению посещаемости.</span>
+                            </p>
+                            <p>
+                                <span>На сайт приходят по разным запросам, но все они коммерческие и непосредственно относятся к оптово-розничной торговле, услугам и производству. Также много социальных запросов типа:</span>
+                            </p>
+                            <ul>
+                                <li><span>военный комиссариат</span></li>
+                                <li><span>органы опеки</span></li>
+                                <li><span>справочная жд вокзала</span></li>
+                                <li><span>налоговая</span></li>
+                                <li><span>паспортный стол</span></li>
+                                <li><span>прокуратура и суд</span></li>
+                                <li><span>соцзащита населения</span></li>
+                            </ul>
+                            <br>
+                        </div>
+
+                        <h2 id="attention">Внимание!</h2>
+                        <ul>
+                            <li><span>Для максимального эффекта услуги "Поднятие компании" рекомендуем указывать как можно больше ключевых слов, свойственных виду деятельности Вашей компании, по которым еще нет поднятых компаний. </span>
+                                <p><strong>Это же относится и к видам деятельности (рубрикам).</strong></p>
+                            </li>
+                            <li><span>Порядок ранжирования. Компании в рубрике ранжируются по принципу "Последний — наверху".<br>
+Если получилось так, что в одном виде деятельности (рубрике) или ключевом слове стало больше одной поднятой компании, то ранжируются поднятые компании по принципу "Последний — наверху".</span>
+                                <p>Пояснение: если компания "А" из рубрики "Рубрика_1" была поднята, например, 1 октября 2013 г. (начало срока поднятия), неважно на какой срок, а
+                                    компания "Б" из той же рубрики была поднята 25 октября 2013г., то компания "А" становится на одну строчку ниже на весь срок поднятия компании
+                                    "Б" и так далее.</p>
+                                <p>Для максимального эффекта рекомендуем указывать как можно больше <strong>рубрик</strong> и ключевых слов, по которым еще нет поднятых
+                                    компаний.<br>
+                                    Таких, как вы сами убедитесь, очень много еще. </p>
+                            </li>
+                            <li><span>Мы не изменяем алгоритм выдачи информации в чью-либо пользу.&nbsp;</span></li>
+                            <li>
+                                <span>Оставляем за собой право отказать в публикации материалов, не соответствующим действительности и/или противоречащим законодательству РФ&nbsp;</span>
+                            </li>
+                            <li><span>Мы не размещаем рекламу на главной странице сайта.&nbsp;</span></li>
+                            <li><span>Оплата принимается в системах «Яндекс.Деньги», «WebMoney» или безналичный расчет</span></li>
+                        </ul>
+                        <p>
+                            <span><span>По вопросам размещения рекламы Вы можете обратиться <a href="mailto:tvoyafirma@gmail.com?subject=Вопрос по рекламе" rel="nofollow">на
+                                        почту</a></span></span>
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

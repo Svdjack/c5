@@ -1,0 +1,267 @@
+{% import "@common/html.twig" as html %}
+{% import "@common/adv.twig" as adv %}
+<script>
+    var title = '{{ head.title }}';
+    var h1 = '{{ h1 }}';
+    var description = '{{ head.description }}';
+</script>
+<div class="map__info-card js-map__info-card">
+    <div class="map__background"></div>
+    <div class="on-map">На карте</div>
+    <div class="map__info-card-header header-second">
+        <div class="map__info-card-service-button">
+            <span class="map__info-card-trigger map__info-card-trigger--close"></span>
+            <span class="map__info-card-trigger map__info-card-trigger--roll"></span>
+        </div>
+    </div>
+    <div class="map__info-card-header">
+        <div class="map__info-card-rating">
+            {% if firm.rating %}
+                {% for i in 1..5 %}
+                    {% if firm.rating >= i %}
+                        <i class="i-rate i-rate-1"></i>
+                    {% else %}
+                        <i class="i-rate i-rate-3"></i>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for i in 1..5 %}
+                    <i class="i-rate i-rate-3"></i>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="map__info-card-title">
+            {% if firm.url %}
+                <a href="{{ firm.url }}" title="{{ firm.name }}" class="map__info-card-title-link">{{ firm.name }}</a>
+            {% else %}
+                {{ firm.name }}
+            {% endif %}
+            <div class="map__info-card-title-description">
+                {{ firm.subtitle }}
+            </div>
+        </div>
+        <div class="l-sides">
+            {% set break = false %}
+            {% set phone = false %}
+            {% for contact in firm.contacts if contact.type == 'phone' and not break %}
+                {% set break = true %}
+                {% set phone = contact.value %}
+                <div class="l-side-left map__info-card-button hide">
+                    <a href="tel:{{ contact.value }}">
+                        <span class="map__info-card-button-image">
+                            <i class="i-phone-mid"></i>
+                        </span>
+                        <span class="map__info-card-button-text">
+                            позвонить на телефон
+                        </span>
+                    </a>
+                </div>
+            {% endfor %}
+            <div class="l-side-right map__info-card-button">
+                <a href="#" class="get-way">
+                    <span class="map__info-card-button-image">
+                        <i class="i-route-mid"></i>
+                    </span>
+                    <span class="map__info-card-button-text">
+                        построить маршрут
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="map__info-card-content">
+        <div class="map__info-card-block map__info-card-block--address">
+            <div class="map__info-card-block-title">
+                Организация находится по адресу:
+            </div>
+            <div class="map__info-card-block-content">
+                <a id="firm-address" data-id="{{ firm.id }}" href="{{ firm.url }}">
+                    {{ firm.address }}
+                </a>
+            </div>
+        </div>
+        {% if phone %}
+            
+            <div class="map__info-card-block map__info-card-block--phone">
+                <div class="map__info-card-block-title js-map__info-card-block">Контактный телефон</div>
+                <div class="map__info-card-block-content">
+                    
+                    {% if firm.contacts_phones <= 1 %}
+                        <div class="map__info-card-block-phone hide">{{ phone }}</div>
+                    {% else %}
+                        {% for contact in firm.contacts if contact.type == 'phone' %}
+                            <div class="map__info-card-block-phone hide">{{ contact.value }}</div>                           
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="map__info-card-block-notice hide">
+                        Пожалуйста, скажите, что узнали номер на портале ТвояФирма.РФ
+                    </div>
+                    <span class="map__info-card-block-roll js-map__info-card-block-phone">
+                        {# Показать телефон #} <i class="i-arrow-top-chevron" title="Открыть/закрыть"></i>
+                    </span>
+                </div>
+                {{ adv.yandex33 }}
+            </div>
+        {% endif %}
+        {% if firm.worktime %}
+            <div class="map__info-card-block map__info-card-block--worktime">
+                <div class="map__info-card-block-title js-map__info-card-block-title">График работы</div>
+                <div class="map__info-card-block-content">
+                    <div class="map__info-card-block-worktime">
+                        {% set eng_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] %}
+                        {% set day = eng_days["now"|date('N') - 1] %}
+                        {% set today = firm.worktime[day] %}
+                        {% if today %}
+                            Сегодня с {{ today.working_hours|first.from }} до {{ today.working_hours|last.to }}
+                        {% else %}
+                            Сегодня выходной
+                        {% endif %}
+                    </div>
+
+                    {% set ru_days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'] %}
+
+                    <div class="contacts__info-wortime" style="display: none">
+                        {% for day in eng_days %}
+                            {% set today = firm.worktime[day] %}
+                            <div class="contacts__info-wortime-item
+                                    {{ (loop.index0 == 5 or loop.index0  == 6) ? 'contacts__info-wortime-item--day-off' : '' }}
+                                    {{ "now"|date('N') == loop.index0 + 1 ? 'active' : '' }}">
+                                <div class="contacts__info-wortime-title">
+                                    {{ ru_days[loop.index0] }}
+                                </div>
+                                <div class="contacts__info-wortime-time contacts__info-wortime-time--top">
+                                    <div class="contacts__info-wortime-time-cell">
+                                        {% if today %}
+                                            <span class="contacts__info-wortime-number">
+                                                {{ today.working_hours|first.from }}
+                                            </span>
+                                            <span class="contacts__info-wortime-number">
+                                                 {{ today.working_hours|last.to }}
+                                            </span>
+                                        {% else %}
+                                            <span style="margin-left: 14px;" class="contacts__info-wortime-number">&#x274C;</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <span class="map__info-card-block-roll js-map__info-card-block-worktime">
+                        <i class="i-arrow-top-chevron" title="Открыть/закрыть"></i>
+                    </span>
+                </div>
+            </div>
+        {% endif %}
+        {% if firm.contacts_social %}
+            <div class="map__info-card-block map__info-card-block--social">
+                <div class="map__info-card-block-content">
+                    {% for contact in firm.contacts %}
+                        {% if contact.type == 'website' %}
+                            <div class="map__info-card-block-item">
+                                <a target="_blank" rel="nofollow" href="{{ contact.value }}">
+                                    <i class="i-spravka"></i> {{ contact.value|replace({'http://' : '','https://' : ''}) }}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if contact.type == 'vkontakte' %}
+                            <div class="map__info-card-block-item">
+                                <a href="{{ contact.value }}">
+                                    <i class="i-vkontakte"></i> Вконтакте
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if contact.type == 'twitter' %}
+                            <div class="map__info-card-block-item">
+                                <a href="{{ contact.value }}">
+                                    <i class="i-twitter"></i> Twitter
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if contact.type == 'facebook' %}
+                            <div class="map__info-card-block-item">
+                                <a href="{{ contact.value }}">
+                                    <i class="i-facebook"></i> Facebook
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if contact.type == 'odnoklassniki' %}
+                            <div class="map__info-card-block-item">
+                                <a href="{{ contact.value }}">
+                                    <i class="i-od"></i> Одноклассники
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if contact.type == 'youtube' %}
+                            <div class="map__info-card-block-item">
+                                <a href="{{ contact.value }}">
+                                    <i class="i-yt"></i> Youtube
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="map__info-card-block map__info-card-block--review">
+            <div class="add-map-label">
+                <input placeholder="Примечание" id="comment" maxlength="30" type="text">
+                <span>+</span>
+            </div>
+            {% if firm.comments %}
+                <div class="map__info-card-block-content">
+                    <a href="#reviews" class="map__info-card-review-link kotel-review">
+                        {{ firm.comments|length }} {{ html.plural_form(firm.comments|length,'отзыв','ов','','а') }}
+                    </a>
+                    <div class="map__info-card-block-content--comments">
+                        {% for comment in firm.comments %}
+                            <div class="comment">
+                                <div class="rating">
+                                    {% for i in 1..5 %}
+                                        {% if comment.score >= i %}
+                                            <i class="i-rate i-rate-1"></i>
+                                        {% else %}
+                                            <i class="i-rate i-rate-3"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="name">
+                                    {{ comment.user }}
+                                </div>
+                                <div class="text">
+                                    {{ comment.comment }}
+                                </div>
+                                <div class="date">
+                                    {{ comment.created_at }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            
+            {{ adv.yandex34 }}
+            
+            {% if firm.url %}
+                <div class="map__info-card-block-content">
+                    <a href="{{ firm.url }}#send-review" class="map__info-card-review-link">
+                        Написать отзыв
+                    </a>
+                    <a href="{{ firm.url }}" class="map__info-card-review-link map__info-card-review-link--more">
+                        Подробнее об организации
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+<div class="frame__mover">
+    &#10096;
+</div>
+        
+<script type="text/javascript">
+    window.interfaceManager && window.interfaceManager.saveActiveFirm({{firm.id }});
+</script>
+        
+{{ dbg() }}

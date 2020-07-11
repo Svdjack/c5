@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru" class="js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="yandex-verification" content="6884320418269a9b">
+    <meta name="google-site-verification" content="rJ_d6d-r1scCC6d0vfiS2_klTzit78UhzYOeLiImEps">
+    <meta name="wmail-verification" content="2bf45f6c86840790">
+    <meta name="description" content="Страница печати для компании {{ h1|capitalize }}">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" async="" src="http://mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">(function (d, w, c) {
+            (w[c] = w[c] || []).push(function () {
+                try {
+                    w.yaCounter28929580 = new Ya.Metrika({id: 28929580, webvisor: true, clickmap: true, trackLinks: true});
+                } catch (e) {
+                }
+            });
+            var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else {
+                f();
+            }
+        })(document, window, "yandex_metrika_callbacks");</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="http://xn--80adsqinks2h.xn--p1ai/misc/favicon.ico" type="image/vnd.microsoft.icon">
+    <title>Версия для печати — {{ h1|capitalize }}</title>
+    <link rel="stylesheet" type="text/css" href="/asset/css/reset.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/asset/css/style.css" media="all">
+</head>
+<body class="html not-front logged-in one-sidebar sidebar-first page-формат page-формат-для-печати page-формат-для-печати- page-формат-для-печати-{{ id }} admin-menu">
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter28929580 = new Ya.Metrika({ id:28929580, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/28929580" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+
+<div class="wrapper">
+    <main>
+        <div class="wrapper" role="main">
+            <div class="main_content">
+
+                <div class="region region-content">
+                    <div id="block-system-main" class="block block-system">
+
+                        <div class="content">
+                            <link rel="stylesheet" type="text/css" href="/asset/css/print.css" media="all"/>
+                            <div class="company-pp">
+                                <div class="company-pp-header">
+                                    <div class="company-pp-header-mark"><a href="/" title="Перейти на главную страницу сайта ТвояФирма.рф"><img alt="ТвояФирма.РФ"
+                                                    src="data:image/png;base64,{{ logo }}"></a></div>
+                                    <div class="company-pp-header-title">Справочник российских компаний «ТвояФирма.рф»</div>
+                                </div>
+                                {% if type == 'для-печати' %}
+                                <div class="company-pp-header-menu">
+                                    <ul>
+                                        <li><a href="{{ alias }}" title="Вернуться к компании">Вернуться назад</a></li>
+                                        <li><a href="javascript:window.print();" title="Отправить на печать">Распечатать</a></li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                <div class="company-pp-company">
+                                    <div class="company-pp-company-title"><h1>{{ h1|capitalize }}</h1>
+                                        <h2>{{ h2|capitalize }}</h2></div>
+                                    <div class="company-pp-company-infos">
+                                        {% if contacts.phones %}
+                                            <div class="company-pp-company-infos-sield dainfo-da-contacts-sield-phones">
+                                                <div class="company-pp-company-infos-sield-label">Телефон:</div>
+                                                <div class="company-pp-company-infos-sield-multi-values">
+                                                    <ul>
+                                                        {% for phone in contacts.phones %}
+                                                            <li>{{ phone }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="company-pp-company-infos-sield dainfo-da-contacts-sield-address">
+                                            <div class="company-pp-company-infos-sield-label">Адрес:</div>
+                                            <div class="company-pp-company-infos-sield-value">
+                                                {{ address }}
+                                                {% if office %}
+                                                    <span class="dainfo-da-contacts-sield-address-office">{{ office }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if contacts.websites %}
+                                            <div class="company-pp-company-infos-sield dainfo-da-contacts-sield-website">
+                                                <div class="company-pp-company-infos-sield-label">Сайт:</div>
+                                                <div class="company-pp-company-infos-sield-multi-values">
+                                                    <ul>
+                                                        {% for web in contacts.websites %}
+                                                            <li>
+                                                                <a rel="nofollow" target="_blank" href="http://{{ web }}" title="Сайт компании «{{ h1|capitalize }}»">{{ web }}</a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="company-pp-company-infos-sield dainfo-da-contacts-sield-category">
+                                            <div class="company-pp-company-infos-sield-label">Категория:</div>
+                                            <div class="company-pp-company-infos-sield-multi-values">
+                                                <ul>
+                                                    <li>
+                                                        <a href="{{ main_cat.link }}"
+                                                           title="{{ main_cat.name }}">{{ main_cat.name }}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="company-pp-company-map"><img alt="Компания на карте" title="Компания на карте"
+                                            src="http://static-maps.yandex.ru/1.x/?l=map&amp;lang=ru-Ru&amp;size=600,400&amp;z=16&amp;ll={{ coords }}&amp;pt={{ coords }},pm2lbl">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <div class="clearfix"></div>
+    <div class="hfooter"></div>
+    <!--нужен чтобы прижать футер-->
+</div>
+
+</body>
+</html>

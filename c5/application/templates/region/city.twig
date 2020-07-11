@@ -1,0 +1,99 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <div class="main_content">
+        <div>
+            {% include "@common/breadcrumb.twig" %}
+        </div>
+        <h1>Справочник компаний {{ title_case }}</h1>
+        <div class="find">В справочнике на сегодня <span>{{ company_count }} {% if company_count%10 == 1 %}
+                    компания
+                {% elseif company_count%10 in 1..4 %}
+                    компании
+                {% else %}
+                    компаний
+                {% endif %}</span>
+        </div>
+
+        <div class="rubrics_list">
+
+            {% for root in root_rubrics %}
+                <div class="rubrics_section">
+                    <div class="rubric_header"><h2 class="title">{{ root.name }}</h2>
+                        <div class="comment">{{ root.review_count }} {% if root.review_count%10 == 1 %}
+                                отзыв
+                            {% elseif root.review_count%10 in 1..4 %}
+                                отзыва
+                            {% else %}
+                                отзывов
+                            {% endif %} / {{ root.company_count }} {% if root.company_count%10 == 1 %}
+                                организация
+                            {% elseif root.company_count%10 in 1..4 %}
+                                организации
+                            {% else %}
+                                организаций
+                            {% endif %}</div>
+                    </div>
+                    <div class="content js-result-search-list">
+                        {% for rubric in root.children %}
+                            <div class="rubric {% if loop.index > 10 %}hide-rubric{% endif %}">
+                                <div class="info"><!--noindex-->
+                                    <div class="review_count"
+                                         title="{{ rubric.review_count }} {{ html.plural_form(rubric
+                                         .review_count, 'отзыв', 'ов', '', 'а') }}">
+                                        {{ rubric.review_count }}</div>
+                                    <div class="org_count"
+                                         title="{{ rubric.company_count }} {{ html.plural_form(rubric
+                                         .company_count, 'компани', 'й', 'я', 'и') }}">
+                                        {{ rubric.company_count }}
+                                    </div><!--/noindex-->
+                                </div>
+                                <a href="{{ rubric.url }}" title="{{ rubric.name }} {{ city.prefix }} {{ city.case5 }}">{{ rubric.name }}</a>
+                            </div>
+                            {% if loop.last %}
+                                {% if root.children|length > 10 %}
+                                    <div class="spoler-open">
+                                        <span class="amount">
+
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="bottom_content">
+            <div class="text">
+                <h3 class="title">Справка города</h3>
+                <p>Посетителям сайта для оптимального поиска важна актуальная информация. Каждая из {{ company_count }}
+                    {% if company_count%10 == 1 %}
+                        компания,
+                    {% elseif company_count%10 in 1..4 %}
+                        компании,
+                    {% else %}
+                        компаний,
+                    {% endif %}представленная на нашем информационном ресурсе, сопровождается
+                    контактной информацией, с указанием вида деятельности и особенностей сотрудничества.
+                    В справочнике приведены контактные данные в полном объеме для возможности
+                    быстро связаться с фирмой.
+                    «Твоя фирма» привлекает большое число пользователей,
+                    благодаря размещению независимых отзывов о фирмах и предприятиях
+                    города {{ city.case1 }} и {{ region.case1 }}.
+                    Также мы формируем и постоянно обновляем рейтинг компаний,
+                    на основании оставленных оценок деятельности каждой фирмы.</p></div>
+            <div class="last_org_list"><h3 class="title">Последние компании</h3>
+                {% for comp in latest_companies %}
+                    <div class="last_org">
+                        <a href="{{ comp.url }}"
+                           title="{{ comp.title[:1]|upper ~ comp.title[1:] }}">{{ comp.title }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

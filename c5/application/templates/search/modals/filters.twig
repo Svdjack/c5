@@ -1,0 +1,74 @@
+<form class="map__info-filter js-map__info-filter">
+    <div class="map__info-filter-header">
+        <div class="map__info-filter-title">
+            Фильтр
+            <span class="map__info-filter-clear">очистить все</span>
+        </div>
+        <span class="map__info-filter-trigger map__info-filter-trigger--close"></span>
+    </div>
+    <div class="map__info-filter-content">
+        {% if districts %}
+            <div class="map__info-filter-field-wrap">
+                <div class="map__info-filter-field">
+                    <select data-type="district" class="filter-select">
+                        <option value="0">Район</option>
+                        {% for id, district in districts %}
+                            <option value="{{ id }}">{{ district }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endif %}
+        {% if streets %}
+            <div class="map__info-filter-field-wrap">
+                <div class="map__info-filter-field">
+                    <select data-type="street" class="filter-select">
+                        <option value="0">Улица</option>
+                        {% for id, street in streets %}
+                            <option value="{{ id }}">{{ street }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endif %}
+        <div class="map__info-filter-field-wrap map__info-filter-field-wrap--checkbox">
+            {% for filter in filters %}
+                <div class="map__info-filter-field">
+                    <input data-id="{{ filter.id }}" class="filter-attribute" id="map__info-filter_cb_0{{ loop.index }}" type="checkbox"/>
+                    <label>{{ filter.name }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="map__info-filter-field-wrap map__info-filter-field-wrap--time">
+            <div class="map__info-filter-field map__info-filter-field--status">
+                <div data-type="worktime" class="filter-item map__info-filter-field-item js-param">
+                    Открыто сейчас
+                </div>
+                <div data-type="is24x7" class="filter-item map__info-filter-field-item js-param">
+                    Круглосуточно
+                </div>
+                <div data-type="time" class="filter-time map__info-filter-field-item">
+                    В указанное время
+                </div>
+            </div>
+            <div class="map__info-filter-field map__info-filter-field--slider">
+                <div>
+                    <input hidden type="text" id="amount" value="12">
+                </div>
+                <div class="map__info-filter-field-slider">
+                    <div class="js-slider-range"></div>
+                </div>
+
+            </div>
+            <div class="filter-by-days map__info-filter-field map__info-filter-field--days">
+                <div class="map__info-filter-field-item js-param">Пн</div>
+                <div class="map__info-filter-field-item js-param">Вт</div>
+                <div class="map__info-filter-field-item js-param">Ср</div>
+                <div class="map__info-filter-field-item js-param">Чт</div>
+                <div class="map__info-filter-field-item js-param">Пт</div>
+                <div class="map__info-filter-field-item js-param">Сб</div>
+                <div class="map__info-filter-field-item js-param">Вс</div>
+            </div>
+        </div>
+    </div>
+</form>

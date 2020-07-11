@@ -1,0 +1,81 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/asset/css/cabinet.css" media="all">
+
+    <main>
+        <div class="wrapper cabinet" role="main">
+            <h1 class="page_title">{{ user.Name }}</h1>
+            <div class="cabinet_description">
+                <ul class="cabinet_menu">
+                    {% if up %}
+                        <li><a href="/профиль/почта">Настройки оповещений</a></li>
+                    {% endif %}
+                    <li><a href="/добавить-компанию">Добавить компанию</a></li>
+                    <li><a href="/профиль/настройки">Настройки аккаунта</a></li>
+                    <li><a href="/профиль/выход">Выход</a></li>
+                </ul>
+                <h3>Мои компании</h3>
+            </div>
+            <table id="my-company-table" class="cabinet_table sticky-enabled tableheader-processed sticky-table">
+                <thead>
+                <tr>
+                    <th>Компания</th>
+                    <th>Дата изменения</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for firm in firms %}
+                    <tr class="odd{{ firm.Up ? ' is-up' : '' }} active-{{ firm.Active }}">
+                        <td>
+                        <span class="account-companies-title">
+                            <a href="{{ firm.Alias }}" title="{{ firm.Subtitle }} {{ firm.Name }}">{{ firm.Name }}</a>
+                            {% if firm.Up %}
+                                ({{ firm.TarifName }} до {{ firm.TimeEnd|date("d-m-Y") }})
+                            {% endif %}
+                        </span>
+                        </td>
+                        <td>{{ firm.ChangedTime | date("d-m-Y") }}</td>
+                        <td>
+                            <ul class="cabinet-actions-links">
+                                <li><span class="link-icon editlink"></span><a href="/firm/edit/{{ firm.Id }}">Изменить</a></li>
+                                <li>
+                                    <span class="link-icon delete"></span>
+                                    <a class="linkmar" href="/профиль/фирма/удалить/{{ firm.Id }}">{{ firm.Active ? 'Удалить компанию' : 'Восстановить' }}</a>
+                                </li>
+                                {% if firm.Up %}
+                                    <li>
+                                        <span class="link-icon linkmar"></span>
+                                        <a class="linkmar" href="/stat/show/{{ firm.Id }}">Статистика</a>
+                                    </li>
+
+                                    {% if 'reviews' in firm.Tarif %}
+                                        <li>
+                                            <span class="link-icon review"></span>
+                                            <a class="linkmar" href="/профиль/отзывы/{{ firm.Id }}">Управление отзывами</a>
+                                        </li>
+
+                                    {% endif %}
+
+                                    <li>
+                                        <span class="link-icon linkmar"></span>
+                                        <a class="linkmar" href="/up/{{ firm.Id }}/checkout">Продлить поднятие</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <span class="link-icon linkmar"></span>
+                                        <a class="linkmar" href="/up/{{ firm.Id }}/checkout">Поднять</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+{% endblock %}

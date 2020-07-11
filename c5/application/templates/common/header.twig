@@ -1,0 +1,216 @@
+<header>
+    <div class="header__wrapper wrapper" role="banner" {{ header.frontPage ? 'id="front-page"' : '' }}>
+        <!--noindex-->
+        <div class="header__logo">
+            <!--T0D0: Ссылка на главной ведет на саму себя-->
+            {% if header.cityUrl %}
+                <a href="/{{ header.cityUrl }}" title="" class="logo">
+                    <div class="asset-logo" alt="logo"></div>
+                </a>
+            {% else %}
+                <a href="/" class="logo">
+                    <div class="asset-logo" alt="logo"></div>
+                </a>
+            {% endif %}
+
+            {% if header.region %}
+                <div class="select_city">{{ header.region.prefix }}
+                    <span onclick="fire_target('city-select')">{{ header.region.case5 }}</span>
+                    <ul class="arrow_link towns-in-region" style="display: none;">
+                        {% for reg in header.region.list %}
+                            {% if reg.name == header.region.name %}
+                                <li class="active-city">{{ reg.name }}</li>
+                            {% else %}
+                                <li><a title="Перейти в {{ reg.alt }}" href="/{{ reg.url }}">
+                                        {{ reg.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                
+            {% endif %}
+        </div>
+        
+        {% if head.nosearch is empty %}
+            {% if not header.frontPage and not header.regionPage %}
+                <form class="header__form" action="/поиск-по-сайту">
+                    <div class="input-search">
+                        <input id="google-search" autocomplete="off" type="text" class="input-search__input js-input-search-focus" placeholder="{% if header.placeholder %}{{ header.placeholder }}{% else %}Введите адрес или название компании{% endif %}">
+                        <button type="submit" class="input-search__btn">
+                            <img src="/asset/images/loupe.png" alt="loupe">
+                        </button>
+                    </div>
+                    <div id="search-autocomplete"></div>
+                </form>
+            {% endif %}
+        {% endif %}
+
+        <div class="header__buttons">
+            <button class="btn btn-theme city-select-link" title="Выбрать город">
+                <span class="btn__text-mv-hide">Выбрать город</span>
+                <img class="btn__icon" src="/asset/images/maps-and-flags.png">
+            </button>
+
+            <a rel="nofollow" onclick="fire_target('add_company')" href="/добавить-компанию" id="header_add_company_link" class="btn btn-theme" title="Добавить компанию">
+                {% if header.frontPage or header.regionPage %}
+                    <span class="btn__text-mv-hide">Добавить фирму</span>
+                {% endif %}
+                <img class="btn__icon" src="/asset/images/add.png">
+            </a>
+
+            <a class="btn btn-theme" href="/профиль" onclick="fire_target('login')" id="header_login_link" title="Войти на сайт">
+                <img class="btn__icon" src="/asset/images/user.png">
+            </a>
+        </div>
+                
+        {% if not header.region %}
+            <div class="slogan">Твоя фирма среди компаний России</div>
+        {% endif %}
+
+        {#<div class="popular">#}
+            {#<h3 class="popular__title">#}
+                {#Популярные запросы#}
+            {#</h3>#}
+
+            {#<div class="popular__links">#}
+                {#<ul class="popular__links-list popular__links-list_xs">#}
+                    {#<li class="popular__links-item">#}
+                        {#<a href="#">#}
+                            {##Котятки#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item">#}
+                        {#<a href="#">#}
+                            {##Молоко#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item">#}
+                        {#<a href="#">#}
+                            {##Котятки#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item">#}
+                        {#<a href="#">#}
+                            {##Телефоны#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item">#}
+                        {#<a href="#">#}
+                            {##Часы#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item">#}
+                        {#<a href="#">#}
+                            {##Золото#}
+                        {#</a>#}
+                    {#</li>#}
+
+                    {#<li class="popular__links-item popular__links-item_lg">#}
+                        {#<a href="#">#}
+                            {##Котятки#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item popular__links-item_lg">#}
+                        {#<a href="#">#}
+                            {##Молоко#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item popular__links-item_lg">#}
+                        {#<a href="#">#}
+                            {##Котятки#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item popular__links-item_lg">#}
+                        {#<a href="#">#}
+                            {##Телефоны#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item popular__links-item_lg">#}
+                        {#<a href="#">#}
+                            {##Часы#}
+                        {#</a>#}
+                    {#</li>#}
+                    {#<li class="popular__links-item popular__links-item_lg">#}
+                        {#<a href="#">#}
+                            {##Золото#}
+                        {#</a>#}
+                    {#</li>#}
+                {#</ul>#}
+            {#</div>#}
+        {#</div>#}
+
+        <!--/noindex-->
+
+        {#<div class="info">#}
+        {#<div class="logo">#}
+        {#{% if header.cityUrl %}#}
+        {#<a href="/{{ header.cityUrl }}"><img src="/asset/images/logo.png" alt="logo"#}
+        {#"title=""/></a>#}
+        {#{% else %}#}
+        {#<a href="/"><img src="/asset/images/logo.png" alt="" title=""/></a>#}
+        {#{% endif %}#}
+        {#</div>#}
+        {#{% if header.region %}#}
+        {#<div class="select_city">{{ header.region.prefix }}#}
+        {#<span onclick="fire_target('city-select')">{{ header.region.case5 }}</span>#}
+        {#<ul class="arrow_link towns-in-region" style="display: none;">#}
+        {#{% for reg in header.region.list %}#}
+        {#{% if reg.name == header.region.name %}#}
+        {#<li class="active-city">{{ reg.name }}</li>#}
+        {#{% else %}#}
+        {#<li><a title="Перейти в {{ reg.alt }}" href="/{{ reg.url }}">#}
+        {#{{ reg.name }}</a></li>#}
+        {#{% endif %}#}
+        {#{% endfor %}#}
+        {#</ul>#}
+        {#</div>#}
+        {#{% else %}#}
+        {#<span class="slogan">Твоя фирма среди компаний России</span>#}
+        {#{% endif %}#}
+        {#</div>#}
+        {#<div class="for_user {% if header_username %}logged-in-scrub{% endif %}">#}
+        {#<div class="login">#}
+        {#<span class="show_search">Поиск</span>#}
+
+        {#<div class="hide_search">Поиск</div>#}
+        {#{% if not header_username %}#}
+        {#<div id="header_login_link"><a onclick="fire_target('login')" href="/профиль">Войти</a></div>#}
+        {#{% else %}#}
+        {#<a href="/профиль">{{ header_username }}</a>#}
+        {#{% endif %}#}
+        {#</div>#}
+        {#<div id="header_add_company_link"><a onclick="fire_target('add_company')" href="/добавить-компанию"#}
+        {#rel="nofollow" class="button">Добавить компанию</a></div>#}
+        {#</div>#}
+        {#<div class="search">#}
+        {#<div class="all_city">#}
+        {#{% if header.frontPage %}#}
+        {#<a class="city-select-link" href="#" title="Выбрать другой город проекта">#}
+        {#Выбрать город</a>#}
+        {#{% else %}#}
+        {#<a class="city-select-link" href="#" title="Выбрать другой регион проекта">#}
+        {#Выбрать другой регион</a>#}
+        {#{% endif %}#}
+        {#</div>#}
+        {#<div class="search_field">#}
+        {#<div class="form-item">#}
+        {#<form autocomplete="off" onsubmit="fire_target('search')" action="/поиск-по-сайту">#}
+        {#<input autocomplete="off" onfocus="fire_target('focusonsearch')"#}
+        {#class="form-text js-input-search-focus" name="запрос" size="50" id="google-search"#}
+        {#placeholder="{% if header.placeholder %} {{ header.placeholder }}#}
+        {#{% else %} Введите адрес или название компании {% endif %}">#}
+        {#{% if header.cityUrl %}#}
+        {#<input type="hidden" name="city-search"#}
+        {#value="твояфирма.рф/{{ header.cityUrl }}">#}
+        {#{% endif %}#}
+        {#<button class="form-submit" type="submit"></button>#}
+        {#<div id="search-autocomplete"></div>#}
+        {#{% if header.frontPage %}#}
+        {#<div id="drop-down-cities-block"></div>{% endif %}#}
+        {#</form>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+    </div>
+</header>

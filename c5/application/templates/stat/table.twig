@@ -1,0 +1,37 @@
+{% macro statTable(data) %}
+    <div class="stat-overview">
+        <h2 class="stat-titler hidder">
+            {{ data.title }}
+            <span class="stat-titler-show" title="Раскрыть статистику просмотров">Показать</span>
+        </h2>
+        <div class="stat-overview-table ">
+            <table class="stat-table">
+                <thead>
+                <tr>
+                    {% for name, head in data.head %}
+                        <th {{ loop.first ? 'class="pgnametbl"' : '' }}>
+                            <div class="stat-table-week-name">{{ head | capitalize }}</div>
+                            <div class="stat-table-daymon-name">{{ not loop.first ? name : '' }}</div>
+                        </th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for body in data.body %}
+                    <tr>
+                        {% set sum = 0 %}
+                        {% for td in body.stat %}
+                            {% if loop.first %}
+                                <td><a>{{ body.title }}</a></td>
+                            {% endif %}
+                            {% set sum = sum + td.Cnt %}
+                            <td>{{ td.Cnt }}</td>
+                        {% endfor %}
+                        <td>{{ sum }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endmacro %}

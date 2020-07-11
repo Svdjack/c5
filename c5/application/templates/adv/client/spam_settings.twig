@@ -1,0 +1,64 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    {% set firm = content.firm %}
+    <link rel="stylesheet" type="text/css" href="/asset/css/cabinet.css" media="all">
+
+    <main>
+        <div class="wrapper cabinet reviews" role="main">
+            <div class="cabinet_description">
+                <ul class="cabinet_menu">
+                    <li><a href="/профиль/компании">Список компаний</a></li>
+                    <li><a href="/добавить-компанию">Добавить компанию</a></li>
+                    <li><a href="/профиль/выход">Выход</a></li>
+                </ul>
+                <div class="clearfix"></div>
+                <form class="spam" method="post" action="/профиль/почта">
+                    <h3>Как часто вы хотите получать отчеты на электронную почту по просмотрам вашей компании?</h3>
+
+                    <select name="spam">
+                        <option value="0">Отключить</option>
+                        <option value="1" {{ firmUp.SpamType == 1 ? 'selected' : '' }}>Каждый день</option>
+                        <option value="7" {{ firmUp.SpamType == 7 ? 'selected' : '' }}>Каждую неделю</option>
+                        <option value="31" {{ firmUp.SpamType == 31 ? 'selected' : '' }}>Каждый месяц</option>
+                    </select>
+                    <input class="button" type="submit" value="Сохранить">
+                </form>
+
+            </div>
+        </div>
+    </main>
+    <style>
+        .spam {
+            margin-top: 20px;
+        }
+
+        .button {
+            margin-left: 20px;
+        }
+
+        /* The CSS */
+        select {
+            padding: 10px;
+            margin: 0;
+            width: 200px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+            -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+            box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+            background: #f8f8f8;
+            color: #2c0e12;
+            border: none;
+            font-weight: bold;
+            outline: none;
+            display: inline-block;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+    </style>
+{% endblock %}

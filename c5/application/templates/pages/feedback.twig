@@ -1,0 +1,85 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <script src='https://www.google.com/recaptcha/api.js' defer></script>
+    <h1>Письмо администрации сайта</h1>
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+        <div class="field-items">
+            <div class="field-item even"><p>Связь с редакцией справочника осуществляется посредством удобной
+                    контактной формы. Вы можете прислать возникший у вас вопрос, интересное предложение или
+                    претензию к работе сайта – мы вам обязательно ответим.</p>
+            </div>
+        </div>
+    </div>
+
+
+    {% if errors.0 %}
+        <div class="messages error">
+            <h2 class="element-invisible">Сообщение об ошибке</h2>
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form class="webform-client-form" enctype="multipart/form-data"
+          action="/%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C-%D0%BD%D0%B0%D0%BC" method="post"
+          id="webform-client-form-43365" accept-charset="UTF-8">
+        <div>
+
+            <div class="form-item webform-component webform-component-textfield"
+                 id="webform-component-vashe-imya">
+                <label for="edit-submitted-vashe-imya">Ваше имя <span class="form-required"
+                                                                      title="Это поле обязательно для заполнения.">*</span></label>
+                <input type="text" id="edit-submitted-vashe-imya" name="name" value="{{ post.name }}"
+                       size="60" maxlength="27" class="form-text required" required>
+            </div>
+            <div class="form-item webform-component webform-component-email" id="webform-component-e-mail">
+                <label for="edit-submitted-e-mail">E-mail <span class="form-required"
+                                                                title="Это поле обязательно для заполнения.">*</span></label>
+                <input class="email form-text form-email" type="email" id="edit-submitted-e-mail"
+                       name="email" size="60" value="{{ post.email }}" required>
+            </div>
+            <p>Если Вы желаете проверить исправления лично, пожалуйста, укажите Ваш e-mail.</p>
+            
+            <div class="form-item webform-component webform-component-textfield" id="webform-component-link">
+                <label for="edit-submitted-link">Ссылка на карточку</label>
+                <input class="form-text" type="text" id="edit-submitted-link"
+                       name="link" value="{{ post.link}}">
+            </div>
+            
+            <div class="form-item webform-component webform-component-textarea"
+                 id="webform-component-soobshchenie">
+                <label for="edit-submitted-soobshchenie">Сообщение <span class="form-required"
+                                                                         title="Это поле обязательно для заполнения.">*</span></label>
+                <div class="form-textarea-wrapper"><textarea id="edit-submitted-soobshchenie"
+                                                             name="body" cols="60" rows="5"
+                                                             class="form-textarea required"
+                                                             required>{{ post.body }}</textarea></div>
+            </div>
+            <input type="hidden" name="details[sid]">
+            <input type="hidden" name="details[page_num]" value="1">
+            <input type="hidden" name="details[page_count]" value="1">
+            <input type="hidden" name="details[finished]" value="0">
+            <input type="hidden" name="form_build_id"
+                   value="form-I2ueTt-talcgASXdmAHH5UaqrNoNZSupMuEAmcTiOAQ">
+            <input type="hidden" name="form_token" value="jwbOpIuAIVdtZ-0WCD8rf9BNCPAiopndSGh04-yi288">
+            <input type="hidden" name="form_id" value="webform_client_form_43365">
+            <input type="hidden" name="webform_ajax_wrapper_id" value="webform-ajax-wrapper-43365">
+            <div class="persinfo-review">
+                <input type="hidden" name="personal-info" value="0"/>
+                <input type="checkbox" name="personal-info" value="1" required id="persinfo"/>
+                <label for="persinfo" style="display: inline-block;">Я согласен с <a href="/polit.pdf" target="_blank" title="Политика защиты и обработки персональных данных">политикой защиты и обработки персональных данных</a> и даю свое <a href="/confirm.pdf" title="Согласие на обработку персональных данных" target="_blank">согласие</a> на их обработку.<span class="required"> *</span></label>
+            </div>
+            <div class="g-recaptcha" data-sitekey="6LdMASYUAAAAADC6p8ZxROPK7I-VuQeUuZ9oqmc0"></div>
+
+            <div class="form-actions form-wrapper" id="edit-actions"><input type="submit"
+                                                                            id="edit-webform-ajax-submit-43365"
+                                                                            name="op" value="Отправить"
+                                                                            class="form-submit ajax-processed">
+            </div>
+        </div>
+    </form>
+{% endblock %}

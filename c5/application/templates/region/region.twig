@@ -1,0 +1,90 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <div class="main_content">
+
+        <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU" async></script>
+        <script>
+
+            setTimeout(wtfORRRAAAA, 1012);
+            function wtfORRRAAAA(){
+                ymaps && ymaps.ready(function () {
+                    var myMap = new ymaps.Map('big_map', {
+                            center: [{{ main_region.Lat }}, {{ main_region.Lon }}],
+                            zoom: 13,
+                            //behaviors: ['default', 'scrollZoom']
+                            behaviors: ['default']
+                        }),
+
+                        clusterer = new ymaps.Clusterer({
+                            preset: 'islands#invertedVioletClusterIcons',
+                            groupByCoordinates: false,
+                            clusterDisableClickZoom: false,
+                            clusterHideIconOnBalloonOpen: false,
+                            geoObjectHideIconOnBalloonOpen: false
+                        }),
+                        //        },
+                        getPointOptions = function () {
+                            return {
+                                preset: 'islands#blueDotIcon'
+                            };
+                        },
+                        geoObjects = [];
+
+                    {% for city in citiesList %}
+                    geoObjects[{{ loop.index0 }}] = new ymaps.Placemark([{{ city.coords }}], {
+                        balloonContentBody: '<div class="category-map-company"><div class="category-map-company-title"><a href="/{{ city.name }}">Перейти к компаниям города ' +
+                        '{{ city.name }}</a></div><div style="font-style: italic;">Найдено {{ city.count }} компании</div></div>',
+                        clusterCaption: '{{ city.name }}'
+                    }, {
+                        preset: 'islands#circleDotIcon',
+                        iconColor: '#B51EFF'
+                    }, getPointOptions());
+                    {% endfor %}
+
+
+                    clusterer.options.set({
+                        gridSize: 80,
+                        clusterDisableClickZoom: false
+                    });
+
+                    clusterer.add(geoObjects);
+                    myMap.geoObjects.add(clusterer);
+                    myMap.setBounds(clusterer.getBounds(), {
+                        checkZoomRange: true
+                    });
+                });
+            }
+        </script>
+        <div>
+            {% include "@common/breadcrumb.twig" %}
+        </div>
+        <h1>Справочник предприятий {{ main_region.cases.1 }}</h1>
+        <div class="find padding">Найдено <span>{{ main_region.Count }} {% if main_region.Count%10 == 1 %}
+                    компания
+                {% elseif main_region.Count%10 in 1..4 %}
+                    компании
+                {% else %}
+                    компаний
+                {% endif %} </span> с актуальной информацией о них.
+        </div>
+        <div id="big_map" class="big_map"></div>
+        <div class="obl_cities_list"><h2 class="title"> Твоя фирма среди компаний {{ main_region.cases.1 }}</h2>
+            {% for city in citiesList %}
+                <div class="obl_cities_section {% if loop.first %}first{% endif %}">
+                    <div class="wrap">
+                        <div class="count">{{ city.count }}</div>
+                        <a title="Перейти к компаниям {{ city.name_case }}" href="/{{ city.url }}">{{ city.name }}</a></div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="two_columns_text">
+            <p>Мы приглашаем владельцев компаний, фирм, предприятий и магазинов Московской области добавить данные о своей организации в каталог, воспользовавшись <a
+                        title="Добавить компанию в один из городов Московской области" href="/добавить-компанию" rel="nofollow">онлайн-формой</a>. Рекомендуем предоставить полную
+                информацию о виде деятельности и контактных данных. </p>
+            <p>Это поможет максимально охватить целевую аудиторию. Поместив информацию на нашем ресурсе, вы сможете выйти на новые рынки сбыта, что будет способствовать развитию
+                вашего бизнеса. Мы создаем компаниям отличные для привлечения потенциальных клиентов.</p>
+        </div>
+    </div>
+{% endblock %}

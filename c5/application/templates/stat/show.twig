@@ -1,0 +1,50 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    {% set firm = content.firm %}
+    <link rel="stylesheet" type="text/css" href="/asset/css/cabinet.css" media="all">
+
+    <main>
+        <div class="wrapper cabinet" role="main">
+            <div class="cabinet_description">
+                <ul class="cabinet_menu">
+                    <li><a href="/профиль/компании">Список компаний</a></li>
+                    <li><a href="/%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8E">Добавить компанию</a></li>
+                    <li><a href="/профиль/настройки">Настройки аккаунта</a></li>
+                    <li><a href="/профиль/отзывы/{{ firm.Id }}">Отзывы</a></li>
+                </ul>
+                <div class="clearfix"></div>
+                <div class="statictic-page-top-info">
+                    <div class="statictic-page-top-info-in">На данной странице представлена статистика просмотров страницы компании, а также страниц рубрик и ключевых слов, к
+                        которым она
+                        относится.<br><br>
+                        Компания «{{ firm.Name }}» поднята и выделена во всех рубриках и ключевых словах, к которым она относится. Поднятие действует
+                        до {{ content.upData.timeEnd | date('d.m.Y') }}.
+                        <div class="statictic-page-top-info-svodka"></div>
+                    </div>
+                </div>
+                {% import "@stat/table.twig" as stat %}
+                {{ stat.statTable(content.firmWeek) }}
+                {{ stat.statTable(content.categoriesWeek) }}
+                {{ stat.statTable(content.tagsWeek) }}
+                {{ stat.statTable(content.sumWeek) }}
+                {% include '@stat/graph.twig' %}
+                {{ stat.statTable(content.sumYear) }}
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            $('.stat-overview-table').hide();
+            $('h2.hidder').click(function () {
+                var stat = $(this).next();
+                stat.toggle();
+                var span = $(this).children('.stat-titler-show');
+                if (span.text() === 'Показать')
+                    span.text('Скрыть');
+                else
+                    span.text('Показать');
+            });
+        });
+    </script>
+{% endblock %}

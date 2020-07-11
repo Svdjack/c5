@@ -1,0 +1,47 @@
+{% macro input(name, value, type, size) %}
+    <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value|e }}" size="{{ size|default(20) }}"/>
+{% endmacro %}
+
+{% macro link(path, content, title, custom) %}
+    <a href="{{ path }}" title="{{ title }}" {{ custom }}>{{ content }}</a>
+{% endmacro %}
+
+{% macro img(path, alt, title) %}
+    <img src="{{ path }}" alt="{{ alt }}" title="{{ title }}"/>
+{% endmacro %}
+
+{% macro similarlinks(content, class) %}
+    {% import _self as html %}
+    <ul class="arrow_link">
+        {% for element in content %}
+            <li>{{ html.link(element.path, element.title, element.title) }} {{ element.text }}</li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro plural_form(number, word, end1, end2, end3) %}
+{% spaceless %}
+    {% set number = number%100 %}
+    {% if number in 11..14 %}
+        {% set end = end1 %}
+    {% else %}
+        {% set rest = number%10 %}
+        {% if rest == 1 %}
+            {% set end = end2 %}
+        {% elseif rest in 2..4 %}
+            {% set end = end3 %}
+        {% else %}
+            {% set end = end1 %}
+        {% endif %}
+    {% endif %}
+    {{ word ~ end }}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro printJs(html) %}
+    {% autoescape false %}
+        <script>
+            document.write('{{ html | replace({'\n' : '', '\n\r' : ''}) }}');
+        </script>
+    {% endautoescape %}
+{% endmacro %}

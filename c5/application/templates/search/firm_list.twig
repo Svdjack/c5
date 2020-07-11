@@ -1,0 +1,42 @@
+<div class="map__info-list js-map__info-list">
+    {% for firm in firms %}
+        {% if loop.index == 1 %}
+            {{ adv.yandex30 }}
+        {% endif %}
+        {% if loop.index == 4 %}
+            {{ adv.yandex31 }}
+        {% endif %}
+        {% if loop.index == 7 %}
+            {{ adv.yandex32 }}
+        {% endif %}
+        {% if loop.index == 9 %}
+            {{ adv.yandex54 }}
+        {% endif %}
+        {% if loop.index == 12 %}
+            {{ adv.yandex55 }}
+        {% endif %}
+        {% include 'search/firm_in_list.twig' %}
+    {% endfor %}
+    {% if not firms %}
+        <div style="line-height: 30px; font-size: 20px;" class="map__info-description">
+            {% if not options.near %}
+                Мы не знаем ответа на ваш вопрос “{{ speller ? : query }}”</br>
+                Попробуйте другой запрос или уточните этот</br>
+                Не нашли компанию? <a href="/добавить-компанию">Добавьте ее в каталог</a>!</br>
+            {% else %}
+                Компаний рядом не найдено, попробуйте</br>
+                - сменить местоположение</br>
+                - изменить регион поиска</br>
+                - расширить поиск</br>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+{% include 'search/layouts/pager.twig' %}
+
+<script>
+    var title = '{{ head.title }}';
+    var h1 = '{{ h1 }}';
+    var description = '{{ head.description }}';
+</script>

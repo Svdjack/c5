@@ -1,0 +1,39 @@
+<h3 class="modal__title">Выбрать другой регион</h3>
+
+{#<div class="select-city-input">#}
+    {#<input type="text" id="city-selector" class="input-base" placeholder="Начните вводить название города"/>#}
+    {#<div id="drop-down-cities-block"></div>#}
+{#</div>#}
+
+<div class="select-city-input">
+    <div class="input-search">
+        <input id="city-selector" type="text" class="input-search__input js-input-search-focus" placeholder="Начните вводить название города">
+        <button type="submit" class="input-search__btn">
+            <img src="/asset/images/loupe.png" alt="loupe">
+        </button>
+    </div>
+    <div id="drop-down-cities-block"></div>
+</div>
+
+{% for key,region in regions %}
+
+    <div class="obl_cities_list colorbox-list-rus">
+        {#Дмитрий сказал убрать области в модальном окне выбора города#}
+        {#<div class="title">{{ key }}</div>#}
+        {% for letter in region %}
+            <div class="obl_cities_section">
+                {% for city in letter %}
+                    <div class="wrap"><a href="/{{ city.url }}" title="{{ city.name }} ({{ key }})">{{ city.name }}</a>
+                        <div class="count">{{ city.count }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+<script>
+window.regions_list = {{ json|raw }};
+</script>
+
+{{ dbg() }}

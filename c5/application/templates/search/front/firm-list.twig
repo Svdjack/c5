@@ -1,0 +1,139 @@
+<div class="firm_list">
+    {% if not firms %}
+        К сожалению, в данной категории нет компаний. Попробуйте посмотреть компании в других городах {{ region_case1 }}
+    {% endif %}
+    {% for firm in firms %}
+        <div class="firm_section{{ firm.array.Up ? ' is-up' : '' }}" itemscope="" itemtype="http://schema.org/LocalBusiness">
+            <div class="map">
+                <a href="/{{ city.url }}/поиск/{{ query }}" rel="nofollow" title="Посмотреть компанию «{{ firm.name }}» на карте">
+                    <img title="Компания {{ firm.name }} на карте города" alt="Компания {{ firm.name }} на карте города"
+                         src="https://static-maps.yandex.ru/1.x/?l=map&lang=ru-Ru&size=240,190&z=14&ll={{ firm.lon }},{{ firm.lat }}&pt={{ firm.lon }},{{ firm.lat }},pm2lbl">
+                </a>
+            </div>
+            <div class="announce">
+                <div class="title">
+                    
+                    {% if firm.url|length > 1 %}
+                        <a href="{{ firm.url }}" title="{{ firm.name }}" itemprop="name">{{ firm.name }}</a>
+                    {% else %}
+                         <span title="{{ firm.name }}" itemprop="name">{{ firm.name }}</span>
+                    {% endif %}    
+                    {% if firm.comments %}
+                        <div title="Оценка компании на основании {{ firm.comments|length }}" class="stars vote-{{ firm.rating }}"
+                             itemprop="aggregateRating" itemscope=""
+                             itemtype="http://schema.org/AggregateRating">
+                            <meta itemprop="ratingValue" content="{{ firm.rating }}">
+                            <meta itemprop="reviewCount" content="{{ firm.comments|length }}">
+                        </div>
+                    {% endif %}
+                </div>
+                <span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                                <meta itemprop="addressCountry" content="Россия">
+                                <meta itemprop="postalCode" content="{{ firm.zip }}">
+                                <meta itemprop="addressRegion" content="{{ firm.region }}">
+                                <meta itemprop="addressLocality" content="{{ firm.city }}">
+                                <meta itemprop="streetAddress" content="{{ firm.address }}">
+                                <span class="address">{{ firm.address }}</span>
+                    {% set break = false %}
+                    {% set phone = '' %}
+                    {% for contact in firm.contacts if contact.type == 'phone' and not break %}
+                        {% set break = true %}
+                        {% set phone = contact.value %}
+                    {% endfor %}
+                    {% if phone %}
+                        <span class="phone" itemprop="telephone">
+                                        <a href="tel:{{ phone|replace({' ': ""}) }}">{{ phone }}</a>
+                                    </span>
+                    {% endif %}
+                            </span>
+                <span class="do">
+                                Виды деятельности: <span itemprop="makesOffer">{{ firm.groups.0.name }}</span>
+                            </span>
+                {% set break = false %}
+                {% set site = '' %}
+                {% for contact in firm.contacts if contact.type == 'website' and not break %}
+                    {% set break = true %}
+                    {% set site = contact.value %}
+                {% endfor %}
+                {% if site %}
+                    <span class="site" itemprop="url">
+                                    <a rel="nofollow" target="_blank" href="{{ site }}" title="Сайт компании «{{ firm.name }}»">
+                                        {{ site|replace({'http://': '', 'https://': ''}) }}
+                                    </a>
+                                </span>
+                {% endif %}
+            </div>
+        </div>
+        {% if loop.index == 2 %}
+            {{ adv.yandex42 }}
+        {% endif %}
+
+        {% if loop.index == 4 %}
+            {{ adv.yandex43 }}
+        {% endif %}
+
+        {% if loop.index == 6 %}
+            {{ adv.yandex44 }}
+        {% endif %}
+
+        {% if loop.index == 8 %}
+            {{ adv.yandex45 }}
+        {% endif %}
+        
+        {% if loop.index == 10 %}
+            {{ adv.yandex46 }}
+        {% endif %}
+
+    {% endfor %}
+
+    {% if pagination.pages > 1 %}
+        <div class="item-list">
+            <ul class="pager">
+                {% if pagination.current == 1 %}
+                    <li>
+                        <div class="paging__item active pager-first">1</div>
+                    </li>
+                {% else %}
+                    <li><a title="Страница 1" href="?page=1" class="paging__item">1</a></li>
+                    {% if pagination.current > 2 %}
+                        {% if pagination.current > 3 and pagination.pages > 3 %}
+                            <li>
+                                <div class="paging__item paging__item--space">
+                                    ...
+                                </div>
+                            </li>
+                        {% endif %}
+                        <li><a title="Страница {{ pagination.current - 1 }}" href="?page={{ pagination.current - 1 }}"
+                               class="paging__item">{{ pagination.current - 1 }}</a></li>
+                    {% endif %}
+                    <li>
+                        <div class="pager-item active">{{ pagination.current }}</div>
+                    </li>
+                {% endif %}
+
+                {% if pagination.current + 1 < pagination.pages %}
+                    <li><a title="Страница {{ pagination.current + 1 }}" href="?page={{ pagination.current + 1 }}" class="paging__item">{{ pagination.current + 1 }}</a>
+                    </li>
+                {% endif %}
+
+                {% if pagination.current + 2 < pagination.pages %}
+                    <li><a title="Страница {{ pagination.current + 2 }}" href="?page={{ pagination.current + 2 }}" class="paging__item">{{ pagination.current + 2 }}</a>
+                    </li>
+                {% endif %}
+
+                {% if pagination.current != pagination.pages %}
+                    {% if pagination.current + 3 < pagination.pages %}
+                        <li>
+                            <div class="pager-item paging__item--space">
+                                ...
+                            </div>
+                        </li>
+                    {% endif %}
+                    <li><a title="Страница {{ pagination.pages }}" href="?page={{ pagination.pages }}" class="pager-item">{{ pagination.pages }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+
+</div>
+{{ dbg() }}

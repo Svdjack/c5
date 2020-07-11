@@ -1,0 +1,21 @@
+{% extends "@adv/server/base.twig" %}
+
+{% block main %}
+    <div class="srf-content">
+        <div class="srf-content-in">
+            <h1 class="title" id="page-title">Компания не прошла модерацию</h1>
+            <div class="tabs"></div>
+            <div class="region region-content">
+                <div id="block-system-main" class="block block-system">
+                    Компанию, не прошедшую модерацию, поднимать нельзя!
+
+                    <script type="text/javascript">
+                        setTimeout(() => {
+                          window.location = '{{ firm.getUrl() }}';
+                        }, 4000);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

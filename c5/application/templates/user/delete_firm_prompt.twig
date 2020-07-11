@@ -1,0 +1,14 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <div class="main_content">
+
+        <h1>Удаление компании {{ name }}</h1>
+        <p>Вы уверены, что хотите удалить эту компанию?</p>
+        <p class="prompt">
+            <a href="/профиль/компании/удалить/{{ id }}/да" class="button yes">Да</a>
+            <a href="/профиль/компании" class="button no">Нет</a>
+        </p>
+
+    </div>
+{% endblock %}

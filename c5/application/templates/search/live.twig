@@ -1,0 +1,19 @@
+<ul>
+    {% for firm in firms %}
+        <li class="firm">
+            <a href="/{{ city.url }}/{{ firm.url }}">
+                {{ firm.name }}
+            </a>
+        </li>
+    {% endfor %}
+    {% for group in groups %}
+        <li class="group">
+            <a href="/{{ city.url }}/{{ group.url }}">
+                {{ group.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% if (firms->count() OR groups->count()) %}
+    Посмотреть все результаты
+{% endif %}

@@ -1,0 +1,38 @@
+{% macro statTable(data) %}
+    <div class="stat-overview">
+        <h2 class="stat-titler hidder"
+            style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#EAEAEA;padding-bottom:9px;background-color:#FAFFEC;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;padding-top:9px;padding-right:13px;padding-left:13px;border-radius:5px;margin-top:10px;margin-bottom:10px;">
+            {{ data.title }}
+        </h2>
+        <table class="stat-table hidder"
+               style="color:#666;background-color:#FFF;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;border-width:1px;border-style:solid;border-color:#E2E2E2;border-radius:3px;width:100%;">
+            <thead>
+            <tr style="text-align:center;padding-left:20px;">
+                {% for name, head in data.head %}
+                    <th {{ loop.first ? 'class="pgnametbl"' : '' }}
+                            style="font-weight:bold;font-size:12px;padding-top:15px;padding-bottom:15px;padding-right:10px;padding-left:10px;border-top-width:1px;border-top-style:solid;border-top-color:#E2E2E2;border-radius:5px;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#DFDFDF;background-color:#EFF9FD;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;text-align:center;width:15%;">
+                        <div class="stat-table-week-name">{{ head | capitalize }}</div>
+                        <div class="stat-table-daymon-name" style="font-weight:normal;font-size:12px;">{{ not loop.first ? name : '' }}</div>
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for body in data.body %}
+                <tr style="text-align:center;padding-left:20px;">
+                    {% set sum = 0 %}
+                    {% for td in body.stat %}
+                        {% if loop.first %}
+                            <td style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;border-top-width:1px;border-top-style:solid;border-top-color:#ffffff;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#e0e0e0;border-left-width:1px;border-left-style:solid;border-left-color:#e0e0e0;background-color:#FDFDFD;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;">
+                                <a style="color:#666;text-decoration:none;">{{ body.title }}</a></td>
+                        {% endif %}
+                        {% set sum = sum + td.Cnt %}
+                        <td style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;border-top-width:1px;border-top-style:solid;border-top-color:#ffffff;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#e0e0e0;border-left-width:1px;border-left-style:solid;border-left-color:#e0e0e0;background-color:#FDFDFD;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;">{{ td.Cnt }}</td>
+                    {% endfor %}
+                    <td style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;border-top-width:1px;border-top-style:solid;border-top-color:#ffffff;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#e0e0e0;border-left-width:1px;border-left-style:solid;border-left-color:#e0e0e0;background-color:#FDFDFD;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;">{{ sum }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endmacro %}

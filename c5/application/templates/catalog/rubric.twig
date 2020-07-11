@@ -1,0 +1,317 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+
+    {% set url_arg = '' %}
+    {% if current_district %}
+        {% set url_arg='?район='~current_district.name %}
+    {% endif %}
+    {% if current_street %}
+        {% set url_arg='?улица='~current_street %}
+    {% endif %}
+
+    <div class="main_content">
+        <div>
+            {% include "@common/breadcrumb.twig" %}
+        </div>
+        <h1>
+            {{ h1 }}
+            <span class="in_h1">
+                {% if sort == 'по-алфавиту' %}
+                    отсортированы по алфавиту
+                {% endif %}
+                {% if sort == 'по-рейтингу' %}
+                    отсортированы по рейтингу
+                {% endif %}
+                {% if pagination.current_page and pagination.current_page != 1 %}
+                    (страница {{ pagination.current_page }})
+                {% endif %}
+            </span>
+        </h1>
+        {{ adv.yandex15 }}
+        {% if level_description %}
+            <h2>Твоя фирма в рубрике «{{ group_name }}» {{ city_case1 }}</h2>
+            <p class="description">
+                {{ level_description }}
+            </p>
+        {% endif %}
+        <div class="horisontal banner"></div>
+        {% if firms %}
+            {% if not is_root %}
+                <div class="find">Всего найдено <span>{{ group_count }} {{ html.plural_form(group_count, 'компани', 'й', 'я', 'и' ) }}</span></div>
+                <p>Вы можете воспользоваться сортировками по алфавиту и средней оценке пользователями на основании их отзывов.</p>
+
+                {% include '@catalog/_sort.twig' %}
+            {% else %}
+            <div class="subrubrics">
+                <div class="find">Всего найдено
+                    <span>{{ totes_counter }}
+                        {{ html.plural_form(totes_counter, 'компани', 'й', 'я', 'и' ) }}</span>
+                </div>
+                {# {{ adv.yandex11 }} #}
+                <ul class="arrow_link">
+                    {% for rub in subrubrics %}
+                    <li>
+                        <a href="{{ rub.link }}" title="{{ rub.namev }}">{{ rub.name }}</a>
+                        <span class="count"
+                              title="{{ rub.count_firm }} {{ html.plural_form(rub.count_firm, 'компани',
+                              'й', 'я', 'и' ) }} ({{ rub.count_review }} {{ html.plural_form(rub.count_review,
+                              'отзыв', 'ов', '', 'а' ) }}) ">{{ rub.count_firm }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="firm_list">
+                
+                {% if is_root %}
+                    {{ adv.yandex12 }}
+                {% else %}
+                    {{ adv.yandex6 }}
+                {% endif %}
+                
+                {% for firm in firms %}
+                    <div class="firm_section{{ firm.array.Up ? ' is-up' : '' }}" itemscope="" itemtype="http://schema.org/LocalBusiness">
+                        <div class="map"><a href="{{ firm.url }}" rel="nofollow" title="Посмотреть компанию «{{ firm.name }}» на карте"><img title="Компания {{ firm.name }} на карте города" alt="Компания {{ firm.name }} на карте города"
+                                        src="https://static-maps.yandex.ru/1.x/?l=map&lang=ru-Ru&size=240,190&z=14&ll={{ firm.cords.lon }},{{ firm.cords.lat }}&pt={{ firm.cords.lon }},{{ firm.cords.lat }},pm2lbl"></a>
+                        </div>
+                        <div class="announce">
+                            <div class="title">
+                                <a href="{{ firm.url }}" title="{{ firm.name }}" itemprop="name">{{ firm.name }}</a>
+                                {% if firm.review %}
+                                    <div title="Оценка компании на основании {{ firm.review.count }}" class="stars vote-{{ firm.review.average|round }}"
+                                         itemprop="aggregateRating" itemscope=""
+                                         itemtype="http://schema.org/AggregateRating">
+                                        <meta itemprop="ratingValue" content="{{ firm.review.average }}">
+                                        <meta itemprop="reviewCount" content="{{ firm.review.count }}">
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                                <meta itemprop="addressCountry" content="Россия">
+                                <meta itemprop="postalCode" content="{{ firm.zip }}">
+                                <meta itemprop="addressRegion" content="{{ firm.region }}">
+                                <meta itemprop="addressLocality" content="{{ firm.city }}">
+                                <meta itemprop="streetAddress" content="{{ firm.address }}">
+                                <span class="address">{{ firm.full_address }}</span>
+                                {% if firm.phone %}
+                                    <span class="phone" itemprop="telephone">
+                                        <a href="tel:{{ firm.phone|replace({' ': ""}) }}">{{ firm.phone }}</a>
+                                    </span>
+                                {% endif %}
+                            </span>
+                            <span class="do">
+                                Виды деятельности: <span itemprop="makesOffer">{{ firm.occupation }}</span>
+                            </span>
+                            {% if firm.website %}
+                                <span class="site" itemprop="url">
+                                    <a rel="nofollow" target="_blank" href="http://{{ firm.website.name|replace({'http://': '', 'https://': ''}) }}"
+                                       title="Сайт компании «{{ firm.name }}»">
+                                        {{ firm.website.name|replace({'http://': '', 'https://': ''}) }}
+                                    </a>
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if not is_root %}
+                        {% if loop.index == 2 %}
+                            {{ adv.yandex7 }}
+                        {% endif %}
+
+                        {% if loop.index == 4 %}
+                            {{ adv.yandex8 }}
+                        {% endif %}
+
+                        {% if loop.index == 6 %}
+                            {{ adv.yandex9 }}
+                        {% endif %}
+
+                        {% if (loop.index == 8 or loop.index == 10 or loop.index == 12 or loop.index == 14) and googleads == 1 %}
+                            {{ adv.google580x400(googleads) }}
+                        {% endif %}
+                    {% else %}
+                        {% if loop.index == 2 %}
+                            {{ adv.yandex13 }}
+                        {% endif %}
+
+                        {% if loop.index == 6 and googleads == 1 %}
+                            {{ adv.google580x400(googleads) }}
+                        {% endif %}
+                    {% endif %}
+
+                {% endfor %}
+                {% if not is_root %}
+                    {% filter replace({'/стр/1"': '"'})|raw %}
+                        {% if pagination %}
+                            <div class="item-list">
+                                <ul class="pager">
+                                    {% for page in pagination.pages %}
+                                        {% if page == 'first' %}
+                                            <li class="pager-first first"><a href="{{ rubric_url_pagination }}{{ url_arg }}" class="active" title="Первая страница">«</a></li>
+                                        {% elseif page == 'last' %}
+                                            <li class="pager-last last">
+                                                <a href="{{ rubric_url_pagination }}/стр/{{ pagination.last_page }}{{ url_arg }}" title="Последняя страница">»</a>
+                                            </li>
+                                        {% elseif page == 'ellipsis' %}
+                                            <li class="pager-ellipsis">…</li>
+                                        {% elseif page == 'next' %}
+                                            <li class="pager-next"><a
+                                                        href="{{ rubric_url_pagination }}/стр/{{ pagination.next_page }}{{ url_arg }}" rel="next" title="Следующая страница">›</a>
+                                            </li>
+                                        {% elseif page == 'prev' %}
+                                            <li class="pager-previous">
+                                                <a href="{{ rubric_url_pagination }}/стр/{{ pagination.prev_page }}{{ url_arg }}" rel="prev" title="Предыдущая страница">‹</a>
+                                            </li>
+                                        {% elseif page == pagination.current_page %}
+                                            <li class="pager-current">{{ page }}</li>
+                                        {% else %}
+                                            <li class="pager-item"><a href="{{ rubric_url_pagination }}/стр/{{ page }}{{ url_arg }}"
+                                                                      title="{{ page }} страница категории «{{ group_name }}» {{ city_prefix }} {{ city_case5 }}">
+                                                    {{ page }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfilter %}
+                {% endif %}
+            </div>
+
+        {% if not is_root %}
+            <script>
+                var yamaps = 0;
+                function yandex_araaaaaa(){
+                    ymaps && ymaps.ready(function () {
+                        if(yamaps == 0) {
+                            yamaps = 1;
+                            var myMap = new ymaps.Map('big_map', {
+                                        center: [53.348779, 83.776282],
+                                        zoom: 14,
+                                        //behaviors: ['default', 'scrollZoom']
+                                        behaviors: ['default']
+                                    }),
+
+                                    clusterer = new ymaps.Clusterer({
+                                        preset: 'islands#invertedBlueClusterIcons',
+                                        groupByCoordinates: false,
+                                        clusterDisableClickZoom: false,
+                                        clusterHideIconOnBalloonOpen: false,
+                                        geoObjectHideIconOnBalloonOpen: false
+                                    }),
+    //        },
+                                    getPointOptions = function () {
+                                        return {
+                                            preset: 'islands#blueDotIcon'
+                                        };
+                                    },
+                                    geoObjects = [];
+                            {% for bloon in firms %}
+                                geoObjects[{{ loop.index0 }}] = new ymaps.Placemark([{{ bloon.cords.lat }},{{ bloon.cords.lon }}], {
+                                    balloonContentBody: '<div class="category-map-company"><div class="category-map-company-title"><a href="{{ bloon.url }}" title="{{ bloon.name }}">{{ bloon.name }}</a></div><div class="category-data-company-information"><div class="category-data-company-information-address">{{ bloon.full_address }}</div><div class="category-data-company-information-phone">{{ bloon.phone }}</div></div></div>',
+                                    clusterCaption: '<a href="{{ bloon.url }}" title="{{ bloon.title }}">{{ bloon.title }}</a>'
+                                }, getPointOptions());
+                            {% endfor %}
+
+                            clusterer.options.set({
+                                gridSize: 80,
+                                clusterDisableClickZoom: false
+                            });
+
+                            clusterer.add(geoObjects);
+                            myMap.geoObjects.add(clusterer);
+                            myMap.setBounds(clusterer.getBounds(), {
+                                checkZoomRange: true
+                            })
+                        }
+                    });
+                }
+                setTimeout(yandex_araaaaaa, 1500);
+            </script>
+
+            {#<a></a>#}
+            <div class="big_map" id="big_map"></div>
+        {% endif %}
+            <div class="category-right-container"></div>
+            <div class="category-bottom-container">
+                {% if not pagination or pagination.current_page == 1 %}
+                    <div class="category-sub-information lineh-view-text"><h2>Интересует категория «{{ group_name }}»
+                            {% if current_street %}
+                                на улице {{ current_street|replace({'ул.': '', 'пер. ': ''})|trim }} {{ city_prefix }} {{ city_case5 }}
+                            {% elseif current_district %}
+                                в {{ current_district.getCase(6) }} районе {{ city_case1 }}
+                            {% else %}
+                            {{ city_prefix }} {{ city_case5 }}
+                            {% endif %}?</h2>
+                        В рубрике «{{ group_name }}» в справочнике найдено {{ group_count }}
+                        {{ html.plural_form(group_count, 'организаци', 'й', 'я', 'и' ) }} и
+                        {{ html.plural_form(group_count, 'предприяти', 'й', 'е', 'я' ) }},
+                        информация о которых представлена на {{ (group_count/30)|round(0, 'ceil') }}
+                        {{ html.plural_form((group_count/30)|round(0, 'ceil'), 'страниц', 'ах', 'е', 'ах' ) }}.
+                        Для получения подробной информации Вы можете посмотреть карточку компании.
+                    </div>
+                {% endif %}
+
+            </div>
+
+        {% else %}
+            К сожалению, в данной категории нет компаний. Попробуйте посмотреть компании в других городах {{ region_case1 }}
+        {% endif %}
+        {{ adv.google728x90 }}
+    </div>
+    <script>
+        var up = document.querySelector('.is-up');
+        if (up !== null) {
+            var request = new XMLHttpRequest();
+            request.open('GET', '/stat/inc/{{ city.id }}/group/{{ group.id }}', true);
+            request.send();
+        }
+    </script>
+    <aside class="side_right">
+        <div class="rubrics">
+            {% if nearby_groups %}
+            <nav><h3 class="title">В ближайших городах</h3>
+                <ul class="arrow_link">
+                    {% for grp in nearby_groups %}
+                        <li><a href="{{ grp.path }}" title="{{ grp.name }} ({{ grp.count }})">
+                                {{ grp.name }}
+                            </a>
+                            <div class="distance" title="Расстояние до г. {{ grp.city_name }} — {{ grp.distance|round }} км">
+                                В <!--noindex-->{{ grp.distance|round }} км<!--/noindex--> от {{ city_case1 }}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+
+        <div class="google">
+            {% if googleads == 1 and firms|length > 5 %}
+                {{ adv.google160x600(googleads) }}
+            {% endif %}
+        </div>
+        
+        {#
+        {{ html.printJs('
+            <div class="adv-category-upupup">
+                <div class="metochka"></div>
+                <div class="strelochka"></div>
+                <div class="pisulki">Хотите быть первым в рубрике?</div>
+                <div class="batonchik"><a href="/реклама" title="Стать первым в рубрике">Поднять компанию</a></div>
+            </div>
+            ') }}
+        </div>
+        #}
+        {% if firms|length > 10 %}
+            <nav class="yandex"><!--noindex--><h3 class="title">Объявления</h3><!--/noindex-->
+                {{ adv.yandex10 }}
+            </nav>
+        {% endif %}
+        
+        <div class="hole"></div>
+    </aside>
+{% endblock %}

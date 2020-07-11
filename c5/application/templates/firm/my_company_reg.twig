@@ -1,0 +1,70 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <h1>Это ваша компания?</h1>
+    {% for er in errors %}
+        <div class="error">{{ er|raw }}</div>
+    {% endfor %}
+    <div class="mycompany-content">
+        <div class="text">
+        </div>
+        <form enctype="multipart/form-data" action="" method="post" id="getfirm-form" accept-charset="UTF-8">
+            <div>
+                <div id="edit-account" class="form-wrapper">
+                    <div class="form-item form-type-textfield form-item-mail">
+                        <label for="edit-name">
+                            Имя
+                        </label>
+                        <input type="text" id="edit-name" name="name" value="" size="60"
+                               maxlength="40" class="form-text required">
+                    </div>
+                    <div class="form-item form-type-textfield form-item-mail">
+                        <label for="edit-mail">
+                            E-mail <span class="form-required" title="Это поле обязательно для заполнения.">*</span>
+                        </label>
+                        {% if user_mail %}
+                            <input type="email" id="edit-mail" name="mail" value="{{ user_mail }}" disabled size="60" maxlength="254" class="form-text required" required>
+                            <input type="hidden" name="mail" value="{{ user_mail }}">
+                        {% else %}
+                            <input type="email" id="edit-mail" name="mail" value="" size="60" maxlength="254" class="form-text required" required>
+
+                        {% endif %}
+                        <div class="description">
+                            Ваш действительный E-mail адрес. Не публикуется на сайте.
+                        </div>
+                    </div>
+
+                    <div class="form-item form-type-textfield form-item-mail">
+                        <label for="edit-phone">
+                            Телефон <span class="form-required"
+                                          title="Это поле обязательно для заполнения.">*</span>
+                        </label>
+                        <input type="text" id="edit-phone" name="phone" value="" size="60"
+                               maxlength="20" class="form-text required" required>
+                        <div class="description">
+                            Ваш контактный телефон. Не публикуется на сайте.
+                        </div>
+                    </div>
+                    <div class="form-item form-type-textfield">
+                        <label for="edit-file">
+                            Копия свидетельства ОГРН <span class="form-required" title="Это поле обязательно для заполнения.">*</span>
+                        </label>
+                        <input style="padding: 10px;" type="file" id="edit-file" name="ogrn" value="" class="form-text required" required>
+                        <div class="description">
+                            до 2Мб с допустимыми расширениями: jpg, jpeg, pdf, png
+                        </div>
+                    </div>
+                    <div class="form-item form-type-textfield form-item-mail">
+                        <label for="edit-desc">
+                            Комментарий
+                        </label>
+                        <textarea name="desc" id="edit-desc" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions form-wrapper" id="edit-actions">
+                    <input type="submit" id="edit-submit" name="op" value="Отправить" class="form-submit">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

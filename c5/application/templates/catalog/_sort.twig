@@ -1,0 +1,21 @@
+<div class="sort">
+    {#
+    <div class="sorting-text">Сортировка</div>
+    #}
+    <div class="sorting-value">
+        {% if sort == 'по-алфавиту' %}
+            <span>по алфавиту</span>
+        {% else %}
+            <a href="{{ rubric_url }}/по-алфавиту" class="sort_tab btn btn-theme btn_filter-button" title="Отсортировать по алфавиту">по алфавиту</a>
+        {% endif %}
+        {% if sort == 'по-рейтингу' %}
+            <span>по оценке</span>
+        {% else %}
+            <a href="{{ rubric_url }}/по-рейтингу" class="sort_tab btn btn-theme btn_filter-button" title="Отсортировать по рейтингу">по оценке</a>
+        {% endif %}
+    </div>
+    <a class="show-map _sort" title="Посмотреть на карте" href="/{{ city_url }}/поиск/{{ group_name }}" >
+        <div class="globus"></div>
+        На карте
+    </a>
+</div>

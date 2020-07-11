@@ -1,0 +1,92 @@
+{% extends "@common/base.twig" %}
+{% block content %}
+
+    {% set url_arg = '' %}
+    {% if current_district %}
+        {% set url_arg='?район='~current_district.name %}
+    {% endif %}
+    {% if current_street %}
+        {% set url_arg='?улица='~current_street %}
+    {% endif %}
+
+    <div class="main_content front-search-page" data-query="{{ query }}">
+        <div>
+            {% include "@common/breadcrumb.twig" %}
+        </div>
+        
+        <h1>{{ h1 }}</h1>
+
+        {% if firms %}
+            
+            {{ adv.yandex40 }}
+            
+            <div class="find">Всего найдено <span>{{ count }} {{ html.plural_form(count, 'компани', 'й', 'я', 'и' ) }}</span></div>
+            <p>Вы можете воспользоваться сортировками по алфавиту и средней оценке пользователями на основании их отзывов.</p>
+
+            <div class="sort">
+                {#
+                <div class="sorting-text">Сортировка</div>
+                #}
+                <div class="sorting-value">
+                    <button title="Отсортировать по алфавиту" class="btn btn-theme btn_filter-button filter--js" value="1" data-type="by_title">по алфавиту</button>
+                    <button title="Отсортировать по рейтингу" class="btn btn-theme btn_filter-button filter--js" value="1" data-type="by_rating">по оценке</button>
+                    <button title="Рядом со мной" class="btn btn-theme btn_filter-button filter--js" value="1" data-type="near" >рядом</button>
+                </div>
+                <a class="show-map" title="Посмотреть на карте" href="/{{ city.url }}/поиск/{{ query }}">
+                    <div class="globus"></div>
+                    На карте
+                </a>
+            </div>
+
+            {{ adv.yandex41 }}
+            
+            {% include "@search/front/firm-list.twig" %}
+
+        {% else %}
+            К сожалению, в данной категории нет компаний. Попробуйте посмотреть компании в других городах {{ region_case1 }}
+        {% endif %}
+        {{ adv.google728x90 }}
+    </div>
+        
+    <aside class="side_right">
+        <div class="rubrics">
+            {% if popular_groups %}
+                <nav><h3 class="title">Популярные рубрики:</h3>
+                    <ul class="arrow_link">
+                        {% for grp in popular_groups %}
+                            <li><a href="{{ grp.path }}" title="{{ grp.name }} ({{ grp.count }})">
+                                    {{ grp.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+        
+        <div class="google">
+            {% if googleads == 1 and firms|length > 5 %}
+                {{ adv.google160x600(googleads) }}
+            {% endif %}
+        </div>
+        
+        {#
+        {{ html.printJs('
+        <div class="adv-category-upupup">
+            <div class="metochka"></div>
+            <div class="strelochka"></div>
+            <div class="pisulki">Хотите быть первым в рубрике?</div>
+            <div class="batonchik"><a href="/реклама" title="Стань первым в рубрике">Поднять компанию</a></div>
+        </div>
+        ') }}
+        #}
+        
+        {% if firms|length > 10 %}
+            <nav class="yandex"><!--noindex--><h3 class="title">Объявления</h3><!--/noindex-->
+                {{ adv.yandex10 }}
+            </nav>
+        {% endif %}
+            
+        <div class="hole"></div>
+    </aside>
+{% endblock %}

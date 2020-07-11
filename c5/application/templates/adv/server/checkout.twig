@@ -1,0 +1,121 @@
+{% extends "@adv/server/base.twig" %}
+
+{% block main %}
+    <div class="srf-content">
+        <div class="srf-content-in">
+            <h1 class="title" id="page-title">{{ head.title }}</h1>
+            <div class="tabs"></div>
+            <div class="region region-content">
+                <div id="block-system-main" class="block block-system">
+
+
+                    <form action="/up/{{ firm.Id }}/checkout" method="post" id="spravkarf-up-form" accept-charset="UTF-8">
+                        <div class="content">
+                            <div class="types">
+                                <div class="inputs">
+                                    {% if beta %}
+                                        <input type="radio" checked name="type" value="beta"> <h2>Пробный период (7 дней) - бесплатно</h2><Br>
+                                        <input type="hidden" name="email" value="{{ firm.User.Email }}">
+                                    {% endif %}
+                                    <input {% if not beta %} checked {% endif %} type="radio" name="type" value="premium" id="prem-raz">
+                                    <h2><label for="prem-raz">Премиальное размещение (1 месяц)</label></h2><Br>
+                                    <input type="radio" name="type" value="all-in" id="all-raz">
+                                    <h2><label for="all-raz">Всё включено (1 месяц)</label></h2><Br>
+                                </div>
+                            </div>
+
+                            <div class="up-page-description">
+                                <div class="up-page-description-title">Преимущества поднятия компании</div>
+                                <ul>
+                                    <li class="pr_icon pr_icon_1 beta premium all-in">Поднятая компания показывается вверху своих рубрик и ключевых слов, выше всех конкурентов</li>
+                                    <li class="pr_icon pr_icon_2 beta premium all-in">Поднятая компания выделяется фоном, что делает её намного заметнее конкурентов<br></li>
+                                    <li class="pr_icon pr_icon_3 beta premium all-in">Среднее количество просмотров информации о компании увеличивается в 3-5 раз</li>
+                                    <li class="pr_icon pr_icon_4 beta premium all-in">Ведется подробная статистика просмотров компании, рубрик и ключевых слов к которым она
+                                        относится
+                                    </li>
+                                    <li class="pr_icon pr_icon_5 premium all-in">Гибкая настройка отчетов по просмотрам вашей компании, рубрик и ключевых слов</li>
+                                    <li class="pr_icon pr_icon_6 premium all-in">У поднятой компании навсегда появляется метка с текстом “Информация проверена её представителем
+                                        ✓”
+                                    </li>
+                                    <li class="pr_icon pr_icon_7 all-in">В карточке (странице) с информацией о компании полностью отключена назойливая реклама</li>
+                                    <li class="pr_icon pr_icon_8 all-in">Cкрытие информации о других компаниях на странице с информацией о компании. Позволит посетителю не уйти к
+                                        конкурентам
+                                    </li>
+                                    <li class="pr_icon pr_icon_9 all-in">Возможность удаления отзывов о вашей компании. Позволяет удалять любые отзывы, включая негативные в адрес
+                                        вашей организации
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="up-page-firm-info">
+                                <div class="up-page-firm-info-in">
+                                    <div class="up-page-firm-info-up_image">
+                                        <img src="/asset/up/images/firm_up_big.png">
+                                    </div>
+                                    <div class="up-page-firm-info-data">
+                                        <h3>
+                                            Компания «<a rel="nofollow" target="_blank" title="Страница компании «{{ firm.Name }}» {{ city.in }} {{ city.Cases.5 }}"
+                                                         href="{{ firm.getAlias() }}">{{ firm.Name }}</a>»
+                                        </h3>
+                                        <ul>
+                                            <li><label>Улица: </label>{{ firm.Street }}, {{ firm.Home }}</li>
+                                            {% for contact in contacts %}
+                                                {% if contact.Type == 'phone' %}
+                                                    <li><label>Телефон: </label> {{ contact.Value }}</li>
+                                                {% elseif contact.Type == 'website' %}
+                                                    <li><label>Сайт: </label> {{ contact.Value }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="up-page-firm-info-description">
+                                            <p>После поднятия компании Вы сможете самостоятельно изменять информацию о ней без участия модератора.</p>
+                                            <p>Реквизиты будут высланы Вам на E-mail.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-item form-type-textfield form-item-email">
+                                    <label for="edit-email">E-mail <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+                                    <input required type="email" id="edit-email" name="email" value="" size="60" maxlength="128" class="form-text required">
+                                </div>
+                                <div class="form-item form-type-select form-item-date-type">
+                                    <label for="edit-date-type">Количество месяцев <span class="form-required" title="Это поле обязательно для заполнения.">*</span></label>
+                                    <select id="edit-date-type" name="date_type" class="form-select required">
+                                        {% for month in range(1,12) %}
+                                            <option {{ loop.first ? 'selected': '' }} value="{{ month }}">{{ month }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div id="pricer">
+                                    <div class="pricer-onmounth"><label>Цена за месяц:</label> <span id="one-month">0</span> руб.</div>
+                                    <div class="pricer-result"><label>Итого:</label> <span id="sum">0</span> руб.</div>
+
+                                    <input id="oferta" required type="checkbox" value="1">
+                                    С <a target="_blank" href="/pravila.pdf">правилами и условиями</a> поднятия согласен
+                                </div>
+                                <div class="bottom">
+                                    {% if beta %}
+                                        <input type="hidden" name="email" value="{{ firm.User.Email }}">
+                                    {% endif %}
+                                    <input type="submit" id="edit-submit" value="Поднять компанию!" class="form-submit">
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% autoescape false %}
+        <script>
+            var Prices = {{ prices }}
+            setTimeout(function(){
+                $('.types input:checked').trigger('change');
+            }, 1200)
+        </script>
+    {% endautoescape %}
+{% endblock %}

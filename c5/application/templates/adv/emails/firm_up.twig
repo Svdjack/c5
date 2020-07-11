@@ -1,0 +1,25 @@
+<h1>{{ tarif.1 }}!</h1>
+<p>
+    Вы оформили пакет “{{ tarif.0 }}” для компании “<a href="http://{{ main_domain }}{{ firm.getAlias() }}">{{ firm.Name }}</a>”.
+</p>
+
+<b>Компания поднята и выделена в следующих рубриках и ключевых словах:</b>
+<ul>
+    {% for group in firm.getFirmGroups %}
+        {% set group = group.getGroup %}
+        <li><a href="http://{{ main_domain }}/{{ city.Url }}/{{ group.Url }}">{{ group.Name }}</a></li>
+    {% endfor %}
+    {% for tag in firm.getFirmTagss %}
+        {% set tag = tag.getTags %}
+        {% if tag.Tag is not empty %}
+            <li><a href="http://{{ main_domain }}/{{ city.Url }}/ключевое-слово/{{ tag.Url }}">{{ tag.Tag }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<p>
+    Поднятие будет действовать до {{ end | date('d.m.Y') }}<br>
+    Для оформления других пакетов поднятия воспользуйтесь <a href="http://{{ main_domain }}/профиль">личным кабинетом.</a><br>
+    Спасибо за работу с нами.<br>
+</p>
+
+<p>С уважением, администрация проекта “ТвояФирма.рф”</p>

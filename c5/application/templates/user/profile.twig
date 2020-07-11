@@ -1,0 +1,24 @@
+{% extends "@common/base.twig" %}
+
+{% block content %}
+    <div class="main_content">
+        <h1>Мой профиль</h1>
+        <ul class="tabs primary">
+            <li>
+                <a href="/профиль/выход">Выход</a>
+            </li>
+            <li>
+                <a href="/профиль/компании">Мои компании</a>
+            </li>
+        </ul>
+        <div class="region region-content">
+            <div id="block-system-main" class="block block-system">
+                <div class="content">
+                    <div style="padding:20px; font-weight:bold; font-size:20px;">
+                        {{ user }} добро пожаловать на сайт ТвояФирма.рф
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

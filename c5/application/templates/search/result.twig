@@ -1,0 +1,98 @@
+{% extends "@search/layouts/main.twig" %}
+{% block content %}
+    <div id="sm"></div>
+    <div title="Определить мое местоположение" class="map__search-location js-map__search-location"></div>
+    <div class="zoom-map">
+        <span class="map__zoom-item map__zoom-item--plus"></span>
+        <span class="map__zoom-item map__zoom-item--minus"></span>
+    </div>
+    <div class="map__wrap">
+        <div class="map__left-panel">
+            <h1>{{ h1 }}</h1>
+            <div class="map__search-wrap">
+                <div class="map__search-logo">
+                    <a href="/" title="ТвояФирма.РФ">
+                        <img width="45" title="ТвояФирма.РФ" alt="ТвояФирма.РФ" src="/asset/icons/apple-touch-icon.png"/>
+                    </a>
+                </div>
+                <div class="map__search">
+                    <form id="search-form">
+                        <div class="search__back"></div>
+                        <input autocomplete="off" class="map__search-input-name" type="text" value="{{ speller ? : query }}" name="search" id="search"
+                               placeholder="Искать {{ city.getPrefix }} {{ city.getCase(5) }}"/>
+                        <input class="map__search-button" type="submit" value=""/>
+                        <span class="close-button"></span>
+                    </form>
+                </div>
+                {% include 'search/modals/location.twig' %}
+            </div>
+            <div id="search-autocomplete" class="search__history"></div>
+            {% include 'search/cities.twig' %}
+            <div class="map__info js-map__info">
+                <div class="map__info-header">
+                    <div class="on-map">На карте</div>
+                    <div class="company-count map__info-header-title">
+                        <span>{{ count }}</span> {{ html.plural_form(count,'организац','ий','ия','ии') }}
+                    </div>
+                    <div class="map__info-header-buttons">
+                        <div data-type="near" class="filter-item map__info-header-buttons-item">
+                            Рядом со мной
+                        </div>
+                        <div data-type="worktime" class="filter-item map__info-header-buttons-item">
+                            Открыто сейчас
+                        </div>
+                        <div class="map__info-header-buttons-item js-map__info-header-button-filter">
+                            <i class="icon i-filter"></i>
+                            Фильтр
+                        </div>
+                        <div class="range map__info-header-buttons-item">
+                            <div class="text"></div>
+                        </div>
+                    </div>
+                    <span class="mob-hidden map__info-header-trigger map__info-header-trigger--close"></span>
+                    <span class="mob-hidden map__info-header-trigger map__info-header-trigger--roll"></span>
+                </div>
+                <div class="map__info-content js-scroll-bar">
+                    {% if speller %}
+                        <div class="map__info-description">
+                            <b>Исправлена опечатка «{{ query }}»</b>
+                        </div>
+                    {% endif %}
+                    {% include 'search/firm_list.twig' %}
+                </div>
+                <div class="company-count map__info-icon">
+                    <i class="i-tool-case"></i>
+                    <span>{{ count }}</span>
+                </div>
+                <div class="company-one-count map__info-card-icon">
+                    <i class="i-tool-case"></i>
+                    <span>1</span>
+                </div>
+                {% include 'search/modals/filters.twig' %}
+            </div>
+        </div>
+        <div class="map__client-service">
+            <div class="map__client-service-item">
+                <a target="_blank" class="i-info" href="/пользовательское-соглашение" title="О нас"></a>
+            </div>
+            <div class="map__client-service-item">
+                <a target="_blank" class="i-plus" href="/добавить-компанию" title="Новая компания"></a>
+            </div>
+
+            <div title="Вход" id="js-get-login-form" class="map__client-service-item">
+                <a target="_blank" class="i-exit" href="/профиль/вход" title="Новая компания"></a>
+            </div>
+
+            <div title="Печать" class="map__client-service-item">
+                <i class="i-print"></i>
+            </div>
+            <div title="Поделиться" class="map__client-service-item">
+                <i class="i-share"></i>
+            </div>
+            <div title="Обратная связь" class="map__client-service-item">
+                <a target="_blank" href="/написать-нам" title="Написать нам" class="i-mail"></a>
+            </div>
+            <div id="share"></div>
+        </div>
+    </div>
+{% endblock %}

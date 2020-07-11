@@ -1,0 +1,27 @@
+<h2>Ошибка на странице</h2>
+<div class="error-form">
+    <h3>{{ company_name }}</h3>
+    <form id="error_form" method="post" action="/ошибка-на-странице">
+        <div class="form-item webform-component webform-component-email" id="webform-component-e-mail">
+            <label for="edit-submitted-e-mail--2">E-mail </label>
+            <input class="email form-text form-email" type="email" id="edit-submitted-e-mail--2"
+                   name="email" size="60">
+            <div class="description">Если Вы желаете получить ответ, то необходимо указать свой E-mail.</div>
+        </div>
+        <div class="form-item webform-component webform-component-textarea"
+             id="webform-component-informaciya-ob-oshibke">
+            <div class="form-textarea-wrapper"><textarea id="edit-submitted-informaciya-ob-oshibke--2"
+                                                         name="body" cols="60"
+                                                         rows="5" class="form-textarea required"></textarea>
+            </div>
+            <div class="description">Пожалуйста укажите информацию об ошибке.</div>
+        </div>
+        <input type="hidden" name="firm_id" value="{{ firm_id }}">
+        <div class="form-actions form-wrapper" id="edit-actions--3"><input type="submit"
+                                                                           id="edit-webform-ajax-submit-15978--2"
+                                                                           name="op"
+                                                                           value="Сообщить об ошибке"
+                                                                           class="form-submit ajax-processed">
+        </div>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+{% import "@common/html.twig" as html %}
+
+
+{% if breadcrumbs %}
+    <div class="breadcrumbs">
+        {% for crumb in breadcrumbs %}
+            {% if loop.first %}
+                <span data-url="{{ crumb.url }}" class="j" title="{{ crumb.title }}">{{ crumb.name }}</span>
+                <span class="sep"> — </span>
+            {% else %}
+                {% if not crumb.url or loop.last %}
+                    <span class="breadcrumbs-active">{{ crumb.name }}</span>
+                {% else %}
+                    <span>
+                    {{ html.link(crumb.url, crumb.name, crumb.title) }}
+                        {#<meta itemprop="title" content="{{ crumb.name }}">#}
+                        {#<meta itemprop="url" content="http://{{ host }}{{ crumb.url }}">#}
+                    </span>
+                    {% if not loop.last %}
+                        <span class="sep"> — </span>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

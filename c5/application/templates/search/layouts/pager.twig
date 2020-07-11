@@ -1,0 +1,35 @@
+{% if pagination.pages > 1 %}
+    <div class="map__info-paging paging">
+        {% if pagination.current == 1 %}
+            <div class="paging__item active">1</div>
+        {% else %}
+        <a title="Страница 1" href="?page=1" class="paging__item">1</a>
+        {% if pagination.current > 2 %}
+            {% if pagination.current > 3 and pagination.pages > 3 %}
+                <div class="paging__item paging__item--space">
+                    ...
+                </div>
+            {% endif %}
+            <a title="Страница {{ pagination.current - 1 }}" href="?page={{ pagination.current - 1 }}" class="paging__item">{{ pagination.current - 1 }}</a>
+        {% endif %}
+        <div class="paging__item active">{{ pagination.current }}</div>
+    {% endif %}
+
+    {% if pagination.current + 1 < pagination.pages %}
+        <a title="Страница {{ pagination.current + 1 }}" href="?page={{ pagination.current + 1 }}" class="paging__item">{{ pagination.current + 1 }}</a>
+        {% endif %}
+
+        {% if pagination.current + 2 < pagination.pages %}
+            <a title="Страница {{ pagination.current + 2 }}" href="?page={{ pagination.current + 2 }}" class="paging__item">{{ pagination.current + 2 }}</a>
+        {% endif %}
+
+        {% if pagination.current != pagination.pages %}
+            {% if pagination.current + 3 < pagination.pages %}
+                <div class="paging__item paging__item--space">
+                    ...
+                </div>
+            {% endif %}
+            <a title="Страница {{ pagination.pages }}" href="?page={{ pagination.pages }}" class="paging__item">{{ pagination.pages }}</a>
+        {% endif %}
+    </div>
+{% endif %}

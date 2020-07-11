@@ -1,0 +1,28 @@
+<div class="map__region js-map__region">
+    {% if cities.count > 0 %}
+        <div class="map__region-area"><span class="map__region-area-trigger">В городах области</span></div>
+        <div class="map__region-list map__region-list--min">
+            {% for cty in cities[:4] %}
+                <div class="map__region-list-items">
+                    <div class="map__region-list-item active">
+                        <a title="{{ query }} {{ cty.getPrefix }} {{ cty.getCase(5) }}" href="/{{ cty.url }}/поиск/{{ query }}">{{ cty.name }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if cities.count > 4 %}
+                <div class="map__region-list-arrow"><i class="i-double-arrow"></i></div>
+            {% endif %}
+        </div>
+        <div class="map__region-list map__region-list--full">
+            <div class="map__region-list-items">
+                {% if cities.count > 0 %}
+                    {% for cty in cities[4:] %}
+                        <div class="map__region-list-item">
+                            <a title="{{ query }} {{ cty.getPrefix }} {{ cty.getCase(5) }}" href="/{{ cty.url }}/поиск/{{ query }}">{{ cty.name }}</a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
