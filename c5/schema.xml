@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore" namespace="PropelModel">
+    <table name="firm_up" idMethod="native" phpName="FirmUp">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER"/>
+        <column name="time_start" phpName="TimeStart" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="time_end" phpName="TimeEnd" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="cash" phpName="Cash" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="type" phpName="Type" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="email" phpName="Email" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="status" phpName="Status" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="spam_type" phpName="SpamType" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="last_mail_send" phpName="LastMailSend" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="last_days" phpName="LastDays" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <foreign-key foreignTable="firm" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="firm_id_index">
+            <index-column name="firm_id"/>
+        </index>
+        <index name="status_index">
+            <index-column name="status"/>
+        </index>
+        <index name="time_start_index">
+            <index-column name="time_start"/>
+        </index>
+        <index name="time_end_index">
+            <index-column name="time_end"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="stat" idMethod="native" phpName="Stat">
+        <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="entity_id" phpName="EntityId" type="INTEGER" sqlType="int(11) unsigned" required="true"/>
+        <column name="city_id" phpName="CityId" type="INTEGER" sqlType="int(11) unsigned" required="true"/>
+        <column name="count" phpName="Count" type="INTEGER" sqlType="int(11) unsigned" defaultValue="0"/>
+        <column name="fake_count" phpName="FakeCount" type="INTEGER" sqlType="int(11) unsigned" defaultValue="0"/>
+        <column name="date" phpName="Date" type="DATE" required="true"/>
+        <column name="type" phpName="Type" type="CHAR" sqlType="enum('firm','group','keyword')"/>
+        <foreign-key foreignTable="region" skipSql="true">
+            <reference local="city_id" foreign="id"/>
+        </foreign-key>
+        <unique name="entity_city_date_type">
+            <unique-column name="entity_id"/>
+            <unique-column name="city_id"/>
+            <unique-column name="date"/>
+            <unique-column name="type"/>
+        </unique>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="adv_server_firm_up" idMethod="native" phpName="AdvServerFirmUp">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="order_id" phpName="FirmId" type="INTEGER"/>
+        <column name="status" phpName="Status" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
+        <column name="url" phpName="Url" type="VARCHAR" size="100" required="true"/>
+        <foreign-key foreignTable="adv_server_orders" skipSql="true">
+            <reference local="order_id" foreign="id"/>
+        </foreign-key>
+        <index name="status_index">
+            <index-column name="status"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="adv_server_orders" idMethod="native" phpName="AdvServerOrders">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="months" phpName="Months" type="INTEGER" required="true"/>
+        <column name="cash" phpName="Cash" type="INTEGER" required="true"/>
+        <column name="type" phpName="Type" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="city_url" phpName="CityUrl" type="VARCHAR" size="255" required="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" required="true"/>
+        <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+        <column name="status" phpName="Status" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <foreign-key foreignTable="firm" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <unique name="id">
+            <unique-column name="id"/>
+        </unique>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="adv_server_prices" idMethod="native" phpName="AdvServerPrices">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="city_id" phpName="CityId" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+        <column name="city_url" phpName="CityUrl" type="VARCHAR" size="100"/>
+        <column name="data" phpName="Data" type="BLOB"/>
+        <foreign-key foreignTable="region" skipSql="true">
+            <reference local="city_id" foreign="id"/>
+        </foreign-key>
+        <index name="url_index">
+            <index-column name="city_url"/>
+        </index>
+        <index name="citi_id_index">
+            <index-column name="city_id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="admin" idMethod="native" phpName="Admin">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="login" phpName="Login" type="VARCHAR" size="255" required="true"/>
+        <column name="hash" phpName="Hash" type="VARCHAR" size="40" required="true"/>
+        <column name="last_login" phpName="LastLogin" type="INTEGER" required="true" defaultValue="0"/>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="comment" idMethod="native" phpName="Comment">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" required="true"/>
+        <column name="user" phpName="User" type="VARCHAR" size="200" required="true" defaultValue="0"/>
+        <column name="email" phpName="Email" type="VARCHAR" size="200" required="true" defaultValue=""/>
+        <column name="text" phpName="Text" type="LONGVARCHAR" required="true"/>
+        <column name="date" phpName="Date" type="TIMESTAMP" required="true"/>
+        <column name="moderation_time" phpName="ModerationTime" type="TIMESTAMP" required="true"/>
+        <column name="score" phpName="Score" type="TINYINT" required="true" defaultValue="0"/>
+        <column name="ip" phpName="Ip" type="VARCHAR" size="100" required="true" defaultValue=""/>
+        <column name="edited" phpName="Edited" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true" defaultValue="0"/>
+        <column name="emotion" phpName="Emotion" type="CHAR" required="true"/>
+        <column name="twitter" phpName="Twitter" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true" defaultValue="0"/>
+        <column name="active" phpName="Active" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true" defaultValue="1"/>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="fid">
+            <index-column name="firm_id"/>
+        </index>
+        <index name="active">
+            <index-column name="active"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="firm" idMethod="native" phpName="Firm">
+        <column name="id" phpName="Id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="active" phpName="Active" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true" defaultValue="1"/>
+        <column name="status" phpName="Status" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true"
+                defaultValue="1"/>
+        <column name="changed" phpName="Changed" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true"
+                defaultValue="0"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+        <column name="official_name" phpName="OfficialName" type="VARCHAR" size="255"/>
+        <column name="url" phpName="Url" type="VARCHAR" size="255"/>
+        <column name="subtitle" phpName="Subtitle" type="VARCHAR" size="255"/>
+        <column name="description" phpName="Description" type="LONGVARCHAR"/>
+        <column name="postal" phpName="Postal" type="VARCHAR" size="10"/>
+        <column name="district_id" phpName="DistrictId" type="INTEGER" size="10" required="true"
+                defaultValue="0"/>
+        <column name="address" phpName="Address" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="city_id" phpName="CityId" type="INTEGER" size="10" required="true" defaultValue="0"/>
+        <column name="street" phpName="Street" type="VARCHAR" size="100"/>
+        <column name="home" phpName="Home" type="VARCHAR" size="100"/>
+        <column name="office" phpName="Office" type="VARCHAR" size="255"/>
+        <column name="main_category" phpName="MainCategory" type="INTEGER" size="10" required="true"
+                defaultValue="0"/>
+        <column name="worktime" phpName="Worktime" type="LONGVARCHAR"/>
+        <column name="views" phpName="Views" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="created" phpName="Created" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="moderation_time" phpName="ModerationTime" type="INTEGER" required="true"/>
+        <column name="changed_time" phpName="ChangedTime" type="INTEGER" required="true"
+                defaultValue="0"/>
+        <column name="lon" phpName="Lon" type="FLOAT" size="15" scale="12" defaultValue="0.000000000000"/>
+        <column name="lat" phpName="Lat" type="FLOAT" size="15" scale="12" defaultValue="0.000000000000"/>
+        <column name="random" phpName="Random" type="INTEGER" size="10" sqlType="int(10) unsigned"
+                required="true" defaultValue="0"/>
+        <column name="logo" phpName="Logo" type="VARCHAR" size="255"/>
+        <column name="redirect_id" phpName="RedirectID" type="INTEGER" required="true"
+                defaultValue="0"/>
+        <foreign-key foreignTable="region" onDelete="CASCADE" skipSql="true">
+            <reference local="city_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="district" onDelete="CASCADE" skipSql="true">
+            <reference local="district_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="jur_data" onDelete="CASCADE" skipSql="true">
+            <reference local="id" foreign="firm_id"/>
+        </foreign-key>
+        <index name="city_id">
+            <index-column name="city_id"/>
+            <index-column name="random"/>
+        </index>
+        <index name="city_last">
+            <index-column name="city_id"/>
+            <index-column name="id"/>
+        </index>
+        <index name="city_name">
+            <index-column name="city_id"/>
+            <index-column name="name"/>
+        </index>
+        <index name="city_pop">
+            <index-column name="city_id"/>
+            <index-column name="views"/>
+        </index>
+        <index name="main_cat">
+            <index-column name="city_id"/>
+        </index>
+        <index name="rnd">
+            <index-column name="random"/>
+        </index>
+        <index name="city_maincat_index">
+            <index-column name="city_id"/>
+            <index-column name="main_category"/>
+        </index>
+        <index name="city_maincat_url_2index">
+            <index-column name="city_id"/>
+            <index-column name="main_category"/>
+            <index-column name="url"/>
+        </index>
+        <index name="url">
+            <index-column name="url"/>
+        </index>
+        <index name="view_sort">
+            <index-column name="views"/>
+        </index>
+        <index name="name">
+            <index-column name="name"/>
+            <index-column name="street"/>
+            <index-column name="home"/>
+        </index>
+        <index name="active">
+            <index-column name="active"/>
+        </index>
+        <index name="status">
+            <index-column name="status"/>
+        </index>
+        <index name="changed">
+            <index-column name="changed"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="firm_childs" idMethod="native" phpName="Child">
+        <column name="id" phpName="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" required="true"/>
+        <column name="value" phpName="Value" type="VARCHAR" size="255"/>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="firm_childs_firm_id_index">
+            <index-column name="firm_id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    <table name="firm_contacts" idMethod="native" phpName="Contact">
+        <column name="id" phpName="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" required="true"/>
+        <column name="type" phpName="Type" type="CHAR" required="true"/>
+        <column name="value" phpName="Value" type="VARCHAR" size="255" required="true"/>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="firm_id">
+            <index-column name="id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="firm_group" idMethod="native" isCrossRef="true" phpName="FirmGroup">
+        <column name="firm_id" phpName="FirmId" type="INTEGER" size="10" sqlType="int(10) unsigned"
+                primaryKey="true" required="true"/>
+        <column name="group_id" phpName="GroupId" type="INTEGER" size="10" sqlType="int(10) unsigned"
+                primaryKey="true" required="true"/>
+        <column name="city_id" phpName="City" type="INTEGER" size="10" sqlType="int(10) unsigned"
+                required="true"/>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="groups" onDelete="CASCADE" skipSql="true">
+            <reference local="group_id" foreign="id"/>
+        </foreign-key>
+
+        <index name="cid">
+            <index-column name="city_id"/>
+        </index>
+        <index name="gid">
+            <index-column name="group_id"/>
+        </index>
+        <index name="fid">
+            <index-column name="firm_id"/>
+        </index>
+        <index name="city_group_count">
+            <index-column name="city_id"/>
+            <index-column name="group_id"/>
+            <index-column name="firm_id"/>
+        </index>
+        <index name="city_group">
+            <index-column name="city_id"/>
+            <index-column name="group_id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="firm_photos" idMethod="native" phpName="FirmPhotos">
+        <column name="id" phpName="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" defaultValue="0"/>
+        <column name="photo" phpName="Photo" type="VARCHAR" size="255"/>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    <table name="firm_tags" idMethod="native" isCrossRef="true" phpName="FirmTags">
+        <column name="id" phpName="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="tag_id" phpName="TagId" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="city_id" phpName="CityId" type="INTEGER" required="true" defaultValue="0"/>
+        <foreign-key foreignTable="tags" onDelete="CASCADE" skipSql="true">
+            <reference local="tag_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="firm_tags_tag_id_firm_id_index">
+            <index-column name="tag_id"/>
+            <index-column name="firm_id"/>
+        </index>
+        <index name="firm_tags_tag_id_index">
+            <index-column name="tag_id"/>
+        </index>
+        <index name="firm_tags_firm_id_index">
+            <index-column name="firm_id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    <table name="firm_user" idMethod="native" isCrossRef="true" phpName="FirmUser">
+        <column name="id" phpName="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" size="10" sqlType="int(10) unsigned"
+                primaryKey="true" required="true"/>
+        <column name="user_id" phpName="UserId" type="INTEGER" primaryKey="true" required="true"/>
+        <foreign-key foreignTable="user" onDelete="CASCADE" skipSql="true">
+            <reference local="user_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="fid">
+            <index-column name="firm_id"/>
+        </index>
+        <index name="uid">
+            <index-column name="user_id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="groups" idMethod="native" phpName="Group">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="parent" phpName="Parent" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="level" phpName="Level" type="INTEGER" required="true" defaultValue="1"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="original" phpName="Original" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="url" phpName="Url" type="VARCHAR" size="255" required="true"/>
+        <column name="worktime" phpName="Worktime" type="VARBINARY"/>
+        <column name="live" phpName="Live" type="LONGVARCHAR"/>
+        <index name="alias">
+            <index-column name="url"/>
+        </index>
+        <index name="parent">
+            <index-column name="parent"/>
+        </index>
+        <index name="name">
+            <index-column name="name"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="jur_data" idMethod="native" phpName="LegalInfo">
+        <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="rusprofile_id" phpName="RusprofileId" type="INTEGER"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" defaultValue="0"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="255"/>
+        <column name="region" phpName="Region" type="VARCHAR" size="127"/>
+        <column name="city" phpName="City" type="VARCHAR" size="127"/>
+        <column name="postal" phpName="Postal" type="VARCHAR" size="7"/>
+        <column name="address" phpName="Address" type="VARCHAR" size="127"/>
+        <column name="director" phpName="Director" type="VARCHAR" size="63"/>
+        <column name="phone" phpName="Phone" type="VARCHAR" size="127"/>
+        <column name="inn" phpName="Inn" type="VARCHAR" size="15"/>
+        <column name="okato" phpName="Okato" type="VARCHAR" size="15"/>
+        <column name="fsfr" phpName="Fsfr" type="VARCHAR" size="15"/>
+        <column name="ogrn" phpName="Ogrn" type="VARCHAR" size="15"/>
+        <column name="okpo" phpName="Okpo" type="VARCHAR" size="15"/>
+        <column name="org_form" phpName="OrgForm" type="VARCHAR" size="63"/>
+        <column name="okogu" phpName="Okogu" type="VARCHAR" size="63"/>
+        <column name="reg_date" phpName="RegDate" type="VARCHAR" size="63"/>
+        <column name="is_liquidated" phpName="IsLiquidated" type="VARCHAR" size="1" sqlType="bit(1)"/>
+        <column name="capital" phpName="Capital" type="VARCHAR" size="63"/>
+        <column name="activities" phpName="Activities" type="LONGVARCHAR"/>
+        <column name="kpp" phpName="Kpp" type="VARCHAR" size="255"/>
+        <foreign-key foreignTable="firm" onDelete="CASCADE" skipSql="true">
+            <reference local="firm_id" foreign="id"/>
+        </foreign-key>
+        <index name="name">
+            <index-column name="name"/>
+        </index>
+        <index name="phone">
+            <index-column name="phone"/>
+        </index>
+        <index name="city">
+            <index-column name="city"/>
+        </index>
+        <index name="rusprofile_id">
+            <index-column name="rusprofile_id"/>
+        </index>
+        <index name="firm_id">
+            <index-column name="firm_id"/>
+        </index>
+        <index name="address">
+            <index-column name="address"/>
+        </index>
+        <index name="city_address">
+            <index-column name="city"/>
+            <index-column name="address"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="district" idMethod="native" phpName="District">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
+        <column name="data" phpName="Data" type="LONGVARCHAR" required="true"/>
+    </table>
+    <table name="region" idMethod="native" phpName="Region">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="area" phpName="Area" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+        <column name="telcode" phpName="Telcode" type="SMALLINT" size="5" sqlType="smallint(5) unsigned"/>
+        <column name="timezone" phpName="Timezone" type="VARCHAR" size="128"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
+        <column name="url" phpName="Url" type="VARCHAR" size="100" required="true"/>
+        <column name="count" phpName="Count" type="INTEGER" size="10" required="true" defaultValue="0"/>
+        <column name="data" phpName="Data" type="BLOB"/>
+        <column name="lon" phpName="Lon" type="FLOAT" size="10" scale="7"/>
+        <column name="lat" phpName="Lat" type="FLOAT" size="10" scale="7"/>
+        <index name="url">
+            <index-column name="url"/>
+        </index>
+        <index name="name">
+            <index-column name="name"/>
+        </index>
+        <index name="lon">
+            <index-column name="lon"/>
+        </index>
+        <index name="lat">
+            <index-column name="lat"/>
+        </index>
+        <index name="lat_lon">
+            <index-column name="lat"/>
+            <index-column name="lon"/>
+        </index>
+        <index name="region_area_index">
+            <index-column name="area"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="sites_data" idMethod="native" phpName="SitesData">
+        <column name="url" phpName="Url" type="VARCHAR" size="255" required="true"/>
+        <column name="title" phpName="Title" type="LONGVARCHAR"/>
+        <column name="keywords" phpName="Keywords" type="LONGVARCHAR"/>
+        <column name="description" phpName="Description" type="LONGVARCHAR"/>
+        <column name="status" phpName="Status" type="INTEGER" size="1"/>
+        <column name="screen" phpName="Screen" type="VARCHAR" size="255"/>
+        <column name="date" phpName="Date" type="INTEGER"/>
+        <unique name="url">
+            <unique-column name="url"/>
+        </unique>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    <table name="tags" idMethod="native" phpName="Tags">
+        <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="tag" phpName="Tag" type="VARCHAR" size="255"/>
+        <column name="url" phpName="Url" type="VARCHAR" size="255"/>
+        <unique name="tags_id_uindex">
+            <unique-column name="id"/>
+        </unique>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    <table name="url_aliases" idMethod="native" phpName="UrlAliases">
+        <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="source" phpName="Source" type="VARCHAR" size="255" required="true"/>
+        <column name="alias" phpName="Alias" type="VARCHAR" size="255" required="true"/>
+        <index name="alias_index">
+            <index-column name="alias"/>
+        </index>
+        <index name="source_index">
+            <index-column name="source"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    <table name="user" idMethod="native" phpName="User">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="login" phpName="Login" type="VARCHAR" size="255" required="true"/>
+        <column name="hash" phpName="Hash" type="VARCHAR" size="255" required="true"/>
+        <column name="email" phpName="Email" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="name" phpName="Name" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="last_login" phpName="LastLogin" type="INTEGER" size="10" sqlType="int(10) unsigned"
+                required="true" defaultValue="0"/>
+        <column name="secret" phpName="Secret" type="VARCHAR" size="50" required="true" defaultValue=""/>
+        <column name="reg_date" phpName="RegDate" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="role" phpName="Role" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true" defaultValue="0"/>
+        <column name="ip" phpName="Ip" type="VARCHAR" size="50" required="true" defaultValue=""/>
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+    <table name="changes" idMethod="native" phpName="Changes">
+        <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true"
+                autoIncrement="true" required="true"/>
+        <column name="firm_id" phpName="FirmId" type="INTEGER" required="true" defaultValue="0"/>
+        <column name="data" phpName="Data" type="LONGVARCHAR" required="true"/>
+        <column name="status" phpName="Status" type="TINYINT" size="3" sqlType="tinyint(3) unsigned"
+                required="true" defaultValue="0"/>
+
+        <vendor type="mysql">
+            <parameter name="Engine" value="MyISAM"/>
+        </vendor>
+    </table>
+</database>

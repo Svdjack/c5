@@ -1,0 +1,3 @@
+[submodule "autodeploy"]
+	path = autodeploy
+	url = git@bitbucket.org:ospsaytum/autodeploy.git

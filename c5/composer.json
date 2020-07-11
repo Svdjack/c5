@@ -1,0 +1,45 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "author's name",
+      "email": "email@example.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/bapewka/GUMP"
+    }
+  ],
+  "require": {
+    "wixel/gump": "dev-master",
+    "propel/propel": "~2.0@dev",
+    "twig/twig": "~1.0",
+    "monolog/monolog": "^1.17",
+    "nikic/fast-route": "^0.7.0",
+    "filp/whoops": "^2.0",
+    "imagine/imagine": "^0.6.3",
+    "plasticbrain/php-flash-messages": "^1.0",
+    "abraham/twitteroauth": "^0.6.2",
+    "endroid/qrcode": "^1.5",
+    "mpdf/mpdf": "^6.0",
+    "cartalyst/sentinel": "^2.0",
+    "swiftmailer/swiftmailer": "^5.4",
+    "yandex/geo": "^1.1",
+    "predis/predis": "^1.1",
+    "khr/php-mcurl-client": "3.*"
+  },
+  "autoload": {
+    "classmap": [
+      "application/propel/classes",
+      "application/Controllers/Adv"
+    ],
+    "psr-4": {
+      "wMVC\\" : "application"
+    }
+  }
+}

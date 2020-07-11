@@ -1,0 +1,15 @@
+/vendor
+/application/config/config-local.php
+/public/asset/sitemap/
+/public/asset/company-photos/
+/public/asset/company_logo/
+/public/asset/screens/
+/public/asset/thumb/
+/public/asset/ogrn
+/logs
+/application/twig/cache
+/application/propel/conf/config-local.php
+/application/route.cache
+.php_cs.cache
+mail.log
+yarn.lock
