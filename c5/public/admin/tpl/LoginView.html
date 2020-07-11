@@ -1,0 +1,48 @@
+<style>
+
+    html,
+    body {
+        height: 100%;
+    }
+    html {
+        display: table;
+        margin: auto;
+    }
+    body {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .margin {
+        margin: 0 !important;
+    }
+
+</style>
+<div id="login-page" class="row valign-wrapper table-cell">
+    <div class="col s12 z-depth-6 card-panel valign">
+        <form class="login-form">
+
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="mdi-social-person-outline prefix"></i>
+                    <input class="validate" id="login" type="text">
+                    <label for="login" class="center-align">Логин</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="mdi-action-lock-outline prefix"></i>
+                    <input id="password" type="password">
+                    <label for="password">Пароль</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <a href="#" class="login btn waves-effect waves-light col s12">Вход</a>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>

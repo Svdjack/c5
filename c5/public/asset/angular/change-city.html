@@ -1,0 +1,18 @@
+{{ help }}
+<label for="firm-region">Регион</label>
+<select ng-model="$ctrl.area" ng-init="$ctrl.area=0" ng-change="$ctrl.changeArea()" id="city" class="form-select" id="firm-region" number-converter>
+    <option ng-repeat="option in $ctrl.areas" ng-selected="option.id == $ctrl.area" ng-value="{{ option.id }}">
+        {{ option.name }}
+    </option>
+</select>
+
+<br />
+
+<label for="city">Город</label>
+<select ng-model="$ctrl.city" id="city" class="form-select firm-city-select" number-converter>
+    <option ng-repeat="option in $ctrl.list" ng-selected="$ctrl.isSelected(option.id, $ctrl.city)" ng-value="{{ option.id }}">
+        {{ option.name }}
+    </option>
+</select>
+
+<input name="firm[city_id]" type="hidden" value="{{ $ctrl.city }}" />

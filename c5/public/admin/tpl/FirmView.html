@@ -1,0 +1,482 @@
+<div class="row edit-firm">
+
+    <form class="form-horizontal firm-form span12">
+
+
+        <fieldset>
+
+            <div class="fieldset-description">
+                <h2>О компании</h2>
+            </div>
+            <div class="row">
+                <div class="span9">
+                    Статус компании: <% if(active==0){
+                    print('<span class="red">Скрыта</span>')
+                    }else{
+                    print('<span class="green">Активна</span>')
+                    }
+                    %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span9">
+
+                    <!---<div class="control-group input-field">
+                        <input id="firmId" name="id" type="text" value="<%- id === null ? '' : id %>" class="span1" disabled/>
+                        <label for="firmId" class="control-label <%- id ? 'active' : '' %>">Id:</label>
+                    </div>--->
+
+                    <div class="row">
+
+                        <div class="col s6">
+                            <%= macros.textInput('name', 'Название', name) %>
+                        </div>
+
+                        <div class="col s6">
+                            <%= macros.textInput('subtitle', 'Подзаголовок', subtitle) %>
+                        </div>
+
+                    </div>
+
+                    <div class="control-group input-field">
+                        <%= macros.textInput('officialname', 'Юридическое название', officialname) %>
+                    </div>
+
+                    <div class="control-group input-field">
+                        <label for="description" class="control-label <%- description ? 'active' : '' %>">
+                            Описание компании:</label>
+                        <textarea class="materialize-textarea" type="text" id="description" name="description"><%- description %></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s7 row">
+                            <label><strong>Рубрики:</strong></label>
+                            <div class="control-group select-wrapper groups-select">
+                                <div class="row">
+                                    <select class="user-company-category browser-default col s8"
+                                            data-level="1" name="group_id[0]">
+                                        <option value="144609">Аварийные и экстренные службы, справки</option>
+                                        <option value="144610">Авто и спецтранспорт - услуги и запчасти</option>
+                                        <option value="137744">Администрация города</option>
+                                        <option value="137838">Инфоркоммуникационные технологии, интернет</option>
+                                        <option value="144597">Кафе, рестораны, пункты общественного питания</option>
+                                        <option value="137874">Коммунальные и бытовые услуги</option>
+                                        <option value="137905">Компьютерная, бытовая техника, оргтехника</option>
+                                        <option value="144602">Красота</option>
+                                        <option value="137925">Культурные организации, искусство</option>
+                                        <option value="138350">Материалы для строительства и отделки</option>
+                                        <option value="137948">Мебель и интерьер</option>
+                                        <option value="137975">Медицина и здоровье</option>
+                                        <option value="138057">Металлургическая промышленность, добыча и переработка</option>
+                                        <option value="144596">Надзорные и органы правопорядка</option>
+                                        <option value="187113">Образование, курсы, саморазвитие</option>
+                                        <option value="144608">Организация пассажирских и грузовых перевозок</option>
+                                        <option value="144605">Поиск работы, HR</option>
+                                        <option value="138228">Продажа продуктов питания и напитков</option>
+                                        <option value="138189">Производство и продажа одежды и обуви</option>
+                                        <option value="144604">Промышленное оборудование, техника и инструмент</option>
+                                        <option value="137794">Развлечения и досуг</option>
+                                        <option value="144598">Религия и ритуальные услуги</option>
+                                        <option value="138263">СМИ, рекламные и полиграфические услуги</option>
+                                        <option value="138399">Строительно-ремонтные организации, риэлторы</option>
+                                        <option value="138462">Ткани, текстиль, интерьер</option>
+                                        <option value="138476">Товары и услуги для животных</option>
+                                        <option value="144603">Топливная, химическая промышленность и нефтепродукты</option>
+                                        <option value="144607">ТРЦ, шопинг, спецмагазины</option>
+                                        <option value="138307">Туристические, спортивные товары и услуги</option>
+                                        <option value="138216">Услуги в области охраны, безопасности</option>
+                                        <option value="138593">Услуги в области финансов, бизнеса, права</option>
+                                        <option value="138554">Хозяйственные товары</option>
+                                        <option value="138577">Электротовары</option>
+                                    </select>
+                                    <div class="addGroup col offset-s1 s2 button green">Добавить</div>
+                                </div>
+                                <div class="row selected-rubrics">
+                                    <%
+                                    for(var i = 0, k = groups.length; i < k; i++){
+                                    print('<div class="collection-item"><span class="name"> \
+                                    '+groups[i].name+'</span> \
+                                    <span class="remove red white-text delete-group">Удалить</span> \
+                                    <input type="hidden" class="groups" name="groups[]" \
+                                           value="'+groups[i].id+'"/></div>');
+                                    }
+                                    %>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row col s5">
+                            <div class="control-group input-field keywords-block">
+                                <label class="active">Ключевые слова:</label>
+                                <div class="row" style="position: relative;">
+                                    <input class="active col s10" type="text" placeholder="Начинайте вводить слово" name="keyword-input-form" id="keyword-input-form"/>
+                                    <div id="drop-down-keywords-block" class="collection"></div>
+                                </div>
+                                <div class="selected-keywords row">
+                                    <%
+                                    for(var i = 0, k = keywords.length; i < k; i++){
+                                    print('<div class="collection-item"><span class="name">'+keywords[i]+'</span> \
+                                    <span class="remove red white-text delete-keyword">Удалить</span> \
+                                    <input type="hidden" class="keywords" name="keywords[]" value="'+keywords[i]+'"/></div>');
+                                    }
+                                    %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Адрес</legend>
+            <div class="row">
+                <div class="span9">
+                    <div class="row">
+                        <div class="col s1">
+                            <%= macros.textInput('postal', 'Индекс', postal) %>
+                        </div>
+                        <div class="col s6">
+                            <div class="col s6">
+                                <label for="region" class="control-label">Регион:</label>
+                                <select id="region" class="region-selector browser-default">
+                                    <%
+                                        for(var i = 0, k = regionsList.length; i < k; i++){
+                                            print('<option value="'+regionsList[i].id+'">'+regionsList[i].name+'</option>');
+                                            }
+                                    %>
+                                </select>
+                            </div>
+                            <div class="col s6">
+                                <label for="city" class="control-label">Город:</label>
+                                <select id="city" name="cityid" class="region-selector browser-default">
+                                    <option>Выберите область...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <script>
+                            $('#region option[value=<%- region %>]').prop('selected', true);
+                            $('#region').change();
+                            $('#region').on('render', function () {
+                                $('#city option[value=<%- cityid %>]').prop('selected', true);
+                                $('#city').change();
+                            });
+                        </script>
+                        <!--<div class="col s5">-->
+                            <!--<label for="district" class="control-label">Район:</label>-->
+                            <!--<select id="district" name="districtid" class="district-selector browser-default">-->
+                                <!--<option>Загружаюсь...</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <%= macros.textInput('street', 'Улица', street) %>
+                        </div>
+                        <div class="col s4">
+                            <%= macros.textInput('home', 'Дом', home) %>
+                        </div>
+                        <div class="col s4">
+                            <%= macros.textInput('office', 'Офис', office) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <label class="control-label active">Филиалы:</label>
+                </div>
+                <div id="children-block" class="row">
+                    <div class="showhidefillials">Показать/Скрыть</div>
+                    <div class="filials_show">
+                        <%
+                        for (var i = 0, k = children.length; i < k; i++){
+                        print('<textarea class="materialize-textarea children" type="text" \
+                                         name="children-text"><%- children[i] %></textarea>');
+                        }
+                        %>
+                        <textarea class="materialize-textarea children filials" style="height: 45px;" type="text" data-type="array"
+                                  name="children-text"></textarea>
+                        <div class="row">
+                            <div id="add-child" class="col s3 offset-s1 button green white-text">Добавить</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Контактная информация</legend>
+            <div class="row">
+                <div class="row">
+                    <label class="control-label active">Телефоны:</label>
+                    <div class="margin250">
+                        <div id="phones-block" class="collection contacts-block">
+                            <%
+                                for (var i = 0, k = phones.length; i < k; i++){
+                                    print('<div class="collection-item"><span class="name contact-input">'+phones[i]+'</span> \
+                            <span class="remove red white-text delete-phone">Удалить</span></div>');
+                                }
+                            %>
+                        </div>
+                        <div class="row">
+                            <input id="insert-phone" class="phones col s10" name="phones[]" type="text" placeholder="8(123)4567890" value="" class="span1"/>
+                            <div id="add-phone" class="col s3 offset-s1 button green white-text">Добавить</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label active">Сайты:</label>
+                    <div class="margin250">
+                        <div id="sites-block" class="collection contacts-block">
+                        <%
+                        for (var i = 0, k = sites.length; i < k; i++){
+                        print('<div class="collection-item"><span class="name contact-input">'+sites[i]+'</span> \
+                            <span class="remove red white-text delete-site">Удалить</span></div>');
+                        }
+                        %>
+                        </div>
+                        <div class="row">
+                            <input id="insert-site" class="sites col s10" name="sites[]" type="text" placeholder="example.com" value="" class="span1"/>
+                            <div id="add-site" class="col s3 offset-s1 button green white-text">Добавить</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label active">Факсы:</label>
+                    <div class="margin250">
+                        <div id="faxes-block" class="collection contacts-block">
+                            <%
+                            for (var i = 0, k = faxes.length; i < k; i++){
+                            print('<div class="collection-item"><span class="name contact-input">'+faxes[i]+'</span> \
+                            <span class="remove red white-text delete-fax">Удалить</span></div>');
+                            }
+                            %>
+                        </div>
+                        <div class="row">
+                            <input id="insert-fax" class="faxes col s10" name="faxes[]" type="text"
+                                   placeholder="8(123)4567890" value="" class="span1"/>
+                            <div id="add-fax" class="col s3 offset-s1 button green white-text">Добавить</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label active">Email:</label>
+                    <div class="margin250">
+                        <div id="emails-block" class="collection contacts-block">
+                            <%
+                            for (var i = 0, k = emails.length; i < k; i++){
+                            print('<div class="collection-item"> \
+                            <span class="name contact-input">'+emails[i]+'</span> \
+                            <span class="remove red white-text delete-email">Удалить</span></div>');
+                            }
+                            %>
+                        </div>
+                        <div class="row">
+                            <input id="insert-email" class="emails col s10" name="emails[]" type="text"
+                                   placeholder="example@example.com" value="" class="span1"/>
+                            <div id="add-email" class="col s3 offset-s1 button green white-text">Добавить</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <%= macros.textInput('user', 'Владелец', user) %>
+            </div>
+            <legend class="unseen">График работы</legend>
+            <div class="row" id="worktime-table" style="display: none;">
+                <div class="col s11">
+                    <table class="striped">
+                <%
+                var days = ['monday',
+                            'tuesday',
+                            'wednesday',
+                            'thursday',
+                            'friday',
+                            'saturday',
+                            'sunday'];
+
+                var rus_days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+                for (var i = 0, k = days.length; i < k; i++){
+                %>
+                        <tr class="workday" data-day="<%= days[i] %>">
+                            <td><%= rus_days[i] %></td>
+                            <td>
+                                <div class="work inline col s3">
+                                    <div class="valign-wrapper">
+                                            <input type="text" name="<%= days[i] %>" data-pos="start"
+                                                   class="time-pick time-pick-start time"
+                                                   value="<%= worktime[days[i]]['start'] %>"/>
+                                         -
+                                            <input type="text" name="<%= days[i] %>" data-pos="end"
+                                                   class="time-pick time-pick-end time"
+                                                   value="<%= worktime[days[i]]['end'] %>"/>
+
+                                        <input type="checkbox" class="nonstop" id="nonstop<%= i %>">
+                                        <label class="worktime-label" for="nonstop<%= i %>">Круглосуточно</label>
+                                        <input type="checkbox" class="notworking" id="notwork<%= i %>">
+                                        <label class="worktime-label" for="notwork<%= i %>">Выходной</label>
+
+                                    </div>
+                                </div>
+                                <div class="col inline s6" style="position: relative;">
+                                    <div class="obed_container"
+                                    <% if (worktime[days[i]]['type'] != 'normal_with_rest') { %>
+                                        style="display: none;"
+                                    <% } %>
+                                    >
+                                        <div class="inline obed valign-wrapper col s10">
+                                            <div class="inline col s3 valign">Перерыв:</div>
+                                            <div class="inline col s3">
+                                                <input type="text" name="<%= days[i] %>" data-pos="start"
+                                                       class="time-pick obed"
+                                                       value="<%= worktime[days[i]]['obed']['start'] %>" />
+                                            </div>
+                                            <div class="inline col s1 valign"> - </div>
+                                            <div class="inline col s3">
+                                                <input type="text" name="<%= days[i] %>" data-pos="end"
+                                                       class="time-pick obed"
+                                                       value="<%= worktime[days[i]]['obed']['end'] %>" />
+                                            </div>
+                                        </div>
+
+                                        <div class="inline col s1">
+                                            <a class="delete-obed remove red white-text">X
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="obed_button"
+                                    <% if (worktime[days[i]]['type'] == 'normal_with_rest') { %>
+                                        style="display: none;"
+                                    <% } %>
+                                    >
+                                        <a class="add-obed button green white-text">Добавить перерыв</a>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                <%
+                }
+
+                %>
+                    </table>
+                </div>
+            </div>
+            <script>
+                $('#worktime-table').trigger('render-done');
+                $('.time-pick').timepicker({ 'timeFormat': 'H:i' });
+            </script>
+        </fieldset>
+
+        <fieldset>
+            <legend class="unseen">Дополнительная информация</legend>
+            <div style="display: none;">
+                <div class="row">
+                    <%= macros.textInput('jur_regdate', 'Дата регистрации компании', jur.regdate) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_inn', 'ИНН', jur.inn) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_kpp', 'КПП', jur.kpp) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_ogrn', 'ОГРН', jur.ogrn) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_okpo', 'ОКПО', jur.okpo) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_okato', 'Код ОКАТО', jur.okato) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_fsfr', 'Код ФСФР', jur.fsfr) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_orgform', 'Организационно-правовая форма', jur.orgform) %>
+                </div>
+                <div class="row">
+                    <%= macros.textInput('jur_okogu', 'ОКОГУ', jur.okogu) %>
+                </div>
+                <div id="okved-block" class="row">
+                    <label class="control-label active">ОКВЭД:</label>
+                    <%
+                    for (var i = 0, k = jur.activities.length; i < k; i++){
+                        print('<input class="okved" type="text" name="okved-text" value="<%= jur.activities[i] %>"/>');
+                    }
+                    %>
+                    <input class="okved" type="text" name="okved-text" value=""/>
+                    <div class="row">
+                        <div id="add-okved" class="col s3 offset-s1 button green white-text">Добавить</div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend class="unseen">Поднятие компании</legend>
+            <div style="display: none;">
+                <div class="firm-up">
+                    <label>Поднять компанию до </label>
+                    <input name="up_time" type="text" value="<%= up_time %>" placeholder="В формате 31.01.2016">
+                    <select name="tarif" class="tarif">
+                        <option <%- tarif == 'beta' ? 'selected' : '' %> value="beta">Пробный период</option>
+                        <option <%- tarif == 'premium' ? 'selected' : '' %> value="premium">Премиальное размещение</option>
+                        <option <%- tarif == 'all-in' ? 'selected' : '' %> value="all-in">Всё включено</option>
+                    </select>
+                </div>
+
+            </div>
+        </fieldset>
+
+        <div class="row logo">
+            Лого: <% if(logo){
+            print('<img width="300" src="/asset/thumb/company_logo/company_logo/' + logo + '" />')
+            print('<br /><button onclick="return window.firmLogoDelete(' + id + ')" >Удалить</button>')
+            } else {
+            print('<span class="red">Нет</span>')
+            }
+            %>
+            <hr />
+            Загрузить новый:
+            <input type="file" id="pictureFile" name="pictureFile" />
+            <button onclick="return window.firmLogoUpload(<%= id %>)">Поехали</button>
+            <hr />
+        </div>
+        <input type="hidden" name="form" value="1"/>
+        <div class="form-actions">
+            <a href="#" class="button update green btn-primary save">Сохранить</a>
+            <a href="#" class="remove red delete">Удалить(Скрыть)</a>
+            <a href="/firm/show/<%= id %>" class="yellow button" target="_blank">Посмотреть на сайте</a>
+        </div>
+
+    </form>
+
+</div>
+<script>
+    $('input').change();
+
+    $('document').ready(function () {
+        $('.showhidefillials').click(function() {
+            $('.filials_show').toggle();
+        });
+    });
+</script>
+<div class="row status-bar">
+    <div class="span12">
+        <div class="alert alert-success" style="display: none">
+            <b>Успех!</b> Фирма успешно сохранена!
+        </div>
+    </div>
+</div>
+
+

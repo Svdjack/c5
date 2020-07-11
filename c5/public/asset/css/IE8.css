@@ -1,0 +1,224 @@
+#max_width960 header .logo{
+    margin-right: 10px;
+}
+#max_width960 header .search{
+    padding-right: 10px;
+}
+#max_width800 footer .help_link{
+    display: block;
+    margin-top: 10px;
+}
+#max_width800  .about{
+    display: block;
+}
+#max_width800  .about .lacation{
+    display: block;
+    width: auto;
+    padding-left: 0;
+}
+#max_width800  .lacation .map img{
+    width: 100%;
+}
+.min_width706   header .search{
+    display: table-cell !important;
+}
+.min_width706 header .show_search,
+.min_width706 header .hide_search{
+    display: none !important;
+}
+
+#max_width705  header .search{
+    display: none;
+    float:left;
+    max-width: 100%;
+    margin-top: 10px;
+}
+#max_width705  header .search form{
+    display: table;
+    width: 100%;
+}
+#max_width705 header .search_field{
+    display: table-cell;
+    max-width: 482px;
+}
+#max_width705 header .search .all_city{
+    display: table-cell;
+    text-align:left;
+    vertical-align: top;
+}
+#max_width705  header .show_search{
+    display: inline-block;
+}
+#max_width705 .firm_section .announce{
+    margin-right: 15px;
+}
+#max_width705 .firm_section .map{
+    float:none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#max_width705 .firm_section .map img{
+    margin:0 auto;
+}
+#max_width705  .obl_list .column{
+    display: block;
+    padding: 0;
+    width: 100%;
+}
+#max_width705 .obl_cities_section{
+    width: 49.6%;
+}
+#max_width705 .two_columns_text{
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    column-count: 1;
+}
+#max_width705  .rubrics_section .title{
+    font-size:16px;
+}
+#max_width705  .rubrics_section .content{
+    font-size: 13px;
+}
+#max_width705  .rubrics_section .org_count,
+#max_width705 .rubrics_section .review_count{
+    margin-left: 9px;
+}
+#max_width705  .bottom_content .text,
+#max_width705  .bottom_content .last_org_list{
+    display: block;
+    padding-left: 0;
+}
+#max_width705   h1{
+    font-size:22px;
+}
+#max_width705   h2{
+    font-size:18px;
+}
+#min_width515 .side_right nav ul{
+    display: block !important;
+}
+#max_width514 h1{
+    font-size:20px;
+}
+#max_width514 h2{
+    font-size:16px;
+}
+#max_width514 .side_right nav .title,
+#max_width514 .find, #max_width514 .firm_section .title{
+    font-size:14px;
+}
+#max_width514 aside .banner{
+    display:none;
+}
+#max_width514 header .info{
+    /*float:left;*/
+}
+#max_width514 header .search{
+    float:none;
+}
+#max_width514 header .for_user{
+    float: none;
+    display: block;
+    margin-top: 10px;
+}
+#max_width514 header .for_user .login{
+    text-align: left;
+}
+#max_width514 .side_right{
+    float:none;
+    width: 100%;
+}
+#max_width514 .side_right nav .title{
+    display: inline-block;
+    border-bottom:#333 dotted 1px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+#max_width514 .side_right nav .title:hover{
+    border-bottom:transparent dotted 1px;
+}
+#max_width514  .side_right nav{
+    margin-bottom: 5px;
+}
+#max_width514 .side_right nav ul{
+    display: none;
+}
+#max_width514 .main_content{
+    margin-right: 0;
+}
+#max_width514 footer .age{
+    margin-right: 5px;
+}
+#max_width514 .obl_cities_section{
+    width: 100%;
+}
+#max_width514  .rubrics_section{
+    width: 100%;
+    margin-right: 0;
+}
+#max_width514 .rubrics_section .content{
+    font-size:12px;
+}
+#max_width514 .subrubrics .arrow_link{
+    font-size: 12px;
+}
+#max_width514  .contacts_block .name{
+    width: auto;
+} 
+#max_width514 h1 .print{
+    display: none;
+}
+#max_width514 .popUp{
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    top:10px;
+    left:0;
+    padding: 10px;
+}
+#max_width514 .popUp .close{
+    top:3px;
+    bottom:auto;
+    left:auto;
+    right:3px;
+    margin: 0;
+    background-position: 0 -26px;
+}
+#max_width514 .popUp .title{
+    font-size: 16px; 
+}
+#max_width514 .popUp label{
+    font-size: 12px;
+    font-family:'OpenSans-Regular';
+}
+
+#max_width309 footer .soc_web{
+    float:none;
+    margin-bottom: 10px;
+}
+#max_width309 footer .metrika{
+    margin-left: 5px;
+}
+#max_width309 input::-moz-placeholder{
+    font-size:12px;
+}
+#max_width309 input::-webkit-input-placeholder{
+    font-size:12px;
+}
+#max_width309 header .search_field input{
+    min-width: 150px;
+}
+
+#max_width309  .firm_section .map{
+    display: none;
+}
+#max_width309  .rewiews_block form textarea,
+#max_width309 .rewiews_block form input{
+    width: 100%;
+}
+#max_width309 .review .review_result{
+    float: none;
+}
+#max_width309 .rewiews_block form .button{
+    margin-left: 0px;
+}

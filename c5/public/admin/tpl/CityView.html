@@ -1,0 +1,66 @@
+<form class="city-form">
+    <fieldset>
+        <legend><strong>Город</strong></legend>
+        <div class="row">
+            <div class="col s6 input-field control-group form-item">
+                <label for="name" class="control-label <%= name ? 'active' : '' %>">Название:</label>
+                <input type="text" id="name" name="name" value="<%= name %>"/>
+            </div>
+            <div class="col s6 input-field control-group form-item">
+                <label for="url" class="control-label <%= url ? 'active' : '' %>">URL города:</label>
+                <input type="text" id="url" name="url" value="<%= url %>"/>
+            </div>
+        </div>
+        <div class="row form-item">
+            <label for="area" class="control-label">Область:</label>
+            <select id="area" name="area" class="browser-default">
+                <% $.each(utils.regions, function(key, value){ %>
+                <option value="<%= value.id %>"><%= value.name %></option>
+                <% }); %>
+            </select>
+            <script>
+                $('select#area').val('<%= area %>');
+            </script>
+
+        </div>
+        <div class="declensions">
+            <div class="row">
+                <label><strong>Склонения</strong></label>
+            </div>
+            <div class="row">
+                <div class="col s6 form-item declension">
+                    <%= macros.textInput('name_p2', 'Родительный падеж', name_p2) %>
+                    Нет Кого? Чего?
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 form-item declension">
+                    <%= macros.textInput('name_p3', 'Дательный падеж', name_p3) %>
+                    Дать Кому? Чему?
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 form-item declension">
+                    <%= macros.textInput('name_p4', 'Винительный падеж', name_p4) %>
+                    Винить Кого? Что?
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 form-item declension">
+                    <%= macros.textInput('name_p5', 'Творительный падеж', name_p5) %>
+                    Доволен Кем? Чем?
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 form-item declension">
+                    <%= macros.textInput('name_p6', 'Предложный падеж', name_p6) %>
+                    Думать О Ком? О Чем?
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <a href="#" class="button green btn-primary save">Сохранить</a>
+        <a href="#" class="button red delete">Удалить</a>
+    </div>
+</form>

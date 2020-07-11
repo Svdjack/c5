@@ -1,0 +1,705 @@
+.wrapper {
+    width: 1000px;
+    margin: auto;
+    overflow: hidden;
+}
+.head {
+    overflow: hidden;
+    height: 120px;
+    background: url('../img/back.jpg');
+}
+h1 {
+    text-align: center;
+    color: #fff;
+}
+td {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+table {
+    width: 100%;
+}
+tbody {
+    border: solid 2px #ccc;
+}
+.title a {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+    display: inline-block;
+    color: #0060B3;
+}
+.pup-up {
+    background: #fff;
+    padding: 15px;
+}
+.admin-menu {
+    background: #191B58;
+    width: 100%;
+    overflow: hidden;
+}
+.admin-menu li {
+    float: left;
+    display: inline-block;
+    padding: 10px 10px;
+    border-right: 1px solid #1AA6DC;
+}
+.admin-menu .exit {
+    float: right;
+    border-right: none;
+    border-left: 1px solid #1AA6DC;
+}
+.admin-menu a {
+    color: #fff;
+}
+
+.item_list {
+    overflow: hidden;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.pager-item,
+.pager-current {
+    float: left;
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid #1AA6DC;
+}
+.pager-current {
+    background: #1AA6DC;
+    color: #fff;
+}
+.pager_info {
+    float: left;
+    margin: 5px;
+    padding: 10px;
+}
+
+.firmlist .title {
+    width: 200px;
+}
+.firmlist .username {
+    width: 150px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+td.username {
+    color: #0060B3;
+}
+.firmlist {
+    margin: 15px 0;
+    overflow: hidden;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
+.filter {
+    margin: 15px 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter a,
+.filter span {
+    float: left;
+    display: inline-block;
+    color: #666;
+    padding: 10px;
+    font-size: 17px;
+}
+.filter span {
+    color: #333;
+}
+.filter .time {
+    float: right;
+    clear: both;
+}
+a.button {
+    color: #fff;
+    text-decoration: none;
+}
+.button, .add-field, .remove {
+    background: #2C649F;
+    color: #fff;
+    padding: 5px 10px;
+    display: inline-block;
+    box-shadow: 2px 2px 1px #191B58;
+    cursor: pointer;
+}
+.button.update {
+    background: #258E1E;
+}
+.button.delete {
+    background: #772735;
+}
+.button.show {
+    background: #AAC343;
+}
+.remove {
+    background: #772735;
+    margin: 0 0 0 1px;
+}
+.add-field {
+    background: #258E1E;
+    margin: 0 0 0 10px;
+    font-weight: bold;
+}
+.add-field:hover {
+    background: #409A3A;
+}
+.button:active,
+.remove:active,
+.add-field:active {
+    box-shadow: none;
+}
+.button:hover {
+    background: #507AA7;
+}
+.remove:hover {
+    background: #A54757;
+}
+
+.region_list {
+    overflow: hidden;
+    position: absolute;
+    margin-left: 500px;
+    background: #fff;
+    padding: 0px 10px;
+}
+.region_list span {
+    color: #191B58;
+    font-weight: bold;
+    cursor: pointer;
+}
+.region_list li a {
+    padding: 0;
+}
+.region_list li {
+    float: left;
+    clear: both;
+    display: none;
+}
+.region_list:hover li{
+    display: inline-block;
+}
+.userlist .firm-block {
+    float: left;
+    clear: both;
+    margin: 10px 0;
+}
+
+.userlist a.remove-firm {
+    font-size: 12px;
+}
+
+.useradd {
+    float: right;
+    clear: both;
+}
+.search {
+    float: right;
+    clear: none;
+    margin-bottom: 10px;
+}
+.useradd input[type=text],
+.user-form input[type=text],
+.comment-form input[type=text]{
+    width: 200px;
+    background: #D9EBF5;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.user-form .form-item,
+.comment-form .form-item {
+    margin: 0 0 15px 0;
+}
+.user-form label,
+.comment-form label {
+    display: inline-block;
+    width: 80px;
+}
+.comment-list .title {
+    max-width: 300px;
+}
+.comment-list .text {
+    max-width: 920px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+.comment-list .show {
+    position: absolute;
+    font-size: 14px;
+    top: 181px;
+    width: 100%;
+    background: #1AA6DC;
+    padding: 1px 115px;
+    color: #fff;
+    cursor: pointer;
+}
+.comment-list .show:hover {
+    background: #507AA7;
+}
+.comment-list a {
+    display: inline-block;
+    padding: 5px 0;
+}
+.comment-list .title span {
+    display: inline-block;
+    float: left;
+    clear: both;
+}
+.comment-list .firm-name {
+    font-weight: bold;
+    color: #191B58;
+}
+.comment-list .other {
+    font-size: 12px;
+}
+.comment-list .author {
+    color: #1AA6DC;
+    font-weight: bold;
+}
+.comment-form .prepend {
+    width: 100%;
+    overflow: hidden;
+    margin: 10px 0;
+}
+.comment-form .prepend span,
+.comment-form .prepend h3 {
+    float: left;
+    display: inline-block;
+    clear: both;
+}
+.comment-form .prepend span {
+    font-size: 12px;
+}
+.comment-form textarea {
+    float: none;
+    padding: 5px;
+    width: 700px;
+    max-width: 700px;
+    height: 250px;
+    margin: 0 0 20px 0;
+    background: #D9EBF5;
+}
+/* loginform */
+.centerbox {
+    margin: 260px 0 0 50%;
+}
+.centerbox .loginbox {
+    width: 200px;
+    margin-left: -120px;
+}
+.loginbox {
+    text-align: center;
+    font-size: 16pt;
+    padding: 20px;
+    border-radius: 10px;
+
+    -webkit-box-shadow: 5px 5px 1px 0px rgba(184,184,184,1);
+    -moz-box-shadow: 5px 5px 1px 0px rgba(184,184,184,1);
+    box-shadow: 5px 5px 1px 0px rgba(184,184,184,1);
+
+    background: #87e0fd; /* Old browsers */
+    background: -moz-linear-gradient(top,  #87e0fd 0%, #05abe0 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#87e0fd), color-stop(100%,#05abe0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #87e0fd 0%,#05abe0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #87e0fd 0%,#05abe0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #87e0fd 0%,#05abe0 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #87e0fd 0%,#05abe0 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 ); /* IE6-9 */
+}
+.loginbox .title {
+    margin-bottom: 10px;
+}
+.loginbox input {
+    width: 100%;
+    margin: 3px 0;
+    display: block;
+    font-size: 16pt;
+}
+.loginbox input.text {
+    border: 1px solid #999;
+    border-top: 1px solid #757575;
+    border-left: 1px solid #757575;
+    border-radius: 4px;
+    text-indent: 4px;
+    margin: 0 0 5px;
+}
+.loginbox input.submit {
+    background-color: #dedede;
+}
+
+/*firmform*/
+
+.edit-firm .part {
+    float: left;
+    width: 950px;
+    margin: 15px 0 0 0;
+}
+
+.edit-firm .form-item {
+    margin: 10px 0;
+}
+.edit-firm input[type=text] {
+    width: 55%;
+    background: #D9EBF5;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.edit-firm textarea {
+    display: block;
+    background: #D9EBF5;
+    width: 600px;
+    max-width: 600px;
+    min-height: 170px;
+    padding: 5px;
+    max-height: 190px
+}
+.edit-firm select {
+    padding: 5px;
+    border: 1px solid #666;
+    max-width: 400px;
+}
+.edit-firm label {
+    float: left;
+    width: 250px;
+}
+.edit-firm .selected {
+    font-size: 14px;
+    margin: 0 0 0  250px;
+}
+.edit-firm .selected div {
+    margin: 10px 0;
+}
+.edit-firm .address input {
+    width: 100px;
+}
+.edit-firm .address input:first-child {
+    width: 300px;
+}
+.edit-firm .keys,
+.edit-firm .childrens {
+    min-height: 50px;
+}
+.edit-firm .childrens {
+    display: inline-block;
+    margin: 0 0 10px 250px;
+}
+.edit-firm .district input:first-child {
+    width: 100px;
+}
+.edit-firm .field_wrap {
+    overflow: hidden;
+}
+.edit-firm .graph-block {
+    margin: 0 0 0 250px;
+}
+.edit-firm .graph input[type=text] {
+    width: 50px;
+    margin: 0 20px 0 10px;
+}
+.edit-firm .graph-block label {
+    width: auto;
+    float: none;
+}
+.edit-firm .day_graph {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+.day_graph .form-item {
+    display: inline-block;
+}
+.edit-firm .weekday {
+    width: 130px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.premium-form {
+    display: none;
+}
+.premium-title {
+    display: inline-block;
+    border-bottom: 1px dotted #444;
+    cursor: pointer;
+}
+.premium-title:hover {
+    border-bottom: 1px solid #fff;
+}
+/*city form*/
+
+.city-form{
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.city-form input,
+.city-form select
+{
+    margin-right: 4px;
+}
+
+.city-form .form-item {
+    margin: 10px 0;
+}
+
+.city-form .declension > * {
+    display: inline-block;
+}
+
+.city-form .declensions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.user-company-category{
+    display: block;
+    margin-left: 250px;
+    margin-bottom: 10px;
+}
+
+
+.city-form label {
+    display: inline-block;
+    width: 200px;
+}
+.city-form input[type=text] {
+    background: #D9EBF5;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.city-form .help {
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 0 0 10px;
+}
+.photo {
+    float: left;
+    height: 300px;
+    position: relative;
+    margin: 5px;
+    overflow: hidden;
+}
+.photo a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #191B58;
+    color: #fff;
+}
+.photo img {
+    width: 300px;
+}
+
+.filter a.active{
+    color: black;
+    text-decoration: none;
+}
+
+.row{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.addGroup{
+    margin-left: 250px;
+}
+
+.selected-rubrics,
+.selected-keywords{
+    margin-left: 250px;
+}
+
+.selected-rubrics > *,
+.selected-keywords > *{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.selected-rubrics > :last-child,
+.selected-keywords > :last-child{
+    border-bottom: 0;
+}
+
+#drop-down-keywords-block{
+    margin-left: 250px;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+#drop-down-keywords-block > *{
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#drop-down-keywords-block > :last-child{
+    border-bottom: 0;
+}
+
+#drop-down-keywords-block .active{
+    background: #2C649F;
+    color: white;
+}
+
+#region{
+    margin-bottom: 10px;
+}
+
+#children-block > * {
+    margin-left: 250px;
+    margin-bottom: 10px;
+}
+
+.margin250{
+    margin-left: 250px;
+}
+
+.contacts-block{
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+.contacts-block > *{
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.contacts-block > :last-child{
+    border-bottom: 0;
+}
+
+input.time-pick[type=text]{
+    display: inline;
+    width: 50px;
+}
+
+.edit-firm label.worktime-label{
+    float: none;
+    width: auto;
+}
+
+.inline {
+    display: inline-block;
+}
+
+legend {
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+legend.unseen{
+    text-decoration: underline;
+}
+
+.okved {
+    margin-left: 250px;
+    margin-bottom: 10px;
+}
+
+#add-okved{
+    margin-left: 250px;
+}
+
+.form-actions{
+    margin-top: 20px;
+}
+
+.login-form{
+    padding: 15px;
+    border: 2px solid #ff9f71;
+    background: #ffdcac;
+}
+
+.login-form label {
+    float: left;
+    width: 100px;
+    line-height: 30px;
+}
+
+.login-form .input-field{
+    margin-bottom: 10px;
+}
+
+.login-form .btn {
+    padding: 5px;
+    border: 1px solid #191b58;
+    background: #0060b3;
+    color: white;
+    width: 130px;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
+
+.login-form .btn:hover {
+    padding: 5px;
+    border: 1px solid #191b58;
+    background: #3e98b3;
+    color: white;
+    width: 130px;
+    text-align: center;
+    float: right;
+}
+
+.input-field input {
+    font-size: 16px;
+    padding: 3px;
+    background: beige;
+    border: 2px solid #888;
+    border-radius: 0px;
+}
+
+.hiddendiv {
+    position: absolute;
+    left: -99999px;
+}
+.firm_list .yandex_ad {
+    border-radius: 5px;
+    box-shadow: 0 3px #3dbcd4;
+}
+.search-block #firms-search-input, .search-block #reviews-search-input {
+    border: 1px solid black;
+}
+
+.edit-firm .filials {
+    height: 45px;
+    min-height: 40px;
+}
+
+.form-actions a {
+    width: 170px;
+    text-align: center;
+}
+
+.filials_show {
+    display: none;
+}
+
+.showhidefillials {
+    cursor: pointer;
+    text-decoration: underline;
+}

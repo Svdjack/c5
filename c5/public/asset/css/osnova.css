@@ -1,0 +1,400 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    font-family: OpenSans-Regular, sans-serif;
+    font-size: 14px;
+    color: rgb(102, 102, 102);
+    background: rgb(245, 245, 245);
+}
+
+html {
+    font-family: sans-serif;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0px;
+}
+
+body > .wrapper {
+    min-height: 100%;
+    margin: 0px auto;
+}
+
+header {
+    padding: 17px 15px 15px;
+    background: rgb(67, 40, 69);
+    border-top: 4px solid rgb(190, 68, 140);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary, time {
+    display: block;
+}
+
+header .wrapper {
+    display: inline-block;
+    max-width: 1022px;
+    width: 100%;
+    margin: 0px auto;
+    text-align: left;
+}
+
+header .for_user, header .info, header .search {
+    display: table-cell;
+    vertical-align: top;
+}
+
+header .info {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+header .logo {
+    margin: 11px 42px 11px 0px;
+    margin-right: 10px;
+}
+
+a {
+    color: rgb(0, 169, 201);
+    text-decoration: underline;
+}
+
+img {
+    border: 0px;
+}
+
+header .select_city {
+    display: inline-block;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    padding-right: 15px;
+    background: url("/asset/images/arrow.png") right center no-repeat;
+}
+
+header .select_city span {
+    display: inline-block;
+    vertical-align: baseline;
+    font-family: OpenSans-Bold, sans-serif;
+    border-bottom: 1px dotted rgb(255, 255, 255);
+    margin-left: 7px;
+    cursor: pointer;
+    max-width: 250px;
+}
+
+li, ol, ul {
+    padding: 0px;
+    margin: 0px;
+    list-style-image: none;
+    list-style-type: none;
+}
+
+.towns-in-region {
+    display: none;
+    position: absolute;
+    height: auto;
+    min-width: 200px;
+    max-height: 300px;
+    background-color: rgb(255, 255, 255);
+    z-index: 100;
+    overflow: auto;
+    width: auto;
+    font-size: 14px;
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: rgb(67, 40, 69) 0px 0px 5px 0px;
+}
+
+.arrow_link li {
+    position: relative;
+    display: block;
+    padding-left: 20px;
+    margin-bottom: 0px;
+}
+
+.arrow_link li a {
+    line-height: 24px;
+    text-decoration: none;
+}
+
+.towns-in-region li a {
+    text-decoration: none;
+}
+
+.towns-in-region .active-city {
+    font-weight: 700;
+    color: grey;
+}
+
+header .for_user {
+    float: none;
+    display: block;
+    margin-top: 10px;
+}
+
+header .for_user .login {
+    text-align: left;
+    line-height: 17px;
+    margin: 1px 2px 13px 0px;
+    float: right;
+}
+
+header .hide_search, header .show_search {
+    display: none;
+    vertical-align: baseline;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    border-bottom: 1px dotted rgb(255, 255, 255);
+    text-decoration: none;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+header .show_search {
+    display: inline-block;
+    margin-right: 0px;
+}
+
+header .for_user .login a {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgb(255, 255, 255);
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+}
+
+.button, .form-submit {
+    position: relative;
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: OpenSans-Bold, sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background: rgb(0, 169, 201);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+header .for_user .button {
+    width: 213px;
+}
+
+header .search {
+    max-width: 100%;
+    width: 100%;
+    padding-right: 10px;
+    display: none;
+    float: none;
+    margin-top: 10px;
+}
+
+header .search .all_city {
+    text-align: left;
+    margin-right: 2px;
+    margin-bottom: 12px;
+    display: none;
+    vertical-align: top;
+}
+
+header .search .all_city a {
+    font-size: 13px;
+    color: rgb(255, 255, 255);
+}
+
+header .search_field {
+    position: relative;
+    height: 45px;
+    display: table-cell;
+    max-width: 482px;
+}
+
+header .search form {
+    display: table;
+    width: 100%;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0px;
+    outline: 0px;
+    border: 0px;
+}
+
+button, input {
+    line-height: normal;
+}
+
+form input, form textarea {
+    position: relative;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    padding: 0px 10px;
+}
+
+.create_company .form-text, .form-text, .mycompany-content .form-text {
+    height: 40px;
+}
+
+header .search_field input {
+    position: relative;
+    min-width: 150px;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    padding: 0px 45px 0px 15px;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+header .search_field .form-submit {
+    position: absolute;
+    width: 35px;
+    height: 45px;
+    top: 0px;
+    right: 0px;
+    background: url("/asset/images/loupe.png") left center no-repeat;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+}
+
+main .wrapper {
+    max-width: 1024px;
+    margin: 0px auto 14px;
+    padding: 0px;
+}
+
+.main_content {
+    position: relative;
+    margin-right: 0px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.breadcrumbs {
+    position: relative;
+    margin-bottom: 13px;
+    padding: 7px 15px 8px;
+    border-radius: 5px;
+    background: rgb(236, 236, 236);
+    font-size: 13px;
+    color: rgb(102, 102, 102);
+}
+
+.about > .text, .breadcrumbs, .contacts_block, .main_content .item-list, .main_content > .category-bottom-container, .main_content > .find, .main_content > .sort, .main_content > h1, .main_content > h2, .main_content > p, .page_nav, .reviews_block form, .reviews_block > .add_review, .reviews_block > p, .side_right .rubrics nav, .side_right .yandex, .tabber {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.breadcrumbs a {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+h1 {
+    font-family: OpenSans-Bold, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 10px 0px 3px;
+    color: rgb(51, 51, 51);
+    padding-left: 4px;
+}
+
+.main_content h1, .main_content h2 {
+    text-align: center;
+}
+
+.firm_section .map {
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.is-up a {
+    color: rgb(190, 68, 140);
+}
+
+.firm_section .map img {
+    display: block;
+    margin: 0px auto;
+}
+
+.pager-ellipsis, .pager-next, .pager-previous {
+    display: none !important;
+}
+
+.pager li {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 33px;
+    height: 43px;
+    margin-right: 4px;
+    margin-bottom: 10px;
+    line-height: 45px;
+    font-family: OpenSans-Bold, sans-serif;;
+    text-align: center;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: rgb(61, 188, 212) 0px 3px;
+}
+
+.pager a, .pager span {
+    display: block;
+    height: 43px;
+    color: rgb(51, 51, 51);
+    background: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+ymaps, ymaps canvas, ymaps i, ymaps input {
+    max-width: none;
+    max-height: none;
+}
+
+nav ul, nav ul li, nav ul li ul {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+.side_right nav ul {
+    display: none;
+}
+
+nav .distance {
+    font-style: italic;
+}
+
+#cboxContent, .tvoyafirma-cbox {
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+}

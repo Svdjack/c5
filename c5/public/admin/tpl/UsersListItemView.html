@@ -1,0 +1,23 @@
+<td><%= login %></td>
+<td><%= utils.convertTime(regdate) %></td>
+<td class="username"><%= name %></td>
+<td>
+    <%
+    for(var i = 0, k = firms.length; i < k; i++){
+    print(' \
+        <div class="firm-binded firm-block" data-firmid="' + firms[i].firm_id + '"> \
+            <a href="'+firms[i].firm_url + '">' + firms[i].firm_name + '</a> \
+            <span class="unbind-firm red remove-firm confirm pointer">Отвязать</span> \
+        </div> \
+    ');
+    }
+    %>
+</td>
+<td>
+    <a href="#user/<%= id %>" class="btn-floating green">
+        Редактировать
+    </a>
+    <a href="#" class="delete-user btn-floating red">
+        Удалить
+    </a>
+</td>

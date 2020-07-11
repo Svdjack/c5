@@ -1,0 +1,10 @@
+@media screen and (max-width: $mobile-width) {
+    .main_content {
+        .breadcrumbs {
+            span {
+                padding: 0 5px;
+                line-height: 30px;
+            }
+        }
+    }
+}

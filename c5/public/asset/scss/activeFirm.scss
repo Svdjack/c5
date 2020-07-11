@@ -1,0 +1,12 @@
+div.activeFirm {
+    position: fixed;
+    top: 60px;
+    left: 0px;
+    background-color: $color-main; 
+    padding: 10px;
+    z-index: 15;
+
+    a {
+        color: white;
+    }
+}

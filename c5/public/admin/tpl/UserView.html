@@ -1,0 +1,23 @@
+<form class="form-horizontal span12 user-form">
+    <fieldset>
+        <legend>Пользователь</legend>
+
+
+        <div class="row">
+            <div class="form-item control-group input-field col s12">
+                <label for="login" class="control-label <%= login ? 'active' : '' %>">Логин:</label>
+                <input type="text" id="login" name="login" value="<%= login %>"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-item control-group input-field col s12">
+                <label for="name" class="control-label <%= name ? 'active' : '' %>">Имя:</label>
+                <input type="text" id="name" name="name" value="<%= name %>"/>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <a href="#" class="button green btn-primary save">Сохранить</a>
+        <a href="#" class="button red delete">Удалить</a>
+    </div>
+</form>

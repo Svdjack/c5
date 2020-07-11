@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Админка</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+    </style>
+    <!--<link href="css/bootstrap.css" rel="stylesheet">-->
+    <!--<link href="css/docs.css" rel="stylesheet">-->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/materialize.css" rel="stylesheet">
+    <link href="css/jquery.timepicker.css" rel="stylesheet">
+</head>
+
+<body data-spy="scroll" data-target=".subnav" data-offset="50">
+
+
+<header class="valign-wrapper head">
+    <div class="wrapper">
+        <!--<div class="col s1 valign"><a  href="javascript: window.history.back();" class="btn white blue-text">Назад</a></div>-->
+        <h1>ТвояФирма.рф</h1>
+        <div class="col s3 valign right-aligned">
+            <!--<a href="/" class="btn white blue-text">На главную</a>-->
+            <!--<a href="#logout" class="btn red hoverable">Выход</a>-->
+        </div>
+        <div id="loading-page">
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="main">
+    <div class="wrapper scrollbar-dynamic">
+        <div class="wrapper" id="left-sidebar-nav">
+
+        </div>
+        <div class="filter">
+
+        </div>
+        <div id="tabber" class="span12 col s10">
+        </div>
+        <div id="content" class="span12 col s10 scrollbar-inner"></div>
+    </div>
+</div>
+
+<script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="lib/underscore-min.js"></script>
+<script src="lib/backbone-min.js"></script>
+<script src="lib/jquery.simplemodal.1.4.4.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="lib/jquery.scrollbar.min.js"></script>
+
+<!--models-->
+<script src="js/models/models.js"></script>
+<script src="js/models/user.js"></script>
+
+<!--views-->
+<script src="js/views/login.js"></script>
+<script src="js/views/paginator.js"></script>
+<script src="js/views/header.js"></script>
+<script src="js/views/firmslist.js"></script>
+<script src="js/views/firmdetails.js"></script>
+<script src="js/views/firmsuplist.js"></script>
+<script src="js/views/citieslist.js"></script>
+<script src="js/views/citydetails.js"></script>
+<script src="js/views/userslist.js"></script>
+<script src="js/views/userdetails.js"></script>
+<script src="js/views/reviewslist.js"></script>
+<script src="js/views/reviewdetails.js"></script>
+<script src="js/views/about.js"></script>
+
+
+<script src="js/main.js"></script>
+<script src="js/materialize.min.js"></script>
+<script src="lib/jquery.scrollbar.min.js"></script>
+<script src="lib/jquery.timepicker.min.js"></script>
+
+</body>
+</html>

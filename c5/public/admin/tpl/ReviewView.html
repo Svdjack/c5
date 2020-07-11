@@ -1,0 +1,27 @@
+<form class="form-horizontal comment-form span12">
+    <fieldset>
+        <legend>Отзыв</legend>
+        <div class="prepend">
+            <p><a href="<%= firm_info.url %>"><%= firm_info.name %></a></p>
+            <p><%= date %></p>
+            <p>IP: <%= ip %></p>
+        </div>
+        <div class="row">
+            <div class="control-group input-field col s6">
+                <label for="user" class="control-label <%= user ? 'active' : '' %>">Имя:</label>
+                <input type="text" id="user" name="user" value="<%= user %>"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group input-field">
+                <label for="text" class="control-label <%= text ? 'active' : '' %>">Текст отзыва:</label>
+                <textarea class="materialize-textarea" type="text" id="text" name="text"><%= text %></textarea>
+            </div>
+        </div>
+    </fieldset>
+    <input type="hidden" name="active" value="<%= active %>">
+    <div class="form-actions">
+        <a href="#" class="button green btn-primary save">Сохранить</a>
+        <a href="#" class="remove red delete">Удалить(Скрыть)</a>
+    </div>
+</form>

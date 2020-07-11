@@ -1,0 +1,24 @@
+.company-pp {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.company-pp-header-menu {
+  text-align: center;
+  padding: 10px;
+}
+
+.company-pp-header-menu li {
+  display: inline-table;
+  padding: 5px;
+}
+
+.company-pp-company-infos-sield-label {
+  font-weight: bold;
+}
+
+.company-pp-company-infos-sield {
+  margin: 10px;
+}

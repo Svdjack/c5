@@ -1,0 +1,17 @@
+@import 'vars.scss';
+@import 'block-system.scss';
+@import 'header.scss';
+@import 'footer.scss';
+@import 'side_right.scss';
+@import 'firm-card.scss';
+@import 'activeFirm.scss';
+
+#city-selector {
+    color: $color-main;
+}
+#city-selector:focus {
+    border: #be448c solid 3px;
+}
+
+@import 'main_content.scss';
+@import 'mobile.scss';

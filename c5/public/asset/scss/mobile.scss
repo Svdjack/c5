@@ -1,0 +1,15 @@
+@media screen and (max-width: $mobile-width) {
+    div#topcontrol {
+        transform: scale(0.55);
+    }
+
+    .firm-card {
+        .center_block {
+            display: block;
+
+            .center_subblock {
+                width: 100%;
+            }
+        }
+    }
+}

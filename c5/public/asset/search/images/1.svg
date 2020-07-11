@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+    <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-229.571" y1="-77.867" x2="-229.571" y2="-76.724" gradientTransform="matrix(7 0 0 7 1612 546.068)">
+        <stop offset="0" stop-color="#be448c"/>
+        <stop offset=".59" stop-color="#be448c"/>
+        <stop offset="1" stop-color="#be448c"/>
+    </linearGradient>
+    <circle fill="url(#a)" cx="5" cy="5" r="4"/>
+    <circle opacity=".6" stroke="#fff" stroke-width="1.143" cx="5" cy="5" r="4" fill="none"/>
+</svg>

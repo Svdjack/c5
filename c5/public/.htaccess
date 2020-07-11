@@ -1,0 +1,55 @@
+#AuthName "Skaji parol i voidi"
+#AuthType Basic
+#Require valid-user
+#AuthUserFile "/var/www/tvoyafirma/data/www/dev.xn--80adsqinks2h.xn--p1ai/.htpasswd"
+
+AddDefaultCharset UTF-8
+
+RewriteEngine On
+
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ /index.php?q=$1 [QSA,L]
+
+<IfModule mod_headers.c>
+Header set Connection keep-alive
+
+# Cache-control headers
+    # 2 HOURS
+    #<filesMatch "*">
+        Header set Cache-Control "max-age=7200, must-revalidate"
+    #</filesMatch>
+
+    # 480 weeks - 290304000
+    # 2 WEEKS
+    <filesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|swf|woff)$">
+        Header set Cache-Control "max-age=1209600, public"
+    </filesMatch>
+
+    # 1 DAY
+    <filesMatch "\.(css)$">
+        Header set Cache-Control "max-age=1186400, public, must-revalidate"
+        #Header set Cache-Control "max-age=0, public, must-revalidate"
+    </filesMatch>
+
+    # 2 DAYS
+    <filesMatch "\.(xml|txt)$">
+        Header set Cache-Control "max-age=172800, public, must-revalidate"
+    </filesMatch>
+
+    # 2 HOURS
+    <filesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=7200, must-revalidate"
+    </filesMatch>
+
+    <FilesMatch "\.(gif|jpg|png|ico|css|js|pdf|txt)$">
+        Header append Cache-Control "public"
+    </FilesMatch>
+</IfModule>
+
+SetEnvIfNoCase User-Agent "^.*(filbi|SemrushBot|AhrefsBot|bingbot|MJ12bot|SocredactorBot).*$" bad_user
+Deny from env=bad_user

@@ -1,0 +1,29 @@
+
+    <td class="title"><a href="/firm/show/<%= id %>" target="_blank"><%= name %></a></td>
+    <td class="center-align"><%= utils.convertTime(created) %></td>
+    <td class="username"><%= username %></td>
+    <td><% if(active==0){
+        print('<div class="red">Скрыта ('+utils.convertTime(moderationtime)+')</div>')
+        }
+        else if(status==0){
+        print('<div class="red">Ожидает модерации(новая)</div>');
+        }
+        else if(moderationtime < changedtime){
+            print('<div class="red">Изменена пользователем ('+utils.convertTime(changedtime)+')</div> ')
+        } else if (status==1){
+            print('<div class="green">Одобрена('+utils.convertTime(moderationtime)+')</div>')}
+        %></td>
+    <td class="right-align" style="width: 130px;">
+        <% if (active == 0) { %>
+            <a href="#" class="restore-firm green">
+                Восстановить
+            </a>
+        <% } else { %>
+            <a href="#firm/edit/<%= id %>" class="green" target="_blank">
+                Редактировать
+            </a>
+            <a href="#" class="delete-firm red">
+                Удалить
+            </a>
+        <% } %>
+    </td>

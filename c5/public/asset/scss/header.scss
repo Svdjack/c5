@@ -1,0 +1,114 @@
+header {
+    .asset-logo {
+        background-image: url(/asset/images/logo.png);
+        height: 24px;
+        width: 244px;
+    }
+    .slogan {
+        width: 100vw;
+    }
+    .header__wrapper {
+        flex-wrap: wrap;
+    }
+
+    .input-search {
+        z-index: 5;
+    }
+
+    #search-autocomplete {
+        li {
+            height: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-width) {
+    header {
+        padding: 10px 5px;
+
+        .header__logo {
+            top: 5px;
+        }
+
+        &.header__search-infocus {
+            .header__buttons {
+                display: none;
+            }
+            .header__form {
+                width: auto;
+            }
+        }
+        //-----
+        .header__wrapper {
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            > * {
+                margin: 0;
+            }
+
+            .slogan {
+                margin: 10px 5px 0 5px;
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+        .header__form {
+            order: 0;
+            width: 30%;
+            margin-right: 12px;
+        }
+
+        .header__logo {
+            position: relative;
+
+            .asset-logo {
+                background-image: url(/asset/images/logo_tf2.png);
+                height: 24px;
+                width: 44px;
+            }
+        }
+
+        .select_city {
+            display: none;
+        }
+
+        .input-search {
+            top: 0;
+            height: 33px;
+
+            .input-search__btn {
+                top: 6px;
+            }
+        }
+
+        .header__buttons {
+            .btn {
+                height: 33px;
+                width: 33px;
+                padding: 0;
+
+                .btn__icon {
+                    top: -5px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+    header.header-fixed {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 9999;
+        padding: 5px;
+        min-width: 100vw;
+
+        .slogan {
+            display: none;
+        }
+
+        .js-input-search-focus-infocus {
+
+        }
+    }
+}

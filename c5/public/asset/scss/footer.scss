@@ -1,0 +1,17 @@
+footer {
+    .column a {
+        line-height: 32px;
+    }
+    .soc_web a {
+        margin-left: 10px;
+    }
+    .age {
+        left: 12px;
+    }
+}
+
+@media screen and (max-width: $mobile-width) {
+    footer .wrapper .column:first-child {
+        margin-right: 24px;
+    }
+}

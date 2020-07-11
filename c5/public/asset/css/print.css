@@ -1,0 +1,57 @@
+header {
+  display: none;
+}
+
+footer {
+  display: none;
+}
+
+.hfooter {
+  display: none;
+}
+
+.company-pp {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.company-pp-header-menu {
+  text-align: center;
+  padding: 10px;
+}
+
+.company-pp-header-menu li {
+  display: inline-table;
+  padding: 5px;
+}
+
+.company-pp-company-map {
+  float: right;
+}
+
+.company-pp-company {
+  float: left;
+}
+
+.company-pp-company-infos-sield-label {
+  font-weight: bold;
+}
+
+main{
+  height: auto;
+  width: auto;
+}
+
+@media print{
+  .company-pp-header-menu{
+    display: none;
+  }
+}
+
+
+.offical_name {
+  font-size: 20px;
+  font-weight: bold;
+}

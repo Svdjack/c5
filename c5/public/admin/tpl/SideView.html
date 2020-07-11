@@ -1,0 +1,117 @@
+<ul class="admin-menu">
+    <li><a class="open-tab" data-tab="users-tab" href="#users/created">Пользователи</a></li>
+    <li><a class="open-tab" data-tab="firms-tab" href="#firms">Фирмы<span class="count">(<span id="counter-firms">?</span>)</span></a></li>
+    <li><a class="open-tab" data-tab="cities-tab" href="#cities/name">Города</a></li>
+    <li><a class="open-tab" data-tab="reviews-tab" href="#reviews/new">Отзывы<span class="count">(<span id="counter-reviews">?</span>)</span></a></li>
+    <li class="exit"><a href="#logout" class="btn red hoverable">Выход</a></li>
+</ul>
+
+<div style="display: none;">
+    <div id="firms-tab">
+        <a href="#firms" class="active">На модерацию</a>
+        <a href="#firms/updated">Обновленные</a>
+        <a href="#firms/new">Новые</a>
+        <a href="#firms/deleted">Удаленные</a>
+        <a href="#firms/approved">Одобренные</a>
+        <a href="#firms/up">Поднятые</a>
+        <div class="search-block">
+            <input type="text" id="firms-search-input" class="firms-search-input" placeholder="поиск" />
+            <input type="button" id="firms-search-button" value="Искать" onclick="globalFirmSearch()"/>
+        </div>
+    </div>
+
+    <div id="reviews-tab">
+        <a href="#reviews/new" class="active">Новые</a>
+        <a href="#reviews/deleted">Удаленные</a>
+        <a href="#reviews/approved">Одобренные</a>
+        <div class="search-block">
+            <input type="text" id="reviews-search-input" class="reviews-search-input" placeholder="поиск по Названию фирм" />
+            <input type="button" id="reviews-search-button" value="Искать" onclick="globalReviewSearch()"/>
+        </div>
+    </div>
+
+    <div id="users-tab">
+        <a href="#users/created" class="active">По дате</a>
+        <a href="#users/name">По имени</a>
+        <a href="#users/email">По E-Mail</a>
+    </div>
+
+    <div id="cities-tab">
+        <a href="#cities/name" class="active">По имени</a>
+        <a href="#cities/url">По URL</a>
+        <a href="#cities/region">По области</a>
+    </div>
+</div>
+
+<script>
+
+    $('.open-tab').click(function(){
+        var t = $(this).attr('data-tab');
+        var html = $('#'+t).html();
+        $('.filter').html(html);
+    });
+
+    utils.setMenuByHash();
+</script>
+
+<!--<ul class="collapsible" data-collapsible="expandable">-->
+    <!--<li>-->
+        <!--<div class="collapsible-header active">Фирмы</div>-->
+        <!--<div class="collapsible-body">-->
+            <!--<div class="collection">-->
+                <!--<a href="#firms" class="firms collection-item">Все на модерацию<span-->
+                        <!--class="count badge">?</span></a>-->
+                <!--<a href="#firms/updated" class="firms-updated collection-item">Обновлённые<span-->
+                        <!--class="count badge">?</span></a>-->
+                <!--<a href="#firms/new" class="firms-new collection-item">Новые<span class="count badge">?</span></a>-->
+                <!--<a href="#firms/approved" class="firms-approved collection-item">Одобренные<span-->
+                        <!--class="count badge">?</span></a>-->
+                <!--<a href="#firms/deleted" class="firms-deleted collection-item">Удаленные<span-->
+                        <!--class="count badge">?</span></a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--<div class="collapsible-header active">Отзывы</div>-->
+        <!--<div class="collapsible-body">-->
+            <!--<div class="collection">-->
+                <!--<a href="#reviews/new" class="reviews-new collection-item">Новые<span-->
+                        <!--class="count badge">?</span></a>-->
+                <!--<a href="#reviews/approved" class="reviews-approved collection-item">Одобренные<span-->
+                        <!--class="count badge">?</span></a>-->
+                <!--<a href="#reviews/deleted" class="reviews-deleted collection-item">Удаленные<span-->
+                        <!--class="count badge">?</span></a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--<div class="collapsible-header active">Пользователи</div>-->
+        <!--<div class="collapsible-body">-->
+            <!--<div class="collection">-->
+                <!--<a href="#users/created" class="users collection-item">По дате</a>-->
+                <!--<a href="#users/name" class="users collection-item">По имени</a>-->
+                <!--<a href="#users/email" class="users collection-item">По E-Mail</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--<div class="collapsible-header active">Города</div>-->
+        <!--<div class="collapsible-body">-->
+            <!--<div class="collection">-->
+                <!--<a href="#cities/name" class="users collection-item">По имени</a>-->
+                <!--<a href="#cities/url" class="users collection-item">По URL</a>-->
+                <!--<a href="#cities/region" class="users collection-item">По области</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</li>-->
+
+<!--</ul>-->
+<script>
+    $(document).trigger('sidebar');
+
+    $(document).on('click', '.filter a', function(){
+        var t = $(this);
+        t.siblings().removeClass('active');
+        t.addClass('active');
+    });
+</script>

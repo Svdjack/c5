@@ -1,0 +1,26 @@
+.side_right {
+    display: flex;
+    flex-wrap: wrap;
+
+    > * {
+        width: 100%;
+    }
+
+    .rubrics {
+
+    }
+    
+    .title {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: $mobile-width) {
+    .yandex {
+        position: sticky;
+        top: 0;
+    }
+    .hole {
+        min-height: 300px;
+    }
+}

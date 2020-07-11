@@ -1,0 +1,31 @@
+
+<td class="title"><a href="<%= firm_url %>"><%= firm_name %></a><a href="/admin/#firm/edit/<%= firm_id %>" target="_blank" style="color: red;">редактировать компанию</a><br/><br/><%= user %><br/><%= ip %><br/><br/><%= date %></td>
+<td><div class="text"><%= text %></div></td>
+<td><%
+    if(edited == 0 && active == 1){
+        print('<div class="red">Ожидает модерации</div>')
+    } else if(active == 0){
+        print('<div class="red">Удалена('+moderationtime+')</div>')
+    } else if(edited == 1){
+        print('<div class="green">Одобрена('+moderationtime+')</div>')
+    }
+    %></td>
+<td class="right-align" style="width: 130px;">
+    <% if (edited == 0) { %>
+    <a href="#" class="approve-review" data-position="top" data-delay="50" data-tooltip="Одобрить">
+        Одобрить
+    </a>
+    <% } %>
+    <a href="#review/edit/<%= id %>" class= "blue">
+        Редактировать
+    </a>
+    <% if (active == 0) { %>
+        <a href="#" class="restore-review green">
+            Восстановить
+        </a>
+    <% } else { %>
+        <a href="#" class="delete-review red">
+            Удалить
+        </a>
+    <% } %>
+</td>

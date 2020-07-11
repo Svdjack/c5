@@ -1,0 +1,136 @@
+a {
+    text-decoration: underline;
+    color: #36b26a;
+}
+a:hover{
+    text-decoration: none; 
+    color: #31995b;
+}
+a:visited{
+    color:#36b26a;
+    text-decoration: underline;
+}
+h1{
+   font-size:  30px;
+   color: #333;
+   font-weight: normal;
+   margin: 0 0 18px;
+}
+h2{
+   font-size:  26px;
+   color: #333;
+   margin: 20px 0 20px;
+   font-weight: normal;
+}
+h3{
+   font-size:  22px;
+   color: #333;
+   margin: 20px 0 20px;
+   font-weight: normal;
+}
+h4{
+   font-size:  18px;
+   color: #333;
+   margin: 20px 0 20px;
+   font-weight: normal;
+}
+p{
+    line-height: 18px;
+    word-wrap: break-word; 
+    margin-bottom: 18px;
+}
+ol {
+    list-style-position: outside; 
+}
+ol, ul{
+    margin-bottom: 20px;
+}
+ol li{
+    list-style-type:  decimal;
+    position: relative;
+    list-style-type: none;
+}
+ol {
+    list-style:none;
+    counter-reset: list1;
+    margin: 0px 0 0px 15px;
+    padding: 0;
+}
+ol li:before{
+    counter-increment: list1;
+    content: counter(list1)".";
+    position: relative;
+    top: 0px;
+    margin-left: -15px;
+    margin-right: 5px;
+    text-align: right;
+    font-family: 'OpenSans-Bold';
+    font-size: 14px;
+    color: #278f53;
+}
+li{
+    margin-bottom: 10px;
+}
+ul{
+    list-style-position: outside; 
+    padding-left: 20px;
+    list-style: none;
+}
+ul>li{
+    list-style-type: none;
+    list-style: none;
+}
+ul>li:before{
+    content: "";
+    display: block;
+    float: left;
+    width: 14px;
+    height: 2px;
+    margin: 5px 5px 0 -15px;
+    background: #278f53;
+}
+ul>li>ul{
+    list-style-type: none;
+    list-style-position: outside; 
+    padding-left: 5px;
+    margin-top: 10px;
+}
+blockquote{
+     padding: 0px 25px;
+     position: relative;
+     font-style: italic;
+     margin: 10px 0;
+     background: #f2f2f2;
+     border-left:#36b26a solid 4px;
+}
+table{
+    width: 100%;
+    border: #e1e1e1 solid 1px;
+    border-top:#36b26a solid 1px;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+td, th{
+   padding: 10px;
+   background: #fff;
+   text-align: left;
+}
+td{ 
+    border-bottom:#ebebeb solid 1px;
+}
+th{
+    font-weight: normal;
+    background: #36b26a;
+    color:#fff;
+}
+td+td, th+th{
+    border-left:#e1e1e1 solid 1px;
+}
+
+table tr.even td{
+    background: #ebebeb;
+}
+
+    
+
+

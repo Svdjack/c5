@@ -1,0 +1,1 @@
+window.adsOn = false;

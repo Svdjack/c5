@@ -1,0 +1,27 @@
+
+<td class="title"><a href="/firm/show/<%= id %>"><%= name %></a></td>
+<td class="center-align date"><%= utils.convertTime(time_start) %></td>
+<td class="center-align date"><%= utils.convertTime(time_end) %></td>
+<td class="username"><%= tarif %></td>rew
+<td class="username"><%= email %></td>rew
+<td><% if(status_up == 0){
+    print('<div class="green">Была поднята</div>')
+    }
+    else{
+    print('<div class="red">Поднята</div>');
+    }
+    %></td>
+<td class="right-align" style="width: 130px;">
+    <% if (active == 0) { %>
+    <a href="#" class="restore-firm green">
+        Восстановить
+    </a>
+    <% } else { %>
+    <a href="#firm/edit/<%= id %>" class="green">
+        Редактировать
+    </a>
+    <a href="#" class="delete-firm red">
+        Удалить
+    </a>
+    <% } %>
+</td>

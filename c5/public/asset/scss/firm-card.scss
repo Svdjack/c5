@@ -1,0 +1,35 @@
+.firm-card {
+    .center_block {
+        display: flex;
+
+        .center_subblock {
+            flex: 50%;
+        }
+    }
+
+    .headline__wrap-adblock {
+        float: none;
+
+        .adv-firm-upupup {
+            float: none;
+        }
+    }
+
+    #contacts {
+        .email {
+            position: relative;
+            padding-left: 23px;
+        }
+        .email:before {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            display: block;
+            content: '';
+            background-image: url(/asset/images/mail.svg);
+            width: 18px;
+            height: 20px;
+            background-size: 18px 20px;
+        }
+    }
+}
