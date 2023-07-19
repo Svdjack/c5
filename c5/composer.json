@@ -26,7 +26,7 @@
     "plasticbrain/php-flash-messages": "^1.0",
     "abraham/twitteroauth": "^0.6.2",
     "endroid/qrcode": "^1.5",
-    "mpdf/mpdf": "^6.0",
+    "mpdf/mpdf": "^8.1",
     "cartalyst/sentinel": "^2.0",
     "swiftmailer/swiftmailer": "^5.4",
     "yandex/geo": "^1.1",
